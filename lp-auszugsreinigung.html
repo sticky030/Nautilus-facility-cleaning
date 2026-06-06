@@ -918,15 +918,11 @@ async function handleEmailSubmit(e, form){
 
 // ── CONVERSION TRACKING ───────────────────────────────────
 function trackLead(type) {
-  // 1. Übergabe an den DataLayer (Google Tag Manager / Analytics 4)
-  window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ 'event': 'generate_lead', 'lead_type': type });
-  
-  // 2. Direkte Übergabe an Google Ads (falls gtag direkt eingebaut ist)
-  if (typeof gtag === 'function') {
-    gtag('event', 'generate_lead');
-  }
   console.log("✅ Conversion getrackt:", type);
+  // Google Ads Conversion Event für WhatsApp-Leads
+  gtag('event', 'conversion', {
+      'send_to': 'AW-18197577914/9SkUCJeC_LkcELqBpOVD'
+  });
 }
 
 // Auto-Listener für alle regulären WhatsApp Links auf der Seite
