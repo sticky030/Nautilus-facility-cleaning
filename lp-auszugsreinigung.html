@@ -791,6 +791,7 @@ function validateAndSend(e){
   msg += `\nGeschaetzter Richtpreis: ab ${total} EUR\n`;
   msg += `\nBitte senden Sie mir ein verbindliches Festpreisangebot nach Fotouebermittlung. Danke!`;
   waBtn.href = 'https://wa.me/4917622844636?text=' + encodeURIComponent(msg);
+  trackLead('whatsapp_calc');
   return true;
 }
 
@@ -897,11 +898,33 @@ async function handleEmailSubmit(e, form){
     const res = await fetch(form.action, {method:'POST', body: new FormData(form), headers:{Accept:'application/json'}});
     if(res.ok){
       document.getElementById('mail-success').style.display='block';
+      trackLead('email_form');
       form.reset();
       btn.textContent = '✅ Gesendet!';
     } else { btn.textContent = 'Fehler — bitte WhatsApp nutzen'; }
   } catch { btn.textContent = 'Fehler — bitte WhatsApp nutzen'; }
 }
+
+
+// ── CONVERSION TRACKING ───────────────────────────────────
+function trackLead(type) {
+  // 1. Übergabe an den DataLayer (Google Tag Manager / Analytics 4)
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ 'event': 'generate_lead', 'lead_type': type });
+  
+  // 2. Direkte Übergabe an Google Ads (falls gtag direkt eingebaut ist)
+  if (typeof gtag === 'function') {
+    gtag('event', 'generate_lead');
+  }
+  console.log("✅ Conversion getrackt:", type);
+}
+
+// Auto-Listener für alle regulären WhatsApp Links auf der Seite
+document.querySelectorAll('a[href*="wa.me"]').forEach(btn => {
+  if (btn.id !== 'wa-btn') { 
+    btn.addEventListener('click', () => trackLead('whatsapp_general'));
+  }
+});
 
 </script>
 </body>
