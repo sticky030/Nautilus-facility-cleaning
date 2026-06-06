@@ -882,6 +882,15 @@ function switchTab(tab){
 
 async function handleEmailSubmit(e, form){
   e.preventDefault();
+  
+  const {base,extras,fenster,total} = calcTotal();
+  let det = `${state.service} · ${state.rooms} Zimmer (ab ${base} €)`;
+  if(state.extras.length) det += ' | Extras: '+state.extras.map(ex=>ex.name).join(', ');
+  if(state.fenster.price>0) det += ' | Fenster: '+state.fenster.name;
+  
+  document.getElementById('mail-details').value = det;
+  document.getElementById('mail-price').value   = 'Schätzwert: ab '+total+' €';
+
   const btn = document.getElementById('mail-btn-txt');
   btn.textContent = 'Wird gesendet…';
   try {
