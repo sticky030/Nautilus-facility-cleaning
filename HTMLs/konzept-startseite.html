@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nautilus Facility – Konzept Startseite</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #06101f;
+  --bg2: #0a1628;
+  --bg3: #0f1e34;
+  --accent: #06b6d4;
+  --accent-glow: rgba(6,182,212,0.15);
+  --white: #f0f9ff;
+  --text: #cbd5e1;
+  --muted: #64748b;
+  --border: rgba(255,255,255,0.07);
+  --green: #10b981;
+  --yellow: #f59e0b;
+  --red: #ef4444;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--white); line-height: 1.6; overflow-x: hidden; }
+
+/* CONCEPT BANNER */
+.concept-banner { background: rgba(245,158,11,0.12); border-bottom: 1px solid rgba(245,158,11,0.3); padding: 10px; text-align: center; font-size: 13px; color: var(--yellow); font-weight: 600; letter-spacing: 0.3px; }
+
+/* NAVBAR */
+nav { position: fixed; top: 37px; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 18px 48px; transition: all 0.3s; border-bottom: 1px solid transparent; }
+nav.scrolled { background: rgba(6,16,31,0.95); backdrop-filter: blur(20px); border-bottom-color: var(--border); top: 0; }
+.nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); }
+.nav-logo-icon { width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent), #0891b2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.nav-logo-text { font-size: 16px; font-weight: 700; }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta { padding: 10px 22px !important; background: var(--accent) !important; color: #000 !important; border-radius: 8px !important; font-weight: 700 !important; }
+.nav-cta:hover { background: #22d3ee !important; }
+
+/* HERO */
+.hero { min-height: 100vh; display: flex; align-items: center; padding: 140px 48px 80px; position: relative; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 800px 600px at 70% 50%, rgba(6,182,212,0.08), transparent 70%), radial-gradient(ellipse 500px 400px at 20% 30%, rgba(14,116,144,0.05), transparent 70%), var(--bg); }
+.hero-bg::after { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse 90% 90% at 50% 40%, black 30%, transparent 100%); }
+.hero-content { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; max-width: 1200px; margin: 0 auto; width: 100%; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.3); border-radius: 100px; font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 28px; }
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+h1.hero-headline { font-size: clamp(40px, 5vw, 62px); font-weight: 900; line-height: 1.05; letter-spacing: -2.5px; margin-bottom: 24px; }
+h1.hero-headline .accent { color: var(--accent); }
+.hero-sub { font-size: 17px; color: var(--text); line-height: 1.75; margin-bottom: 40px; max-width: 460px; }
+.hero-ctas { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.btn-primary { padding: 14px 28px; background: var(--accent); color: #000; font-weight: 700; font-size: 15px; border: none; border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary:hover { background: #22d3ee; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(6,182,212,0.3); }
+.btn-ghost { padding: 14px 28px; background: transparent; color: var(--white); font-weight: 600; font-size: 15px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-ghost:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+.hero-trust { margin-top: 48px; font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.hero-trust-icons { display: flex; }
+.hero-trust-icons span { width: 28px; height: 28px; border-radius: 50%; background: var(--bg3); border: 2px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 12px; margin-left: -6px; }
+.hero-trust-icons span:first-child { margin-left: 0; }
+
+/* DASHBOARD MOCKUP (Hero) */
+.hero-right { position: relative; }
+.dashboard-wrapper { animation: float 6s ease-in-out infinite; position: relative; }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+.dashboard-glow { position: absolute; width: 320px; height: 320px; background: radial-gradient(circle, rgba(6,182,212,0.22), transparent 70%); top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 0; pointer-events: none; }
+.dashboard-mockup { position: relative; z-index: 1; background: var(--bg2); border-radius: 14px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04); }
+.dash-bar { background: #0a1525; padding: 10px 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid var(--border); }
+.dash-dots { display: flex; gap: 5px; }
+.dash-dots span { width: 9px; height: 9px; border-radius: 50%; }
+.dash-dots span:nth-child(1){background:#ef4444} .dash-dots span:nth-child(2){background:#f59e0b} .dash-dots span:nth-child(3){background:#10b981}
+.dash-url { flex:1; background: rgba(255,255,255,0.05); border-radius: 5px; padding: 3px 10px; font-size: 10px; color: var(--muted); font-family: monospace; }
+.dash-inner { display: flex; height: 340px; }
+.dash-sidebar { width: 48px; background: #070e1c; border-right: 1px solid var(--border); display: flex; flex-direction: column; align-items: center; padding: 14px 0; gap: 16px; }
+.dash-icon { width: 30px; height: 30px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+.dash-icon.active { background: rgba(6,182,212,0.15); }
+.dash-icon:not(.active) { opacity: 0.4; }
+.dash-main { flex:1; padding: 14px; display: flex; flex-direction: column; gap: 9px; overflow: hidden; }
+.dash-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+.dash-heading { font-size: 12px; font-weight: 700; }
+.dash-live { font-size: 10px; color: var(--green); font-weight: 600; display: flex; align-items: center; gap: 4px; }
+.dash-live::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); animation:pulse-dot 2s infinite; }
+.proto-row { background: var(--bg3); border: 1px solid var(--border); border-radius: 9px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; }
+.proto-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.proto-dot.ok{background:var(--green)} .proto-dot.warn{background:var(--yellow);animation:pulse-dot 2s infinite}
+.proto-name { font-size: 11px; font-weight: 600; flex: 1; }
+.proto-meta { font-size: 9px; color: var(--muted); margin-top: 1px; }
+.proto-time { font-size: 9px; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+.damage-row { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.22); border-radius: 9px; padding: 10px 12px; display: flex; align-items: center; gap: 10px; }
+.damage-label { font-size: 10px; font-weight: 700; color: var(--yellow); }
+.damage-desc { font-size: 9px; color: var(--muted); margin-top: 1px; }
+.damage-photo { width: 36px; height: 36px; border-radius: 6px; background: #1e293b; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; margin-left: auto; }
+.dash-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-top: auto; }
+.dash-stat { background: var(--bg3); border: 1px solid var(--border); border-radius: 7px; padding: 8px; text-align: center; }
+.dash-stat-val { font-size: 18px; font-weight: 900; }
+.dash-stat-lbl { font-size: 8px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1px; }
+
+/* TRUST BAR */
+.trust-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 18px 48px; display: flex; align-items: center; justify-content: center; gap: 32px; background: var(--bg2); flex-wrap: wrap; }
+.trust-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+.trust-chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.trust-chip { font-size: 12px; font-weight: 600; color: var(--text); padding: 5px 14px; background: var(--bg3); border: 1px solid var(--border); border-radius: 100px; }
+
+/* SECTIONS */
+.section-tag { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--accent); margin-bottom: 14px; }
+h2.section-h { font-size: clamp(30px, 4vw, 46px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 14px; }
+p.section-p { font-size: 17px; color: var(--text); line-height: 1.7; }
+
+/* STATS */
+.stats-section { padding: 100px 48px; text-align: center; }
+.stats-grid { display: grid; grid-template-columns: repeat(3,1fr); max-width: 880px; margin: 56px auto 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+.stat-item { padding: 48px 36px; background: var(--bg2); }
+.stat-item:not(:last-child) { border-right: 1px solid var(--border); }
+.stat-big { font-size: 58px; font-weight: 900; letter-spacing: -3px; display: block; }
+.stat-big .a { color: var(--accent); }
+.stat-lbl { font-size: 14px; color: var(--muted); margin-top: 6px; }
+.stat-desc { font-size: 12px; color: var(--text); margin-top: 4px; }
+
+/* PROBLEM VS SOLUTION */
+.problem-section { padding: 100px 48px; background: var(--bg2); }
+.pv-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+.pv-list { list-style: none; margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+.pv-list li { display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; border-radius: 10px; font-size: 14px; color: var(--text); }
+.pv-list li.bad { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.14); }
+.pv-list li.good { background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.14); }
+.pv-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; font-weight: 700; }
+.icon-bad { color: var(--red); }
+.icon-good { color: var(--green); }
+
+/* DASHBOARD SECTION */
+.dashboard-section { padding: 120px 48px; background: #030810; position: relative; overflow: hidden; }
+.dashboard-section::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 1000px 500px at 50% 40%, rgba(6,182,212,0.06), transparent 70%); pointer-events: none; }
+.dashboard-section-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; text-align: center; }
+
+/* Large dashboard */
+.db-large { background: var(--bg2); border-radius: 18px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 60px 120px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.04); margin-top: 56px; }
+.db-large-bar { background: #0a1525; padding: 13px 20px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--border); }
+.db-large-inner { display: grid; grid-template-columns: 220px 1fr; min-height: 460px; }
+.db-nav { background: #070e1c; border-right: 1px solid var(--border); padding: 20px 0; }
+.db-nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 20px; font-size: 13px; font-weight: 500; color: var(--muted); cursor: pointer; transition: all 0.15s; border: none; background: none; width: 100%; text-align: left; }
+.db-nav-item.active { color: var(--white); background: rgba(6,182,212,0.08); border-left: 2px solid var(--accent); }
+.db-nav-sep { height: 1px; background: var(--border); margin: 8px 0; }
+.db-badge { margin-left: auto; background: rgba(245,158,11,0.2); color: var(--yellow); border-radius: 10px; padding: 1px 7px; font-size: 10px; font-weight: 700; }
+.db-content { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.db-content-hdr { display: flex; justify-content: space-between; align-items: center; }
+.db-content-title { font-size: 15px; font-weight: 700; }
+.db-content-meta { font-size: 11px; color: var(--muted); }
+.db-obj-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.db-obj-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 11px; padding: 15px; cursor: pointer; transition: all 0.2s; }
+.db-obj-card:hover { border-color: rgba(6,182,212,0.3); }
+.db-obj-card.dmg { border-color: rgba(245,158,11,0.25); }
+.db-obj-name { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+.db-obj-addr { font-size: 10px; color: var(--muted); margin-bottom: 10px; }
+.db-obj-status { display: flex; align-items: center; gap: 6px; }
+.dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.dot-g{background:var(--green)} .dot-y{background:var(--yellow);animation:pulse-dot 2s infinite}
+.db-obj-status-txt { font-size: 10px; color: var(--text); }
+.db-obj-proto { font-size: 10px; color: var(--muted); margin-top: 5px; }
+.db-table { background: var(--bg3); border: 1px solid var(--border); border-radius: 11px; overflow: hidden; }
+.db-table-hdr { display: grid; grid-template-columns: 2fr 1.5fr 1fr 1fr; padding: 11px 16px; border-bottom: 1px solid var(--border); font-size: 10px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+.db-table-row { display: grid; grid-template-columns: 2fr 1.5fr 1fr 1fr; padding: 11px 16px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 12px; color: var(--text); align-items: center; transition: background 0.15s; }
+.db-table-row:last-child { border-bottom: none; }
+.db-table-row:hover { background: rgba(255,255,255,0.02); }
+.proto-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 600; background: rgba(16,185,129,0.12); color: var(--green); }
+
+/* Dashboard features */
+.db-features { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 36px; }
+.db-feat { padding: 20px; background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; text-align: left; }
+.db-feat-icon { font-size: 22px; margin-bottom: 10px; }
+.db-feat-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+.db-feat-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* HOW IT WORKS */
+.how-section { padding: 100px 48px; }
+.how-inner { max-width: 1100px; margin: 0 auto; }
+.how-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; margin-top: 56px; position: relative; }
+.how-steps::before { content:''; position:absolute; top:27px; left:15%; right:15%; height:1px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+.how-step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+.how-num { width: 54px; height: 54px; border-radius: 50%; background: var(--accent); color: #000; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+.how-title { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+.how-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+/* SERVICES */
+.services-section { padding: 100px 48px; background: var(--bg2); }
+.services-inner { max-width: 1100px; margin: 0 auto; }
+.services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 18px; margin-top: 56px; }
+.svc-card { background: var(--bg); border: 1px solid var(--border); border-radius: 14px; padding: 26px; text-decoration: none; color: var(--white); transition: all 0.25s; display: flex; flex-direction: column; }
+.svc-card:hover { border-color: rgba(6,182,212,0.35); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+.svc-icon { font-size: 30px; margin-bottom: 14px; }
+.svc-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+.svc-desc { font-size: 13px; color: var(--muted); line-height: 1.6; flex: 1; }
+.svc-arrow { margin-top: 18px; color: var(--accent); font-size: 15px; }
+
+/* CTA */
+.cta-section { padding: 120px 48px; text-align: center; background: linear-gradient(135deg, #060d1e 0%, #0a1f3a 50%, #060d1e 100%); position: relative; overflow: hidden; }
+.cta-section::before { content:''; position:absolute; top:50%; left:50%; width:600px; height:600px; background: radial-gradient(circle, rgba(6,182,212,0.1), transparent 70%); transform:translate(-50%,-50%); pointer-events:none; }
+.cta-section > div { position: relative; z-index: 1; }
+.cta-checks { display: flex; gap: 28px; justify-content: center; margin-top: 36px; flex-wrap: wrap; }
+.cta-check { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 7px; }
+.cta-check-icon { color: var(--green); font-weight: 700; }
+
+/* FOOTER */
+footer { background: #030810; border-top: 1px solid var(--border); padding: 40px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.footer-logo { font-size: 14px; font-weight: 700; }
+.footer-links { display: flex; gap: 24px; }
+.footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; }
+.footer-links a:hover { color: var(--white); }
+.footer-copy { font-size: 12px; color: var(--muted); }
+
+/* ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<div class="concept-banner">⚡ Konzept-Vorschau — Dies ist nicht die Live-Website</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">🌊</div>
+    <div class="nav-logo-text">Nautilus Facility</div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#">Hausverwaltungen</a></li>
+    <li><a href="#">Büroreinigung</a></li>
+    <li><a href="#">Praxisreinigung</a></li>
+    <li><a href="#" class="nav-cta">Angebot anfragen →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-left reveal">
+      <div class="hero-badge"><div class="badge-dot"></div>Berlins erste volldigitale Reinigungsfirma</div>
+      <h1 class="hero-headline">Saubere Objekte.<br><span class="accent">Null Aufwand.</span></h1>
+      <p class="hero-sub">Nach jedem Einsatz liegt das Protokoll automatisch in Ihrem Dashboard. Schäden werden mit Foto gemeldet — bevor Sie davon erfahren. Für Hausverwaltungen, Büros und Praxen in Berlin.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-primary">Kostenlos besichtigen →</a>
+        <a href="#dashboard" class="btn-ghost">Dashboard ansehen</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-icons"><span>🏢</span><span>🏢</span><span>🏢</span></div>
+        Aktiv in Friedrichshain · Mitte · Pankow · Marzahn · Lichtenberg
+      </div>
+    </div>
+    <div class="hero-right reveal">
+      <div class="dashboard-wrapper">
+        <div class="dashboard-glow"></div>
+        <div class="dashboard-mockup">
+          <div class="dash-bar">
+            <div class="dash-dots"><span></span><span></span><span></span></div>
+            <div class="dash-url">dashboard.nautilus-facility.de/objekte</div>
+          </div>
+          <div class="dash-inner">
+            <div class="dash-sidebar">
+              <div class="dash-icon active">🏠</div>
+              <div class="dash-icon">📋</div>
+              <div class="dash-icon">⚠️</div>
+              <div class="dash-icon">📊</div>
+              <div class="dash-icon" style="margin-top:auto">⚙️</div>
+            </div>
+            <div class="dash-main">
+              <div class="dash-top">
+                <span class="dash-heading">Meine Objekte</span>
+                <span class="dash-live">Live</span>
+              </div>
+              <div class="proto-row">
+                <div class="proto-dot ok"></div>
+                <div><div class="proto-name">Marchwitzastr. 25–27 · Treppenhaus</div><div class="proto-meta">4 Etagen · Eingang · Kellerflur</div></div>
+                <div class="proto-time">Heute 09:47</div>
+              </div>
+              <div class="damage-row">
+                <span style="font-size:15px">⚠️</span>
+                <div><div class="damage-label">Schaden erkannt</div><div class="damage-desc">Feuchtigkeitsfleck — 2. OG links</div></div>
+                <div class="damage-photo">📸</div>
+              </div>
+              <div class="proto-row">
+                <div class="proto-dot ok"></div>
+                <div><div class="proto-name">Lichtenberger Str. 12 · Büro</div><div class="proto-meta">380 m² · Di + Fr</div></div>
+                <div class="proto-time">Heute 07:30</div>
+              </div>
+              <div class="dash-stats">
+                <div class="dash-stat"><div class="dash-stat-val">12</div><div class="dash-stat-lbl">Protokolle</div></div>
+                <div class="dash-stat"><div class="dash-stat-val" style="color:var(--yellow)">1</div><div class="dash-stat-lbl">Schaden</div></div>
+                <div class="dash-stat"><div class="dash-stat-val" style="color:var(--green)">0</div><div class="dash-stat-lbl">Offen</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <span class="trust-label">Aktiv in Berlin</span>
+  <div class="trust-chips">
+    <span class="trust-chip">Friedrichshain</span>
+    <span class="trust-chip">Mitte</span>
+    <span class="trust-chip">Pankow</span>
+    <span class="trust-chip">Marzahn</span>
+    <span class="trust-chip">Lichtenberg</span>
+    <span class="trust-chip">Prenzlauer Berg</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="section-tag">Warum Nautilus</div>
+  <h2 class="section-h">Die Reinigung läuft.<br>Sie müssen nichts tun.</h2>
+  <p class="section-p" style="max-width:520px;margin:0 auto">Kein Nachfassen. Kein Protokoll anfordern. Kein Kontrollanruf. Alles liegt automatisch im Dashboard.</p>
+  <div class="stats-grid reveal">
+    <div class="stat-item">
+      <span class="stat-big"><span class="counter" data-target="100">0</span><span class="a">%</span></span>
+      <div class="stat-lbl">Digitale Protokolle</div>
+      <div class="stat-desc">Jeder Einsatz, automatisch dokumentiert</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-big"><span class="counter" data-target="0">0</span></span>
+      <div class="stat-lbl">Nachfass-Anrufe</div>
+      <div class="stat-desc">Ihr Dashboard zeigt alles in Echtzeit</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-big"><span class="a">&lt;</span><span class="counter" data-target="2">0</span><span class="a">h</span></span>
+      <div class="stat-lbl">Bis das Protokoll bereit liegt</div>
+      <div class="stat-desc">Nach Einsatzende — automatisch, ohne Aktion</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM VS SOLUTION -->
+<section class="problem-section">
+  <div class="pv-inner">
+    <div class="reveal">
+      <div class="section-tag" style="color:#ef4444">Vorher</div>
+      <h2 class="section-h" style="font-size:34px;text-align:left">So läuft Reinigung<br>normalerweise.</h2>
+      <ul class="pv-list">
+        <li class="bad"><span class="pv-icon icon-bad">✕</span> Reinigungsfirma anrufen — ob der Termin war</li>
+        <li class="bad"><span class="pv-icon icon-bad">✕</span> Protokoll per Mail anfordern — und auf Antwort warten</li>
+        <li class="bad"><span class="pv-icon icon-bad">✕</span> Schäden selbst entdecken — oft zu spät</li>
+        <li class="bad"><span class="pv-icon icon-bad">✕</span> Dokumentation manuell ablegen — verschwendete Zeit</li>
+        <li class="bad"><span class="pv-icon icon-bad">✕</span> Nächste Kontrolle: alles wieder von vorne</li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="section-tag" style="color:var(--green)">Mit Nautilus</div>
+      <h2 class="section-h" style="font-size:34px;text-align:left">Reinigung, die sich<br>selbst verwaltet.</h2>
+      <ul class="pv-list">
+        <li class="good"><span class="pv-icon icon-good">✓</span> Einsatz startet — Sie werden automatisch informiert</li>
+        <li class="good"><span class="pv-icon icon-good">✓</span> Protokoll liegt nach &lt;2h automatisch im Dashboard</li>
+        <li class="good"><span class="pv-icon icon-good">✓</span> Schaden erkannt? Foto + Meldung sofort sichtbar</li>
+        <li class="good"><span class="pv-icon icon-good">✓</span> Alles archiviert, abrufbar, nachweisbar</li>
+        <li class="good"><span class="pv-icon icon-good">✓</span> Kein einziger Kontrollanruf mehr nötig</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD SECTION -->
+<section class="dashboard-section" id="dashboard">
+  <div class="dashboard-section-inner">
+    <div class="reveal">
+      <div class="section-tag">Das Nautilus Dashboard</div>
+      <h2 class="section-h">Ihr Reinigungsstatus.<br>Immer. In Echtzeit.</h2>
+      <p class="section-p" style="max-width:520px;margin:0 auto">Kein Login-Aufwand, kein Download. Ihr persönliches Dashboard zeigt alle Objekte, Protokolle und Schadensmeldungen — auf dem PC und mobil. Kein anderes Reinigungsunternehmen in Berlin bietet das.</p>
+    </div>
+    <div class="db-large reveal">
+      <div class="db-large-bar">
+        <div class="dash-dots"><span></span><span></span><span></span></div>
+        <div class="dash-url" style="max-width:280px">dashboard.nautilus-facility.de</div>
+        <span style="margin-left:auto;font-size:11px;color:var(--green);font-weight:600">● Alle Objekte aktuell</span>
+      </div>
+      <div class="db-large-inner">
+        <div class="db-nav">
+          <div class="db-nav-item active">🏠 &nbsp;Übersicht</div>
+          <div class="db-nav-item">📋 &nbsp;Protokolle</div>
+          <div class="db-nav-item">⚠️ &nbsp;Schäden <span class="db-badge">1</span></div>
+          <div class="db-nav-item">📊 &nbsp;Berichte</div>
+          <div class="db-nav-sep"></div>
+          <div class="db-nav-item">📍 &nbsp;Objekte</div>
+          <div class="db-nav-item">⚙️ &nbsp;Einstellungen</div>
+        </div>
+        <div class="db-content">
+          <div class="db-content-hdr">
+            <span class="db-content-title">Aktuelle Objekte</span>
+            <span class="db-content-meta">Letzte Aktualisierung: Heute 11:04 Uhr</span>
+          </div>
+          <div class="db-obj-grid">
+            <div class="db-obj-card">
+              <div class="db-obj-name">Marchwitzastr. 25–27</div>
+              <div class="db-obj-addr">Marzahn · WEG Tascania</div>
+              <div class="db-obj-status"><div class="dot dot-g"></div><span class="db-obj-status-txt">Protokoll vorhanden</span></div>
+              <div class="db-obj-proto">Heute 09:47 · 4 Etagen</div>
+            </div>
+            <div class="db-obj-card dmg">
+              <div class="db-obj-name">Lichtenberger Str. 12</div>
+              <div class="db-obj-addr">Lichtenberg · Büro</div>
+              <div class="db-obj-status"><div class="dot dot-y"></div><span class="db-obj-status-txt">⚠ Schaden gemeldet</span></div>
+              <div class="db-obj-proto">Heute 07:30</div>
+            </div>
+            <div class="db-obj-card">
+              <div class="db-obj-name">Ringstraße 8</div>
+              <div class="db-obj-addr">Pankow · Praxis</div>
+              <div class="db-obj-status"><div class="dot dot-g"></div><span class="db-obj-status-txt">Protokoll vorhanden</span></div>
+              <div class="db-obj-proto">Gestern 18:00</div>
+            </div>
+          </div>
+          <div class="db-table">
+            <div class="db-table-hdr"><span>Objekt</span><span>Leistung</span><span>Datum</span><span>Status</span></div>
+            <div class="db-table-row"><span>Marchwitzastr. 25–27</span><span>Treppenhaus, 4 Etagen</span><span>Heute 09:47</span><span><div class="proto-badge">✓ Erledigt</div></span></div>
+            <div class="db-table-row"><span>Lichtenberger Str. 12</span><span>Büro, 380 m²</span><span>Heute 07:30</span><span><div class="proto-badge">✓ Erledigt</div></span></div>
+            <div class="db-table-row"><span>Ringstraße 8</span><span>Praxis, Wartezimmer</span><span>Gestern 18:00</span><span><div class="proto-badge">✓ Erledigt</div></span></div>
+            <div class="db-table-row" style="opacity:0.45"><span>Frankfurter Allee 22</span><span>Treppenhaus, 6 Etagen</span><span>Mo, 26.05.</span><span><div class="proto-badge">✓ Erledigt</div></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="db-features reveal">
+      <div class="db-feat"><div class="db-feat-icon">📋</div><div class="db-feat-title">Automatische Protokolle</div><div class="db-feat-desc">Nach jedem Einsatz liegt das Protokoll automatisch bereit. Nichts anfordern, nichts archivieren.</div></div>
+      <div class="db-feat"><div class="db-feat-icon">📸</div><div class="db-feat-title">Schadensdokumentation</div><div class="db-feat-desc">Schäden werden sofort mit Foto gemeldet. Bevor der Schaden teuer wird.</div></div>
+      <div class="db-feat"><div class="db-feat-icon">📱</div><div class="db-feat-title">Mobil & Browser</div><div class="db-feat-desc">Kein Download, kein Login-Aufwand. Dashboard auf jedem Gerät sofort abrufbar.</div></div>
+      <div class="db-feat"><div class="db-feat-icon">🔒</div><div class="db-feat-title">Vertraglich gesichert</div><div class="db-feat-desc">Ausfall bedeutet kostenlose Nachreinigung — automatisch dokumentiert, ohne Diskussion.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="how-inner">
+    <div style="text-align:center" class="reveal">
+      <div class="section-tag">Ablauf</div>
+      <h2 class="section-h">Von der Anfrage zum laufenden Betrieb.</h2>
+    </div>
+    <div class="how-steps reveal">
+      <div class="how-step"><div class="how-num">1</div><div class="how-title">Objekt klären</div><div class="how-desc">Kurzes Gespräch über Ihre Objekte, Anforderungen und gewünschten Turnus.</div></div>
+      <div class="how-step"><div class="how-num">2</div><div class="how-title">Vor Ort besichtigen</div><div class="how-desc">Kostenfreie Besichtigung — wir prüfen das Objekt und erstellen ein präzises Angebot.</div></div>
+      <div class="how-step"><div class="how-num">3</div><div class="how-title">Dashboard einrichten</div><div class="how-desc">Ihr persönliches Dashboard wird eingerichtet. Ab dem ersten Einsatz läuft alles automatisch.</div></div>
+      <div class="how-step"><div class="how-num">4</div><div class="how-title">Fertig — zurücklehnen</div><div class="how-desc">Protokolle, Schäden, Berichte: alles passiert automatisch. Sie behalten den Überblick.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section">
+  <div class="services-inner">
+    <div style="text-align:center" class="reveal">
+      <div class="section-tag">Leistungen</div>
+      <h2 class="section-h">Für jeden Bedarf das<br>richtige Leistungsbild.</h2>
+    </div>
+    <div class="services-grid reveal">
+      <a href="#" class="svc-card"><div class="svc-icon">🏢</div><div class="svc-title">Hausverwaltungen</div><div class="svc-desc">Treppenhausreinigung, Allgemeinflächen, Grundreinigung und Übergabereinigung — mit volldigitaler Protokollierung.</div><div class="svc-arrow">→</div></a>
+      <a href="#" class="svc-card"><div class="svc-icon">💼</div><div class="svc-title">Büroreinigung</div><div class="svc-desc">Regelmäßige Unterhaltsreinigung für Büros, Kanzleien und Geschäftsräume in Berlin.</div><div class="svc-arrow">→</div></a>
+      <a href="#" class="svc-card"><div class="svc-icon">🏥</div><div class="svc-title">Praxisreinigung</div><div class="svc-desc">Hygienegerechte Reinigung für Arztpraxen, Therapieräume und Gesundheitseinrichtungen.</div><div class="svc-arrow">→</div></a>
+      <a href="#" class="svc-card"><div class="svc-icon">🪜</div><div class="svc-title">Treppenhausreinigung</div><div class="svc-desc">Objektbezogene Treppenhausreinigung mit flexiblem Turnus und automatischer Dokumentation.</div><div class="svc-arrow">→</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div>
+    <div class="section-tag">Jetzt starten</div>
+    <h2 class="section-h">Bereit für Reinigung,<br>die sich selbst verwaltet?</h2>
+    <p class="section-p" style="max-width:480px;margin:0 auto 32px">Kostenfreie Besichtigung in Berlin. Kein Risiko, kein Aufwand. Sie sehen das Angebot — und entscheiden.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="#" class="btn-primary" style="font-size:16px;padding:16px 36px">Kostenlos besichtigen →</a>
+      <a href="tel:+4917622844636" class="btn-ghost" style="font-size:16px;padding:16px 36px">☎ 0176 2284 4636</a>
+    </div>
+    <div class="cta-checks">
+      <div class="cta-check"><span class="cta-check-icon">✓</span> Kostenfreie Besichtigung</div>
+      <div class="cta-check"><span class="cta-check-icon">✓</span> Dashboard inklusive</div>
+      <div class="cta-check"><span class="cta-check-icon">✓</span> Kein Risiko</div>
+      <div class="cta-check"><span class="cta-check-icon">✓</span> Berlinweit</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">🌊 Nautilus Facility Cleaning</div>
+  <div class="footer-links">
+    <a href="#">Hausverwaltungen</a>
+    <a href="#">Büroreinigung</a>
+    <a href="#">Praxisreinigung</a>
+    <a href="#">Kontakt</a>
+    <a href="#">Impressum</a>
+    <a href="#">Datenschutz</a>
+  </div>
+  <div class="footer-copy">© 2026 Nautilus Security UG (haftungsbeschränkt)</div>
+</footer>
+
+<script>
+// Navbar
+const nav = document.getElementById('navbar');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Counter animation
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const start = performance.now();
+  const update = now => {
+    const p = Math.min((now - start) / 1400, 1);
+    el.textContent = Math.round((1 - Math.pow(1-p, 3)) * target);
+    if (p < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+const statsObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.querySelectorAll('.counter').forEach(animateCounter); statsObserver.unobserve(e.target); } });
+}, { threshold: 0.5 });
+document.querySelectorAll('.stats-grid').forEach(el => statsObserver.observe(el));
+
+// Hero reveal on load
+setTimeout(() => document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible')), 100);
+</script>
+</body>
+</html>
