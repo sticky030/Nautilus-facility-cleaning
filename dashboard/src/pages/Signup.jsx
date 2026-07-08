@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, Mail, Lock } from 'lucide-react'
 
 export default function Signup() {
   const [email, setEmail] = useState('')
@@ -28,8 +28,8 @@ export default function Signup() {
     <div className="auth-wrap">
       <div className="auth-card">
         <div className="auth-brand">
-          <div className="auth-logo">N</div>
-          <div className="auth-title">Nautilus Portal</div>
+          <img src="/nautilus-logo-transparent.png" alt="Nautilus Facility Cleaning" className="auth-logo-img" />
+          <div className="auth-eyebrow">Kundenportal</div>
           <div className="auth-sub">Kundenkonto einrichten</div>
         </div>
 
@@ -43,33 +43,42 @@ export default function Signup() {
               Wir haben eine Bestätigungsmail an <strong style={{ color: 'var(--c)' }}>{email}</strong> geschickt.
               Bitte bestätigen Sie Ihre Adresse, danach können Sie sich anmelden.
             </p>
-            <button onClick={() => navigate('/login')} className="btn-c" style={{ width: '100%', marginTop: 20 }}>
+            <button onClick={() => navigate('/login')} className="auth-btn">
               Zur Anmeldung
             </button>
           </div>
         ) : (
           <>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <form onSubmit={handleSubmit}>
               {error && <div className="auth-err">{error}</div>}
               <div>
                 <label className="flabel">E-Mail</label>
-                <input type="email" required value={email}
-                  onChange={e => setEmail(e.target.value)}
-                  placeholder="ihre@email.de" className="field" />
+                <div className="auth-field">
+                  <Mail size={17} className="ic" />
+                  <input type="email" required value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="ihre@email.de" className="auth-input" />
+                </div>
               </div>
-              <div>
+              <div style={{ marginTop: 16 }}>
                 <label className="flabel">Passwort</label>
-                <input type="password" required value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  placeholder="Mindestens 8 Zeichen" className="field" />
+                <div className="auth-field">
+                  <Lock size={17} className="ic" />
+                  <input type="password" required value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    placeholder="Mindestens 8 Zeichen" className="auth-input" />
+                </div>
               </div>
-              <div>
+              <div style={{ marginTop: 16 }}>
                 <label className="flabel">Passwort bestätigen</label>
-                <input type="password" required value={password2}
-                  onChange={e => setPassword2(e.target.value)}
-                  placeholder="Passwort wiederholen" className="field" />
+                <div className="auth-field">
+                  <Lock size={17} className="ic" />
+                  <input type="password" required value={password2}
+                    onChange={e => setPassword2(e.target.value)}
+                    placeholder="Passwort wiederholen" className="auth-input" />
+                </div>
               </div>
-              <button type="submit" disabled={loading} className="btn-c" style={{ width: '100%', marginTop: 4 }}>
+              <button type="submit" disabled={loading} className="auth-btn">
                 {loading ? 'Registrieren …' : 'Konto erstellen'}
               </button>
             </form>

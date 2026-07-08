@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard'
 import PropertyDetail from './pages/PropertyDetail'
 import Admin from './pages/Admin'
 import Signup from './pages/Signup'
+import ResetPassword from './pages/ResetPassword'
 
 function ProtectedRoute({ session, children }) {
   if (!session) return <Navigate to="/login" replace />
@@ -59,6 +60,7 @@ export default function App() {
         </AdminRoute>
       } />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
       <Route path="*" element={<Navigate to={session ? "/dashboard" : "/login"} replace />} />
     </Routes>
   )
