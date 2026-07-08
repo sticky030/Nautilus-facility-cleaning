@@ -63,14 +63,8 @@ export default function Login() {
               </div>
 
               <div style={{ marginTop: 16 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                  <label className="flabel" style={{ marginBottom: 0 }}>Passwort</label>
-                  <button type="button" onClick={() => { setView('forgot'); setError('') }}
-                    style={{ background: 'none', border: 'none', color: 'var(--c)', fontSize: 11.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', padding: 0 }}>
-                    Passwort vergessen?
-                  </button>
-                </div>
-                <div className="auth-field" style={{ marginTop: 7 }}>
+                <label className="flabel">Passwort</label>
+                <div className="auth-field">
                   <Lock size={17} className="ic" />
                   <input type="password" required value={password}
                     onChange={e => setPassword(e.target.value)}
@@ -81,6 +75,13 @@ export default function Login() {
               <button type="submit" disabled={loading} className="auth-btn">
                 {loading ? 'Anmelden …' : 'Anmelden'}
               </button>
+
+              <div style={{ textAlign: 'center', marginTop: 16 }}>
+                <button type="button" onClick={() => { setView('forgot'); setError('') }}
+                  style={{ background: 'none', border: 'none', color: 'var(--c)', fontSize: 12.5, fontWeight: 600, cursor: 'pointer', fontFamily: 'inherit', padding: 4 }}>
+                  Passwort vergessen?
+                </button>
+              </div>
             </form>
 
             <div className="auth-foot">
