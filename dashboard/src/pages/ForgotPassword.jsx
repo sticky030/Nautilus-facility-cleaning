@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { Mail, ArrowLeft, CheckCircle2 } from 'lucide-react'
 
@@ -39,9 +38,9 @@ export default function ForgotPassword() {
             <p className="auth-sub" style={{ marginTop: 10, lineHeight: 1.6 }}>
               Falls ein Konto mit <strong style={{ color: 'var(--c)' }}>{email}</strong> existiert, haben wir einen Link zum Zurücksetzen des Passworts geschickt.
             </p>
-            <Link to="/login" className="auth-btn" style={{ display: 'block', textDecoration: 'none', textAlign: 'center' }}>
+            <a href="/login" className="auth-btn" style={{ display: 'block', textDecoration: 'none', textAlign: 'center' }}>
               Zurück zur Anmeldung
-            </Link>
+            </a>
           </div>
         ) : (
           <>
@@ -65,9 +64,9 @@ export default function ForgotPassword() {
             </form>
 
             <div className="auth-foot">
-              <Link to="/login" style={{ color: 'var(--tx)', fontSize: 12, display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}>
+              <a href="/login" style={{ color: 'var(--tx)', fontSize: 12, display: 'inline-flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}>
                 <ArrowLeft size={14} /> Zurück zur Anmeldung
-              </Link>
+              </a>
             </div>
           </>
         )}

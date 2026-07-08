@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { Mail, Lock } from 'lucide-react'
 
@@ -55,9 +54,9 @@ export default function Login() {
         </form>
 
         <div style={{ textAlign: 'center', marginTop: 18 }}>
-          <Link to="/passwort-vergessen" style={{ color: 'var(--c)', fontSize: 12.5, fontWeight: 600, textDecoration: 'none' }}>
+          <a href="/passwort-vergessen" style={{ color: 'var(--c)', fontSize: 12.5, fontWeight: 600, textDecoration: 'none', cursor: 'pointer' }}>
             Passwort vergessen?
-          </Link>
+          </a>
         </div>
 
         <div className="auth-foot">
