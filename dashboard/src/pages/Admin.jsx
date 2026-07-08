@@ -3,26 +3,26 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { generateSchadenPDF } from '../lib/generatePDF'
 import { sendEmail } from '../lib/sendEmail'
-import Navbar from '../components/Navbar'
+import Sidebar from '../components/Sidebar'
 import ProtocolForm from '../components/ProtocolForm'
-import { FileText, AlertTriangle, Building2, Users, Check, ArrowLeft } from 'lucide-react'
+import { FileText, AlertTriangle, Building2, Users, Check } from 'lucide-react'
 
 export default function Admin({ session }) {
   const [activeSection, setActiveSection] = useState('protokoll')
-  const [hausverwaltungen, setHausverwaltungen] = useState([])
+  const [kunden, setKunden] = useState([])
   const [success, setSuccess] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  // Schaden form
+  // Hinweis form
   const [selectedHV, setSelectedHV] = useState('')
   const [selectedObjekt, setSelectedObjekt] = useState('')
   const [objekte, setObjekte] = useState([])
   const [schadenTitel, setSchadenTitel] = useState('')
   const [schadenBeschreibung, setSchadenBeschreibung] = useState('')
-  const [schadenFoto, setSchadenFoto] = useState(null)
+  const [schadenFotos, setSchadenFotos] = useState([])
 
-  // HV form
+  // Kunde form
   const [hvName, setHvName] = useState('')
   const [hvEmail, setHvEmail] = useState('')
   const [hvRegistrierLink, setHvRegistrierLink] = useState('')
@@ -30,9 +30,11 @@ export default function Admin({ session }) {
   // Objekt form
   const [objektName, setObjektName] = useState('')
   const [objektAdresse, setObjektAdresse] = useState('')
+  const [objektGroesse, setObjektGroesse] = useState('')
+  const [objektTurnus, setObjektTurnus] = useState('')
 
   useEffect(() => {
-    supabase.from('hausverwaltungen').select('id, name').then(({ data }) => setHausverwaltungen(data || []))
+    supabase.from('hausverwaltungen').select('id, name').then(({ data }) => setKunden(data || []))
   }, [])
 
   useEffect(() => {
@@ -49,78 +51,72 @@ export default function Admin({ session }) {
   async function handleSchadenseintrag(e) {
     e.preventDefault(); setLoading(true)
     try {
-      let fotoUrl = null
-      if (schadenFoto) {
-        const path = `schaeden/${selectedObjekt}/${Date.now()}.${schadenFoto.name.split('.').pop()}`
-        const { data: up } = await supabase.storage.from('fotos').upload(path, schadenFoto)
-        if (up) fotoUrl = supabase.storage.from('fotos').getPublicUrl(path).data.publicUrl
+      const fotoUrls = []
+      for (const foto of schadenFotos) {
+        const path = `schaeden/${selectedObjekt}/${Date.now()}_${foto.name}`
+        const { data: up } = await supabase.storage.from('fotos').upload(path, foto)
+        if (up) fotoUrls.push(supabase.storage.from('fotos').getPublicUrl(path).data.publicUrl)
       }
 
       const objekt = objekte.find(o => o.id === selectedObjekt)
-      const hv = hausverwaltungen.find(h => h.id === selectedHV)
+      const hv = kunden.find(h => h.id === selectedHV)
 
-      // PDF generieren
+      // Fortlaufende Hinweis-Nummer atomar aus der Datenbank
+      const { data: nummer } = await supabase.rpc('next_beleg', { p_prefix: 'NFS' })
+
       const pdfBlob = await generateSchadenPDF({
-        objekt,
-        hausverwaltung: hv?.name,
-        titel: schadenTitel,
-        beschreibung: schadenBeschreibung,
-        datum: new Date().toISOString().split('T')[0],
-        fotoUrl,
+        objekt, hausverwaltung: hv?.name, titel: schadenTitel,
+        beschreibung: schadenBeschreibung, nummer,
+        datum: new Date().toISOString().split('T')[0], fotoUrls,
       })
-
-      // PDF hochladen
-      const pdfPath = `schaeden/${selectedObjekt}/schaden_${Date.now()}.pdf`
+      const pdfPath = `schaeden/${selectedObjekt}/hinweis_${Date.now()}.pdf`
       await supabase.storage.from('fotos').upload(pdfPath, pdfBlob, { contentType: 'application/pdf' })
-      const { data: pdfUrlData } = supabase.storage.from('fotos').getPublicUrl(pdfPath)
 
       await supabase.from('schadensmeldungen').insert({
         objekt_id: selectedObjekt, titel: schadenTitel,
-        beschreibung: schadenBeschreibung, foto_url: fotoUrl, behoben: false
+        beschreibung: schadenBeschreibung, nummer,
+        foto_url: fotoUrls[0] || null, foto_urls: fotoUrls, behoben: false
       })
-      await supabase.from('objekte').update({ status: 'dringend' }).eq('id', selectedObjekt)
+      await supabase.from('objekte').update({ status: 'hinweis' }).eq('id', selectedObjekt)
 
-      // E-Mail an Hausverwaltung
       const { data: hvFull } = await supabase.from('hausverwaltungen').select('email').eq('id', selectedHV).single()
       if (hvFull?.email) {
         await sendEmail({
           to: hvFull.email,
-          subject: `Neue Schadensmeldung – ${objekt?.name}`,
+          subject: `Neuer Hinweis, ${objekt?.name}`,
           html: `
-            <div style="font-family:sans-serif;max-width:520px;margin:0 auto;color:#2C2C2C">
-              <div style="background:#2C2C2C;padding:24px 32px">
-                <p style="color:#B79B6C;font-size:11px;letter-spacing:3px;margin:0">NAUTILUS FACILITY CLEANING</p>
+            <div style="font-family:sans-serif;max-width:520px;margin:0 auto;color:#0f172a">
+              <div style="background:#06101f;padding:22px 30px">
+                <p style="color:#06b6d4;font-size:11px;letter-spacing:2px;margin:0">NAUTILUS FACILITY CLEANING</p>
               </div>
-              <div style="padding:32px;border:1px solid #e5e1d8;border-top:none">
-                <h2 style="margin:0 0 16px;font-size:20px">Neue Schadensmeldung eingegangen</h2>
-                <p style="color:#6f6559;margin:0 0 8px">Für Ihr Objekt <strong>${objekt?.name}</strong> wurde ein Schaden gemeldet.</p>
-                <div style="background:#fef2f2;border-left:3px solid #ef4444;padding:12px 16px;margin:16px 0;border-radius:4px">
-                  <p style="margin:0;font-weight:600;color:#dc2626">${schadenTitel}</p>
-                  ${schadenBeschreibung ? `<p style="margin:8px 0 0;color:#6f6559;font-size:14px">${schadenBeschreibung}</p>` : ''}
+              <div style="padding:30px;border:1px solid #e2e8f0;border-top:none">
+                <h2 style="margin:0 0 14px;font-size:19px">Neuer Hinweis eingegangen</h2>
+                <p style="color:#475569;margin:0 0 8px">Für Ihr Objekt <strong>${objekt?.name}</strong> wurde ein Hinweis erfasst.</p>
+                <div style="background:#fff7ed;border-left:3px solid #f59e0b;padding:12px 16px;margin:16px 0;border-radius:4px">
+                  <p style="margin:0;font-weight:600;color:#b45309">${schadenTitel}</p>
+                  ${schadenBeschreibung ? `<p style="margin:8px 0 0;color:#475569;font-size:14px">${schadenBeschreibung}</p>` : ''}
                 </div>
-                <a href="https://dashboard.nautilus-facility.de" style="background:#B79B6C;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600">Im Dashboard ansehen</a>
-                <p style="color:#a09080;font-size:12px;margin-top:32px">Nautilus Facility Cleaning · Berlin · kontakt@nautilus-facility.de</p>
+                <a href="https://dashboard.nautilus-facility.de" style="background:#06b6d4;color:#04121f;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700;display:inline-block">Im Portal ansehen</a>
+                <p style="color:#94a3b8;font-size:12px;margin-top:30px">Nautilus Facility Cleaning · Berlin · kontakt@nautilus-facility.de</p>
               </div>
-            </div>
-          `
+            </div>`
         })
       }
 
-      setSchadenTitel(''); setSchadenBeschreibung(''); setSchadenFoto(null)
-      showSuccess('Schadensmeldung + PDF gespeichert!')
-    } catch(err) {
+      setSchadenTitel(''); setSchadenBeschreibung(''); setSchadenFotos([])
+      showSuccess('Hinweis und PDF gespeichert.')
+    } catch (err) {
       showSuccess('Fehler: ' + err.message)
     }
     setLoading(false)
   }
 
-  async function handleNeueHV(e) {
+  async function handleNeuerKunde(e) {
     e.preventDefault(); setLoading(true)
     const { error } = await supabase.from('hausverwaltungen').insert({ name: hvName, email: hvEmail })
     if (!error) {
-      const link = `${window.location.origin}/signup`
-      setHvRegistrierLink(link)
-      showSuccess('Hausverwaltung angelegt! Link zum Registrieren kopieren.')
+      setHvRegistrierLink(`${window.location.origin}/signup`)
+      showSuccess('Kunde angelegt. Registrierungslink kopieren.')
     } else {
       showSuccess('Fehler: ' + (error?.message || 'Unbekannt'))
     }
@@ -129,229 +125,183 @@ export default function Admin({ session }) {
 
   async function handleNeuesObjekt(e) {
     e.preventDefault(); setLoading(true)
-    await supabase.from('objekte').insert({
-      hausverwaltung_id: selectedHV, name: objektName, adresse: objektAdresse, status: 'ok'
+    const { error } = await supabase.from('objekte').insert({
+      hausverwaltung_id: selectedHV, name: objektName, adresse: objektAdresse,
+      groesse: objektGroesse || null, turnus: objektTurnus || null, status: 'ok'
     })
-    setObjektName(''); setObjektAdresse('')
-    showSuccess('Objekt angelegt!')
+    if (error) {
+      showSuccess('Fehler: ' + (error.message || 'Unbekannt'))
+    } else {
+      setObjektName(''); setObjektAdresse(''); setObjektGroesse(''); setObjektTurnus('')
+      showSuccess('Objekt angelegt.')
+    }
     setLoading(false)
   }
 
   const sections = [
-    { id: 'protokoll', label: 'Protokoll erstellen', icon: <FileText size={15}/> },
-    { id: 'schaden',   label: 'Schaden melden',     icon: <AlertTriangle size={15}/> },
-    { id: 'objekt',    label: 'Neues Objekt',        icon: <Building2 size={15}/> },
-    { id: 'hv',        label: 'Neue Hausverwaltung', icon: <Users size={15}/> },
+    { id: 'protokoll', label: 'Protokoll erstellen', icon: <FileText size={15} /> },
+    { id: 'schaden', label: 'Hinweis melden', icon: <AlertTriangle size={15} /> },
+    { id: 'objekt', label: 'Neues Objekt', icon: <Building2 size={15} /> },
+    { id: 'hv', label: 'Neuer Kunde', icon: <Users size={15} /> },
   ]
 
-  const inputStyle = {
-    width: '100%', padding: '0.65rem 0.9rem',
-    background: '#faf8f4', border: '1px solid #e7ded0',
-    borderRadius: '8px', color: '#2C2C2C',
-    fontFamily: "'Inter', sans-serif", fontSize: '0.875rem',
-    outline: 'none', boxSizing: 'border-box'
-  }
-  const labelStyle = {
-    display: 'block', fontSize: '0.62rem', fontWeight: 600,
-    letterSpacing: '0.18em', textTransform: 'uppercase',
-    color: '#6f6559', marginBottom: '6px',
-    fontFamily: "'Inter', sans-serif"
-  }
-
   return (
-    <div style={{ minHeight: '100vh', background: '#f7f4ee', fontFamily: "'Inter', sans-serif" }}>
-      <Navbar session={session} />
-      <div style={{ maxWidth: '860px', margin: '0 auto', padding: '2.5rem 1.5rem' }}>
+    <div className="app">
+      <Sidebar session={session} view={null} onSelect={() => navigate('/dashboard')} />
 
-        <button onClick={() => navigate('/dashboard')} style={{
-          display: 'flex', alignItems: 'center', gap: '6px',
-          background: 'none', border: 'none', cursor: 'pointer',
-          color: '#6f6559', fontSize: '0.8rem', marginBottom: '1.5rem', padding: 0
-        }}>
-          <ArrowLeft size={14}/> Zurück zur Übersicht
-        </button>
-
-        <p style={{ fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#B79B6C', marginBottom: '6px' }}>Admin</p>
-        <h1 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '2rem', fontWeight: 400, color: '#2C2C2C', marginBottom: '0.4rem' }}>Verwaltung</h1>
-        <p style={{ fontSize: '0.82rem', color: '#6f6559', marginBottom: '2rem' }}>Protokolle erstellen, Schäden melden, Kunden verwalten</p>
+      <main className="main" style={{ maxWidth: 900 }}>
+        <div className="head" style={{ marginBottom: 22 }}>
+          <div>
+            <div className="head-tag">Verwaltung</div>
+            <h1>Admin</h1>
+          </div>
+        </div>
 
         {success && (
           <div style={{
-            display: 'flex', alignItems: 'center', gap: '8px',
-            padding: '0.75rem 1rem', marginBottom: '1.5rem',
-            background: '#f0fdf4', border: '1px solid #bbf7d0',
-            borderRadius: '10px', color: '#16a34a', fontSize: '0.82rem'
+            display: 'flex', alignItems: 'center', gap: 8, padding: '11px 15px', marginBottom: 18,
+            background: 'rgba(16,185,129,.1)', border: '1px solid rgba(16,185,129,.3)',
+            borderRadius: 10, color: 'var(--green)', fontSize: 13.5
           }}>
-            <Check size={15}/> {success}
+            <Check size={15} /> {success}
           </div>
         )}
 
-        {/* Tabs */}
-        <div style={{ display: 'flex', gap: '8px', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
-          {sections.map(s => (
-            <button key={s.id} onClick={() => setActiveSection(s.id)} style={{
-              display: 'flex', alignItems: 'center', gap: '7px',
-              padding: '8px 16px', borderRadius: '10px', cursor: 'pointer',
-              border: activeSection === s.id ? 'none' : '1px solid #e7ded0',
-              background: activeSection === s.id
-                ? 'linear-gradient(135deg, #c9a96e, #B79B6C)' : 'white',
-              color: activeSection === s.id ? '#1a1510' : '#6f6559',
-              fontSize: '0.78rem', fontWeight: 600,
-              fontFamily: "'Inter', sans-serif",
-              boxShadow: activeSection === s.id ? '0 4px 12px rgba(183,155,108,0.3)' : 'none',
-              transition: 'all 0.15s'
-            }}>
-              {s.icon} {s.label}
-            </button>
-          ))}
+        {/* Section tabs */}
+        <div style={{ display: 'flex', gap: 8, marginBottom: 20, flexWrap: 'wrap' }}>
+          {sections.map(s => {
+            const active = activeSection === s.id
+            return (
+              <button key={s.id} onClick={() => setActiveSection(s.id)}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 7, padding: '9px 15px', borderRadius: 10,
+                  cursor: 'pointer', fontFamily: 'inherit', fontSize: 13, fontWeight: 600,
+                  border: '1px solid', borderColor: active ? 'var(--c)' : 'var(--bd)',
+                  background: active ? 'var(--cs)' : 'transparent',
+                  color: active ? 'var(--c)' : 'var(--mt)', transition: 'all .15s'
+                }}>
+                {s.icon} {s.label}
+              </button>
+            )
+          })}
         </div>
 
-        <div style={{
-          background: 'white', border: '1px solid #e7ded0',
-          borderRadius: '16px', padding: '1.8rem',
-          boxShadow: '0 2px 16px rgba(183,155,108,0.07)'
-        }}>
-
-          {/* Protokoll */}
+        <div className="panel" style={{ padding: 24 }}>
           {activeSection === 'protokoll' && (
             <div>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.4rem', fontWeight: 400, color: '#2C2C2C', marginBottom: '1.2rem' }}>
-                Reinigungsprotokoll erstellen
-              </h2>
-              <ProtocolForm
-                hausverwaltungen={hausverwaltungen}
-                onSuccess={() => showSuccess('Protokoll erstellt und PDF gespeichert!')}
-              />
+              <h2 style={{ fontSize: 18, fontWeight: 800, marginBottom: 16 }}>Reinigungsprotokoll erstellen</h2>
+              <ProtocolForm hausverwaltungen={kunden} onSuccess={() => showSuccess('Protokoll erstellt und PDF gespeichert.')} />
             </div>
           )}
 
-          {/* Schaden */}
           {activeSection === 'schaden' && (
-            <form onSubmit={handleSchadenseintrag} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.4rem', fontWeight: 400, color: '#2C2C2C', marginBottom: '0.2rem' }}>
-                Schadensmeldung erfassen
-              </h2>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+            <form onSubmit={handleSchadenseintrag} style={{ display: 'flex', flexDirection: 'column', gap: 15 }}>
+              <h2 style={{ fontSize: 18, fontWeight: 800 }}>Hinweis erfassen</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 15 }}>
                 <div>
-                  <label style={labelStyle}>Hausverwaltung</label>
-                  <select value={selectedHV} onChange={e => setSelectedHV(e.target.value)} required style={inputStyle}>
-                    <option value="">Wählen...</option>
-                    {hausverwaltungen.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
+                  <label className="flabel">Kunde</label>
+                  <select value={selectedHV} onChange={e => setSelectedHV(e.target.value)} required className="field">
+                    <option value="">Wählen …</option>
+                    {kunden.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label style={labelStyle}>Objekt</label>
-                  <select value={selectedObjekt} onChange={e => setSelectedObjekt(e.target.value)} required disabled={!selectedHV} style={inputStyle}>
-                    <option value="">Wählen...</option>
+                  <label className="flabel">Objekt</label>
+                  <select value={selectedObjekt} onChange={e => setSelectedObjekt(e.target.value)} required disabled={!selectedHV} className="field">
+                    <option value="">Wählen …</option>
                     {objekte.map(o => <option key={o.id} value={o.id}>{o.name}</option>)}
                   </select>
                 </div>
               </div>
               <div>
-                <label style={labelStyle}>Titel</label>
+                <label className="flabel">Titel</label>
                 <input type="text" value={schadenTitel} onChange={e => setSchadenTitel(e.target.value)}
-                  placeholder="z.B. Riss in Treppenhauswand" required style={inputStyle}/>
+                  placeholder="z.B. Glühbirne defekt, Flur 2.OG" required className="field" />
               </div>
               <div>
-                <label style={labelStyle}>Beschreibung</label>
+                <label className="flabel">Beschreibung</label>
                 <textarea value={schadenBeschreibung} onChange={e => setSchadenBeschreibung(e.target.value)}
-                  rows={3} style={{ ...inputStyle, resize: 'none' }}/>
+                  rows={3} className="field" style={{ resize: 'none' }} />
               </div>
               <div>
-                <label style={labelStyle}>Foto</label>
-                <input type="file" accept="image/*" onChange={e => setSchadenFoto(e.target.files[0])}
-                  style={{ fontSize: '0.8rem', color: '#6f6559' }}/>
+                <label className="flabel">Fotos</label>
+                <input type="file" accept="image/*" multiple onChange={e => setSchadenFotos(Array.from(e.target.files))}
+                  style={{ fontSize: 13, color: 'var(--tx)' }} />
+                {schadenFotos.length > 0 && <p style={{ fontSize: 12, color: 'var(--c)', marginTop: 4 }}>{schadenFotos.length} Foto{schadenFotos.length > 1 ? 's' : ''} ausgewählt</p>}
               </div>
-              <button type="submit" disabled={loading} style={{
-                padding: '0.8rem', background: loading ? '#e7ded0' : '#dc2626',
-                border: 'none', borderRadius: '10px', color: 'white',
-                fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.15em',
-                textTransform: 'uppercase', cursor: 'pointer'
-              }}>{loading ? 'Speichern...' : 'Schaden melden'}</button>
+              <button type="submit" disabled={loading} className="btn-c">{loading ? 'Speichern …' : 'Hinweis melden'}</button>
             </form>
           )}
 
-          {/* Neues Objekt */}
           {activeSection === 'objekt' && (
-            <form onSubmit={handleNeuesObjekt} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.4rem', fontWeight: 400, color: '#2C2C2C' }}>
-                Neues Objekt anlegen
-              </h2>
+            <form onSubmit={handleNeuesObjekt} style={{ display: 'flex', flexDirection: 'column', gap: 15 }}>
+              <h2 style={{ fontSize: 18, fontWeight: 800 }}>Neues Objekt anlegen</h2>
               <div>
-                <label style={labelStyle}>Hausverwaltung</label>
-                <select value={selectedHV} onChange={e => setSelectedHV(e.target.value)} required style={inputStyle}>
-                  <option value="">Wählen...</option>
-                  {hausverwaltungen.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
+                <label className="flabel">Kunde</label>
+                <select value={selectedHV} onChange={e => setSelectedHV(e.target.value)} required className="field">
+                  <option value="">Wählen …</option>
+                  {kunden.map(h => <option key={h.id} value={h.id}>{h.name}</option>)}
                 </select>
               </div>
               <div>
-                <label style={labelStyle}>Objektname</label>
+                <label className="flabel">Objektname</label>
                 <input type="text" value={objektName} onChange={e => setObjektName(e.target.value)}
-                  placeholder="z.B. Musterstraße 12" required style={inputStyle}/>
+                  placeholder="z.B. Agentur Mitte" required className="field" />
               </div>
               <div>
-                <label style={labelStyle}>Adresse</label>
+                <label className="flabel">Adresse</label>
                 <input type="text" value={objektAdresse} onChange={e => setObjektAdresse(e.target.value)}
-                  placeholder="Straße, PLZ Berlin" required style={inputStyle}/>
+                  placeholder="Straße, PLZ Berlin" required className="field" />
               </div>
-              <GoldButton loading={loading} label="Objekt anlegen"/>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 15 }}>
+                <div>
+                  <label className="flabel">Größe (optional)</label>
+                  <input type="text" value={objektGroesse} onChange={e => setObjektGroesse(e.target.value)}
+                    placeholder="z.B. 320 m²" className="field" />
+                </div>
+                <div>
+                  <label className="flabel">Turnus (optional)</label>
+                  <input type="text" value={objektTurnus} onChange={e => setObjektTurnus(e.target.value)}
+                    placeholder="z.B. Di + Fr" className="field" />
+                </div>
+              </div>
+              <button type="submit" disabled={loading} className="btn-c">{loading ? 'Speichern …' : 'Objekt anlegen'}</button>
             </form>
           )}
 
-          {/* Neue HV */}
           {activeSection === 'hv' && (
-            <form onSubmit={handleNeueHV} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.4rem', fontWeight: 400, color: '#2C2C2C' }}>
-                Neue Hausverwaltung anlegen
-              </h2>
-              <p style={{ fontSize: '0.78rem', color: '#6f6559', background: '#faf8f4', borderRadius: '8px', padding: '0.75rem 1rem', border: '1px solid #e7ded0' }}>
-                Trage Firmenname und E-Mail ein. Der Kunde registriert sich dann selbst über den Registrierungslink.
+            <form onSubmit={handleNeuerKunde} style={{ display: 'flex', flexDirection: 'column', gap: 15 }}>
+              <h2 style={{ fontSize: 18, fontWeight: 800 }}>Neuen Kunden anlegen</h2>
+              <p style={{ fontSize: 13, color: 'var(--tx)', background: 'rgba(255,255,255,.03)', borderRadius: 8, padding: '11px 14px', border: '1px solid var(--bd)' }}>
+                Firmenname und E-Mail eintragen. Der Kunde registriert sich dann selbst über den Registrierungslink.
               </p>
               <div>
-                <label style={labelStyle}>Firmenname</label>
+                <label className="flabel">Firmenname</label>
                 <input type="text" value={hvName} onChange={e => setHvName(e.target.value)}
-                  placeholder="Muster Hausverwaltung GmbH" required style={inputStyle}/>
+                  placeholder="Muster GmbH" required className="field" />
               </div>
               <div>
-                <label style={labelStyle}>E-Mail des Kunden</label>
+                <label className="flabel">E-Mail des Kunden</label>
                 <input type="email" value={hvEmail} onChange={e => setHvEmail(e.target.value)}
-                  placeholder="kunde@hausverwaltung.de" required style={inputStyle}/>
+                  placeholder="kunde@firma.de" required className="field" />
               </div>
-              <GoldButton loading={loading} label="Hausverwaltung anlegen"/>
+              <button type="submit" disabled={loading} className="btn-c">{loading ? 'Speichern …' : 'Kunde anlegen'}</button>
               {hvRegistrierLink && (
-                <div style={{ padding: '1rem', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: '10px' }}>
-                  <p style={{ fontSize: '0.72rem', fontWeight: 600, color: '#16a34a', marginBottom: '6px', letterSpacing: '0.1em', textTransform: 'uppercase' }}>Registrierungslink für Kunden:</p>
-                  <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                    <code style={{ fontSize: '0.78rem', background: 'white', padding: '6px 10px', borderRadius: '6px', border: '1px solid #bbf7d0', flex: 1, wordBreak: 'break-all' }}>
-                      {hvRegistrierLink}
-                    </code>
-                    <button type="button" onClick={() => navigator.clipboard.writeText(hvRegistrierLink)} style={{
-                      padding: '6px 12px', background: '#16a34a', border: 'none', borderRadius: '6px',
-                      color: 'white', fontSize: '0.72rem', cursor: 'pointer', whiteSpace: 'nowrap'
-                    }}>Kopieren</button>
+                <div style={{ padding: 14, background: 'rgba(16,185,129,.08)', border: '1px solid rgba(16,185,129,.3)', borderRadius: 10 }}>
+                  <p style={{ fontSize: 11, fontWeight: 700, color: 'var(--green)', marginBottom: 6, letterSpacing: '.08em', textTransform: 'uppercase' }}>Registrierungslink für den Kunden</p>
+                  <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                    <code style={{ fontSize: 12.5, background: 'rgba(0,0,0,.25)', padding: '7px 10px', borderRadius: 6, border: '1px solid var(--bd)', flex: 1, wordBreak: 'break-all', color: 'var(--tx)' }}>{hvRegistrierLink}</code>
+                    <button type="button" onClick={() => navigator.clipboard.writeText(hvRegistrierLink)} className="btn-c" style={{ padding: '7px 12px', fontSize: 12 }}>Kopieren</button>
                   </div>
-                  <p style={{ fontSize: '0.68rem', color: '#6f6559', marginTop: '6px' }}>
-                    Der Kunde registriert sich mit der E-Mail <strong>{hvEmail}</strong> — das System verbindet ihn automatisch.
+                  <p style={{ fontSize: 11.5, color: 'var(--mt)', marginTop: 6 }}>
+                    Der Kunde registriert sich mit <strong style={{ color: 'var(--tx)' }}>{hvEmail}</strong>, das System verknüpft ihn automatisch.
                   </p>
                 </div>
               )}
             </form>
           )}
         </div>
-      </div>
+      </main>
     </div>
-  )
-}
-
-function GoldButton({ loading, label }) {
-  return (
-    <button type="submit" disabled={loading} style={{
-      padding: '0.8rem', border: 'none', borderRadius: '10px',
-      background: loading ? '#e7ded0' : 'linear-gradient(135deg, #c9a96e, #B79B6C)',
-      color: loading ? '#6f6559' : '#1a1510',
-      fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.15em',
-      textTransform: 'uppercase', cursor: loading ? 'not-allowed' : 'pointer',
-      fontFamily: "'Inter', sans-serif"
-    }}>{loading ? 'Speichern...' : label}</button>
   )
 }

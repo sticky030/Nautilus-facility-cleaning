@@ -1,77 +1,49 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
-import Navbar from '../components/Navbar'
-import { Building2, CheckCircle2, AlertTriangle, XCircle, ChevronRight, Clock } from 'lucide-react'
-import { formatDistanceToNow } from 'date-fns'
+import Sidebar from '../components/Sidebar'
+import {
+  Building2, FileText, AlertTriangle, CheckCircle2,
+  Check, Download, Calendar
+} from 'lucide-react'
+import { formatDistanceToNow, format, isSameMonth } from 'date-fns'
 import { de } from 'date-fns/locale'
 
-function StatusBadge({ status }) {
-  const map = {
-    ok:       { label: 'Alles OK',  bg: '#f0fdf4', color: '#16a34a', dot: '#22c55e' },
-    hinweis:  { label: 'Hinweis',   bg: '#fffbeb', color: '#d97706', dot: '#f59e0b' },
-    dringend: { label: 'Dringend',  bg: '#fef2f2', color: '#dc2626', dot: '#ef4444' },
-  }
-  const s = map[status] || map['ok']
-  return (
-    <span style={{
-      display: 'inline-flex', alignItems: 'center', gap: '6px',
-      padding: '3px 10px', borderRadius: '999px',
-      background: s.bg, color: s.color,
-      fontSize: '0.72rem', fontWeight: 600,
-      fontFamily: "'Inter', sans-serif"
-    }}>
-      <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: s.dot, flexShrink: 0 }} />
-      {s.label}
-    </span>
-  )
+const STATUS = {
+  ok:       { cls: 'ok',       label: 'Alles OK' },
+  hinweis:  { cls: 'warn',     label: 'Hinweis gemeldet' },
+  dringend: { cls: 'dringend', label: 'Dringender Hinweis' },
 }
 
-function StatCard({ label, value, icon, bg, accent }) {
-  return (
-    <div style={{
-      background: 'white', border: '1px solid #e7ded0',
-      borderRadius: '16px', padding: '1.2rem 1.4rem',
-      display: 'flex', alignItems: 'center', gap: '1rem',
-      boxShadow: '0 2px 12px rgba(183,155,108,0.06)'
-    }}>
-      <div style={{
-        width: '46px', height: '46px', borderRadius: '12px',
-        background: bg, display: 'flex', alignItems: 'center',
-        justifyContent: 'center', flexShrink: 0, color: accent
-      }}>{icon}</div>
-      <div>
-        <div style={{
-          fontSize: '1.75rem', fontWeight: 700, color: '#2C2C2C',
-          fontFamily: "'Cormorant Garamond', serif", lineHeight: 1
-        }}>{value}</div>
-        <div style={{
-          fontSize: '0.7rem', color: '#6f6559', marginTop: '3px',
-          fontFamily: "'Inter', sans-serif"
-        }}>{label}</div>
-      </div>
-    </div>
-  )
+function StatusBadge({ status }) {
+  const s = STATUS[status] || STATUS.ok
+  return <span className={`badge ${s.cls}`}><span className="d" />{s.label}</span>
+}
+
+function letzteReinigung(obj) {
+  const p = (obj.protokolle || []).slice().sort((a, b) => new Date(b.datum) - new Date(a.datum))[0]
+  return p ? new Date(p.datum) : null
 }
 
 export default function Dashboard({ session }) {
   const [objekte, setObjekte] = useState([])
   const [loading, setLoading] = useState(true)
-  const [hvName, setHvName] = useState('')
+  const [kundeName, setKundeName] = useState('')
+  const [view, setView] = useState('overview')
   const navigate = useNavigate()
 
   useEffect(() => {
     async function load() {
       const { data: hvData } = await supabase
         .from('hausverwaltungen').select('id, name')
-        .eq('user_id', session.user.id).single()
+        .eq('user_id', session.user.id).maybeSingle()
       if (!hvData) { setLoading(false); return }
-      setHvName(hvData.name)
+      setKundeName(hvData.name)
       const { data } = await supabase
         .from('objekte')
-        .select(`id, name, adresse, status,
-          protokolle ( id, datum ),
-          schadensmeldungen ( id, behoben )`)
+        .select(`id, name, adresse, status, groesse, turnus,
+          protokolle ( id, datum, mitarbeiter, pdf_url ),
+          schadensmeldungen ( id, titel, behoben, created_at )`)
         .eq('hausverwaltung_id', hvData.id)
         .order('name')
       setObjekte(data || [])
@@ -80,141 +52,180 @@ export default function Dashboard({ session }) {
     load()
   }, [session])
 
+  // abgeleitete Daten
+  const alleProtokolle = objekte.flatMap(o =>
+    (o.protokolle || []).map(p => ({ ...p, objektName: o.name, objektId: o.id, adresse: o.adresse }))
+  ).sort((a, b) => new Date(b.datum) - new Date(a.datum))
+
+  const offeneHinweise = objekte.flatMap(o =>
+    (o.schadensmeldungen || []).filter(s => !s.behoben)
+      .map(s => ({ ...s, objektName: o.name, objektId: o.id, adresse: o.adresse }))
+  ).sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+
   const stats = {
-    gesamt:   objekte.length,
-    ok:       objekte.filter(o => o.status === 'ok').length,
-    hinweis:  objekte.filter(o => o.status === 'hinweis').length,
-    dringend: objekte.filter(o => o.status === 'dringend').length,
+    objekte: objekte.length,
+    protokolleMonat: alleProtokolle.filter(p => isSameMonth(new Date(p.datum), new Date())).length,
+    offen: offeneHinweise.length,
+    ok: objekte.filter(o => o.status === 'ok').length,
   }
 
+  const now = new Date()
+  const liveTs = `Letzte Aktualisierung: Heute ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} Uhr`
+
+  const titles = {
+    overview:   { tag: 'Objektübersicht', h1: 'Aktuelle Objekte' },
+    objekte:    { tag: 'Alle Liegenschaften', h1: 'Objekte' },
+    protokolle: { tag: 'Dokumentation', h1: 'Protokolle' },
+    hinweise:   { tag: 'Offene Punkte', h1: 'Hinweise' },
+  }
+  const t = titles[view] || titles.overview
+
   return (
-    <div style={{ minHeight: '100vh', background: '#f7f4ee', fontFamily: "'Inter', sans-serif" }}>
-      <Navbar session={session} />
+    <div className="app">
+      <Sidebar
+        session={session}
+        view={view}
+        onSelect={setView}
+        kundeName={kundeName}
+        openHinweise={stats.offen}
+      />
 
-      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '2.5rem 1.5rem' }}>
-
-        {/* Header */}
-        <div style={{ marginBottom: '2rem' }}>
-          <p style={{
-            fontSize: '0.62rem', fontWeight: 600, letterSpacing: '0.25em',
-            textTransform: 'uppercase', color: '#B79B6C', marginBottom: '6px',
-            fontFamily: "'Inter', sans-serif"
-          }}>Objektübersicht</p>
-          <h1 style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: '2rem', fontWeight: 400,
-            color: '#2C2C2C', lineHeight: 1.1
-          }}>{hvName || 'Meine Objekte'}</h1>
-          <p style={{ fontSize: '0.82rem', color: '#6f6559', marginTop: '4px' }}>
-            Alle verwalteten Liegenschaften auf einen Blick
-          </p>
+      <main className="main">
+        <div className="head">
+          <div>
+            <div className="head-tag">{t.tag}</div>
+            <h1>{t.h1}</h1>
+          </div>
+          <div className="head-meta"><span className="live-dot" />{liveTs}</div>
         </div>
 
-        {/* Stats */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
-          <StatCard label="Objekte gesamt" value={stats.gesamt}
-            icon={<Building2 size={20}/>} bg="rgba(183,155,108,0.1)" accent="#B79B6C" />
-          <StatCard label="Alles OK" value={stats.ok}
-            icon={<CheckCircle2 size={20}/>} bg="#f0fdf4" accent="#16a34a" />
-          <StatCard label="Hinweise" value={stats.hinweis}
-            icon={<AlertTriangle size={20}/>} bg="#fffbeb" accent="#d97706" />
-          <StatCard label="Dringend" value={stats.dringend}
-            icon={<XCircle size={20}/>} bg="#fef2f2" accent="#dc2626" />
-        </div>
-
-        {/* Tabelle */}
         {loading ? (
           <div style={{ display: 'flex', justifyContent: 'center', padding: '5rem 0' }}>
-            <div style={{
-              width: '32px', height: '32px', borderRadius: '50%',
-              border: '2px solid #e7ded0', borderTopColor: '#B79B6C',
-              animation: 'spin 0.8s linear infinite'
-            }}/>
-            <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
+            <div className="spin" />
           </div>
-        ) : objekte.length === 0 ? (
-          <div style={{
-            background: 'white', border: '1px solid #e7ded0', borderRadius: '16px',
-            padding: '4rem', textAlign: 'center'
-          }}>
-            <Building2 size={36} style={{ color: '#e7ded0', margin: '0 auto 12px' }}/>
-            <p style={{ color: '#6f6559', fontSize: '0.875rem' }}>Noch keine Objekte vorhanden.</p>
-          </div>
+        ) : (!kundeName ? (
+          <div className="empty">Diesem Konto ist noch kein Kunde zugeordnet. Bitte wenden Sie sich an Nautilus Facility Cleaning.</div>
         ) : (
-          <div style={{
-            background: 'white', border: '1px solid #e7ded0',
-            borderRadius: '16px', overflow: 'hidden',
-            boxShadow: '0 2px 16px rgba(183,155,108,0.07)'
-          }}>
-            {/* Tabellenkopf */}
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '2fr 2fr 120px 160px 120px 40px',
-              padding: '0.75rem 1.5rem',
-              background: '#faf8f4',
-              borderBottom: '1px solid #e7ded0',
-            }}>
-              {['Objekt', 'Adresse', 'Status', 'Letzte Reinigung', 'Schäden', ''].map(h => (
-                <span key={h} style={{
-                  fontSize: '0.6rem', fontWeight: 600, letterSpacing: '0.18em',
-                  textTransform: 'uppercase', color: '#B79B6C',
-                  fontFamily: "'Inter', sans-serif"
-                }}>{h}</span>
-              ))}
-            </div>
-
-            {/* Zeilen */}
-            {objekte.map((obj, i) => {
-              const letztes = obj.protokolle?.sort((a,b) => new Date(b.datum)-new Date(a.datum))[0]
-              const offene = obj.schadensmeldungen?.filter(s => !s.behoben).length || 0
-              return (
-                <div key={obj.id}
-                  onClick={() => navigate(`/objekt/${obj.id}`)}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '2fr 2fr 120px 160px 120px 40px',
-                    padding: '1rem 1.5rem',
-                    borderBottom: i < objekte.length-1 ? '1px solid #f0ece4' : 'none',
-                    cursor: 'pointer', transition: 'background 0.15s',
-                    alignItems: 'center'
-                  }}
-                  onMouseOver={e => e.currentTarget.style.background='rgba(183,155,108,0.04)'}
-                  onMouseOut={e => e.currentTarget.style.background='transparent'}>
-                  <span style={{ fontWeight: 600, color: '#2C2C2C', fontSize: '0.875rem' }}>{obj.name}</span>
-                  <span style={{ color: '#6f6559', fontSize: '0.82rem' }}>{obj.adresse}</span>
-                  <span><StatusBadge status={obj.status} /></span>
-                  <span style={{ color: '#6f6559', fontSize: '0.8rem' }}>
-                    {letztes ? (
-                      <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                        <Clock size={12} style={{ color: '#B79B6C' }}/>
-                        {formatDistanceToNow(new Date(letztes.datum), { addSuffix: true, locale: de })}
-                      </span>
-                    ) : <span style={{ color: '#d6c9b8' }}>—</span>}
-                  </span>
-                  <span>
-                    {offene > 0
-                      ? <span style={{
-                          padding: '2px 10px', borderRadius: '999px',
-                          background: '#fef2f2', color: '#dc2626',
-                          fontSize: '0.72rem', fontWeight: 700
-                        }}>{offene}</span>
-                      : <span style={{ color: '#d6c9b8', fontSize: '0.75rem' }}>Keine</span>}
-                  </span>
-                  <span><ChevronRight size={15} style={{ color: '#B79B6C' }}/></span>
+          <>
+            {/* OVERVIEW */}
+            {view === 'overview' && (
+              <>
+                <div className="stats">
+                  <Stat icon={<Building2 />} bg="var(--cs)" col="var(--c)" value={stats.objekte} label="Objekte gesamt" />
+                  <Stat icon={<FileText />} bg="rgba(16,185,129,.12)" col="var(--green)" value={stats.protokolleMonat} label="Protokolle diesen Monat" />
+                  <Stat icon={<AlertTriangle />} bg="rgba(245,158,11,.13)" col="var(--yellow)" value={stats.offen} label={stats.offen === 1 ? 'Offener Hinweis' : 'Offene Hinweise'} />
+                  <Stat icon={<CheckCircle2 />} bg="var(--cs)" col="var(--c)" value={stats.ok} label="Objekte ohne Befund" />
                 </div>
-              )
-            })}
-          </div>
-        )}
 
-        {/* Footer */}
-        <p style={{
-          textAlign: 'center', fontSize: '0.68rem', marginTop: '3rem',
-          color: '#c9b99a', fontFamily: "'Inter', sans-serif"
-        }}>
-          Nautilus Facility Cleaning · Berlin · nautilus-facility.de
-        </p>
+                <ObjectGrid objekte={objekte} navigate={navigate} />
+
+                <div className="sec-title">Letzte Reinigungen</div>
+                <ProtocolTable rows={alleProtokolle.slice(0, 6)} navigate={navigate} />
+              </>
+            )}
+
+            {/* OBJEKTE */}
+            {view === 'objekte' && (
+              objekte.length === 0
+                ? <div className="empty">Noch keine Objekte hinterlegt.</div>
+                : <ObjectGrid objekte={objekte} navigate={navigate} />
+            )}
+
+            {/* PROTOKOLLE */}
+            {view === 'protokolle' && (
+              alleProtokolle.length === 0
+                ? <div className="empty">Noch keine Protokolle vorhanden.</div>
+                : <ProtocolTable rows={alleProtokolle} navigate={navigate} withPdf />
+            )}
+
+            {/* HINWEISE */}
+            {view === 'hinweise' && (
+              offeneHinweise.length === 0
+                ? <div className="empty">Keine offenen Hinweise. Alles im grünen Bereich.</div>
+                : (
+                  <div className="panel">
+                    <div className="tbl-hdr"><span>Objekt</span><span>Hinweis</span><span className="c-date">Gemeldet</span><span className="c-stat">Status</span></div>
+                    {offeneHinweise.map(h => (
+                      <div key={h.id} className="tbl-row" onClick={() => navigate(`/objekt/${h.objektId}`)}>
+                        <span><span className="tbl-obj">{h.objektName}</span><div className="tbl-sub">{h.adresse}</div></span>
+                        <span>{h.titel}</span>
+                        <span className="c-date">{format(new Date(h.created_at), 'dd.MM.yyyy', { locale: de })}</span>
+                        <span className="c-stat"><span className="badge warn"><span className="d" />Offen</span></span>
+                      </div>
+                    ))}
+                  </div>
+                )
+            )}
+          </>
+        ))}
+      </main>
+    </div>
+  )
+}
+
+function Stat({ icon, bg, col, value, label }) {
+  return (
+    <div className="stat">
+      <div className="stat-ic" style={{ background: bg, color: col }}>{icon}</div>
+      <div><div className="stat-v">{value}</div><div className="stat-l">{label}</div></div>
+    </div>
+  )
+}
+
+function ObjectGrid({ objekte, navigate }) {
+  return (
+    <div className="obj-grid">
+      {objekte.map(obj => {
+        const lr = letzteReinigung(obj)
+        const cardCls = obj.status === 'dringend' ? 'dringend' : obj.status === 'hinweis' ? 'warn' : ''
+        return (
+          <button key={obj.id} className={`obj-card ${cardCls}`} onClick={() => navigate(`/objekt/${obj.id}`)}>
+            <div className="obj-top">
+              <div>
+                <div className="obj-name">{obj.name}</div>
+                <div className="obj-addr">{obj.adresse}</div>
+              </div>
+              <div className="obj-ic"><Building2 strokeWidth={2} /></div>
+            </div>
+            <StatusBadge status={obj.status} />
+            <div className="obj-foot">
+              <span>Letzte Reinigung</span>
+              <span className="m">
+                {lr ? formatDistanceToNow(lr, { addSuffix: true, locale: de }) : 'noch keine'}
+                {obj.groesse ? ` · ${obj.groesse}` : ''}
+              </span>
+            </div>
+            {obj.turnus && (
+              <div style={{ marginTop: 8, fontSize: 11, color: 'var(--mt)' }}>Turnus: <span style={{ color: 'var(--tx)' }}>{obj.turnus}</span></div>
+            )}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
+function ProtocolTable({ rows, navigate, withPdf }) {
+  if (!rows.length) return <div className="empty">Noch keine Protokolle vorhanden.</div>
+  return (
+    <div className="panel">
+      <div className="tbl-hdr">
+        <span>Objekt</span><span>Mitarbeiter</span><span className="c-date">Datum</span><span className="c-stat">{withPdf ? 'PDF' : 'Status'}</span>
       </div>
+      {rows.map(p => (
+        <div key={p.id} className="tbl-row" onClick={() => navigate(`/objekt/${p.objektId}`)}>
+          <span><span className="tbl-obj">{p.objektName}</span><div className="tbl-sub">{p.adresse}</div></span>
+          <span>{p.mitarbeiter || 'Nautilus Team'}</span>
+          <span className="c-date"><span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}><Calendar size={12} style={{ color: 'var(--c)' }} />{format(new Date(p.datum), 'dd.MM.yyyy', { locale: de })}</span></span>
+          <span className="c-stat">
+            {withPdf
+              ? (p.pdf_url
+                  ? <a href={p.pdf_url} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="chk" style={{ color: 'var(--c)' }}><Download size={13} />PDF</a>
+                  : <span style={{ color: 'var(--mt)', fontSize: 12 }}>ausstehend</span>)
+              : <span className="chk"><Check size={14} strokeWidth={3} />Erledigt</span>}
+          </span>
+        </div>
+      ))}
     </div>
   )
 }

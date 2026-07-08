@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nautilus Portal, Design-Vorschau</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --ink:#06101f;--ink2:#0a1628;--ink3:#0f1e34;--sidebar:#070e1c;
+    --c:#06b6d4;--cs:rgba(6,182,212,.15);
+    --white:#f0f9ff;--tx:#cbd5e1;--mt:#64748b;
+    --bd:rgba(255,255,255,.07);
+    --green:#10b981;--yellow:#f59e0b;--red:#ef4444;
+  }
+  body{
+    background:var(--ink);color:var(--white);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;
+  }
+  .app{display:grid;grid-template-columns:244px 1fr;min-height:100vh}
+
+  /* SIDEBAR */
+  .side{background:var(--sidebar);border-right:1px solid var(--bd);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+  .side-brand{padding:20px 20px 18px;border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:11px}
+  .side-brand-logo{width:38px;height:38px;border-radius:10px;background:linear-gradient(145deg,#22d3ee,#0891b2);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#04121f;font-weight:900;font-size:17px}
+  .side-brand-name{font-size:15px;font-weight:800;letter-spacing:-.01em}
+  .side-brand-sub{font-size:10px;color:var(--mt);letter-spacing:.04em}
+  .side-user{padding:16px 20px;border-bottom:1px solid var(--bd)}
+  .side-user-name{font-size:13px;font-weight:700}
+  .side-user-role{font-size:11px;color:var(--c);margin-top:2px}
+  .side-user-co{font-size:10px;color:var(--mt);margin-top:1px}
+  .side-nav{padding:12px 0;flex:1}
+  .side-lbl{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--mt);padding:6px 20px 8px}
+  .nav-item{display:flex;align-items:center;gap:11px;padding:10px 20px;font-size:13.5px;font-weight:500;color:var(--mt);cursor:pointer;transition:all .15s;border-left:2px solid transparent}
+  .nav-item svg{width:17px;height:17px;flex-shrink:0}
+  .nav-item:hover{background:rgba(255,255,255,.03);color:var(--white)}
+  .nav-item.active{color:var(--white);background:rgba(6,182,212,.08);border-left-color:var(--c)}
+  .nav-badge{margin-left:auto;background:rgba(245,158,11,.2);color:var(--yellow);border-radius:10px;padding:1px 8px;font-size:10px;font-weight:800}
+  .side-foot{padding:14px 20px;border-top:1px solid var(--bd)}
+  .side-logout{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--mt);cursor:pointer;transition:color .15s;background:none;border:none;font-family:inherit;padding:0}
+  .side-logout:hover{color:var(--white)}
+
+  /* MAIN */
+  .main{padding:30px 34px 60px;max-width:1180px}
+  .head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+  .head-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--c);margin-bottom:7px}
+  .head h1{font-size:27px;font-weight:800;letter-spacing:-.8px;line-height:1.1}
+  .head-meta{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mt)}
+  .live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(16,185,129,.15);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
+  .stat{background:var(--ink2);border:1px solid var(--bd);border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:13px}
+  .stat-ic{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .stat-ic svg{width:20px;height:20px}
+  .stat-v{font-size:23px;font-weight:800;line-height:1;letter-spacing:-.5px}
+  .stat-l{font-size:11.5px;color:var(--mt);margin-top:3px}
+
+  .sec-title{font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--tx);margin:0 0 13px}
+
+  /* OBJECT CARDS */
+  .obj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:30px}
+  .obj-card{background:var(--ink2);border:1px solid var(--bd);border-radius:14px;padding:17px;cursor:pointer;transition:all .2s}
+  .obj-card:hover{border-color:rgba(6,182,212,.35);transform:translateY(-2px)}
+  .obj-card.warn{border-color:rgba(245,158,11,.28)}
+  .obj-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}
+  .obj-name{font-size:14.5px;font-weight:700}
+  .obj-addr{font-size:11.5px;color:var(--mt);margin-top:2px}
+  .obj-ic{width:34px;height:34px;border-radius:9px;background:var(--cs);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--c)}
+  .obj-ic svg{width:17px;height:17px}
+  .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:100px;font-size:11px;font-weight:700}
+  .badge .d{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+  .badge.ok{background:rgba(16,185,129,.12);color:var(--green)}
+  .badge.ok .d{background:var(--green)}
+  .badge.warn{background:rgba(245,158,11,.13);color:var(--yellow)}
+  .badge.warn .d{background:var(--yellow);animation:pulse 2s infinite}
+  .obj-foot{display:flex;align-items:center;justify-content:space-between;margin-top:13px;padding-top:12px;border-top:1px solid var(--bd);font-size:11.5px;color:var(--mt)}
+  .obj-foot .m{color:var(--tx);font-weight:600}
+
+  /* TABLE */
+  .panel{background:var(--ink2);border:1px solid var(--bd);border-radius:14px;overflow:hidden}
+  .tbl-hdr,.tbl-row{display:grid;grid-template-columns:1.8fr 1.5fr 1.1fr 1fr;gap:12px;padding:13px 20px;align-items:center}
+  .tbl-hdr{border-bottom:1px solid var(--bd);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mt);background:rgba(255,255,255,.015)}
+  .tbl-row{border-bottom:1px solid rgba(255,255,255,.03);font-size:13px;color:var(--tx);cursor:pointer;transition:background .15s}
+  .tbl-row:last-child{border-bottom:none}
+  .tbl-row:hover{background:rgba(255,255,255,.025)}
+  .tbl-obj{font-weight:700;color:var(--white)}
+  .tbl-sub{font-size:11px;color:var(--mt);margin-top:1px}
+  .chk{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-weight:700;font-size:12px}
+  .chk svg{width:14px;height:14px}
+
+  @media(max-width:900px){
+    .app{grid-template-columns:1fr}
+    .side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:0}
+    .side-brand{border-bottom:none;flex:1}
+    .side-user,.side-foot{display:none}
+    .side-nav{display:flex;flex-wrap:wrap;padding:6px;width:100%;border-top:1px solid var(--bd)}
+    .side-lbl{display:none}
+    .nav-item{border-left:none;border-radius:8px;padding:8px 12px}
+    .stats{grid-template-columns:1fr 1fr}
+    .obj-grid{grid-template-columns:1fr}
+    .tbl-hdr,.tbl-row{grid-template-columns:1.6fr 1fr;gap:8px}
+    .tbl-hdr span:nth-child(3),.tbl-hdr span:nth-child(4),.tbl-row .c-date,.tbl-row .c-stat{display:none}
+    .main{padding:22px 18px 50px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="side">
+    <div class="side-brand">
+      <div class="side-brand-logo">N</div>
+      <div>
+        <div class="side-brand-name">Nautilus Portal</div>
+        <div class="side-brand-sub">Facility Cleaning</div>
+      </div>
+    </div>
+    <div class="side-user">
+      <div class="side-user-name">Michael Sander</div>
+      <div class="side-user-role">Facility Manager</div>
+      <div class="side-user-co">BFM Berlin GmbH</div>
+    </div>
+    <nav class="side-nav">
+      <div class="side-lbl">Portal</div>
+      <div class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Übersicht
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+        Protokolle
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Hinweise
+        <span class="nav-badge">1</span>
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Berichte
+      </div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>
+        Objekte
+      </div>
+      <div class="side-lbl">Konto</div>
+      <div class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        Einstellungen
+      </div>
+    </nav>
+    <div class="side-foot">
+      <button class="side-logout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Abmelden
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="head">
+      <div>
+        <div class="head-tag">Objektübersicht</div>
+        <h1>Aktuelle Objekte</h1>
+      </div>
+      <div class="head-meta"><span class="live-dot"></span><span id="live">Letzte Aktualisierung: Heute 09:15 Uhr</span></div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-ic" style="background:var(--cs);color:var(--c)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></div>
+        <div><div class="stat-v">3</div><div class="stat-l">Objekte gesamt</div></div>
+      </div>
+      <div class="stat">
+        <div class="stat-ic" style="background:rgba(16,185,129,.12);color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+        <div><div class="stat-v">12</div><div class="stat-l">Protokolle diesen Monat</div></div>
+      </div>
+      <div class="stat">
+        <div class="stat-ic" style="background:rgba(245,158,11,.13);color:var(--yellow)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div><div class="stat-v">1</div><div class="stat-l">Offener Hinweis</div></div>
+      </div>
+      <div class="stat">
+        <div class="stat-ic" style="background:var(--cs);color:var(--c)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div><div class="stat-v">&lt;2h</div><div class="stat-l">Reaktionszeit</div></div>
+      </div>
+    </div>
+
+    <!-- OBJECT CARDS -->
+    <div class="obj-grid">
+      <div class="obj-card">
+        <div class="obj-top">
+          <div><div class="obj-name">Agentur Mitte</div><div class="obj-addr">Torstraße 12, Berlin-Mitte</div></div>
+          <div class="obj-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></div>
+        </div>
+        <span class="badge ok"><span class="d"></span>Protokoll vorhanden</span>
+        <div class="obj-foot"><span>Letzte Reinigung</span><span class="m" data-doff="0" data-time="07:30" data-size="320 m²">Heute 07:30 · 320 m²</span></div>
+      </div>
+
+      <div class="obj-card warn">
+        <div class="obj-top">
+          <div><div class="obj-name">Startup Kreuzberg</div><div class="obj-addr">Oranienstraße 4, Kreuzberg</div></div>
+          <div class="obj-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></div>
+        </div>
+        <span class="badge warn"><span class="d"></span>Hinweis gemeldet</span>
+        <div class="obj-foot"><span>Letzte Reinigung</span><span class="m" data-doff="0" data-time="06:45" data-size="180 m²">Heute 06:45 · 180 m²</span></div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-top">
+          <div><div class="obj-name">Verwaltung Charlottenburg</div><div class="obj-addr">Kantstraße 88, Charlottenburg</div></div>
+          <div class="obj-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></div>
+        </div>
+        <span class="badge ok"><span class="d"></span>Protokoll vorhanden</span>
+        <div class="obj-foot"><span>Letzte Reinigung</span><span class="m" data-doff="-1" data-time="18:00" data-size="240 m²">Gestern 18:00 · 240 m²</span></div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <div class="sec-title">Letzte Reinigungen</div>
+    <div class="panel">
+      <div class="tbl-hdr"><span>Objekt</span><span>Leistung</span><span>Datum</span><span>Status</span></div>
+      <div class="tbl-row">
+        <span><span class="tbl-obj">Agentur Mitte</span><div class="tbl-sub">Torstraße 12</div></span>
+        <span>Bürofläche, 320 m²</span>
+        <span class="c-date">Heute 07:30</span>
+        <span class="c-stat"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Erledigt</span></span>
+      </div>
+      <div class="tbl-row">
+        <span><span class="tbl-obj">Startup Kreuzberg</span><div class="tbl-sub">Oranienstraße 4</div></span>
+        <span>Open Space, 180 m²</span>
+        <span class="c-date">Heute 06:45</span>
+        <span class="c-stat"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Erledigt</span></span>
+      </div>
+      <div class="tbl-row">
+        <span><span class="tbl-obj">Verwaltung Charlottenburg</span><div class="tbl-sub">Kantstraße 88</div></span>
+        <span>Treppenhaus + Büro, 240 m²</span>
+        <span class="c-date">Gestern 18:00</span>
+        <span class="c-stat"><span class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Erledigt</span></span>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  // Live-Zeitstempel + relative Datumsangaben (wie im Marketing-Mockup)
+  (function(){
+    var now=new Date();
+    var hh=String(now.getHours()).padStart(2,'0'), mm=String(now.getMinutes()).padStart(2,'0');
+    var live=document.getElementById('live');
+    if(live) live.textContent='Letzte Aktualisierung: Heute '+hh+':'+mm+' Uhr';
+    document.querySelectorAll('[data-doff]').forEach(function(el){
+      var off=parseInt(el.dataset.doff,10);
+      var label=off===0?'Heute':(off===-1?'Gestern':'');
+      var t=el.dataset.time||'', s=el.dataset.size||'';
+      el.textContent=(label?label+' ':'')+t+(s?' · '+s:'');
+    });
+  })();
+</script>
+</body>
+</html>

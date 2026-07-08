@@ -19,7 +19,7 @@ const SignaturePad = forwardRef(({ label }, ref) => {
   useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
-    ctx.strokeStyle = '#1a1510'
+    ctx.strokeStyle = '#0f172a'
     ctx.lineWidth = 2
     ctx.lineCap = 'round'
     ctx.lineJoin = 'round'
@@ -85,14 +85,14 @@ const SignaturePad = forwardRef(({ label }, ref) => {
     <div>
       {label && (
         <label style={{
-          display: 'block', fontSize: '0.62rem', fontWeight: 600,
-          letterSpacing: '0.2em', textTransform: 'uppercase',
-          color: '#6f6559', marginBottom: '8px', fontFamily: "'Inter', sans-serif"
+          display: 'block', fontSize: '10.5px', fontWeight: 700,
+          letterSpacing: '0.14em', textTransform: 'uppercase',
+          color: 'var(--mt)', marginBottom: '8px', fontFamily: 'inherit'
         }}>{label}</label>
       )}
       <div style={{
-        border: '1px solid #e7ded0', borderRadius: '10px',
-        overflow: 'hidden', background: '#faf8f4', position: 'relative'
+        border: '1px solid #cbd5e1', borderRadius: '10px',
+        overflow: 'hidden', background: '#ffffff', position: 'relative'
       }}>
         <canvas
           ref={canvasRef}
@@ -105,8 +105,8 @@ const SignaturePad = forwardRef(({ label }, ref) => {
             alignItems: 'center', justifyContent: 'center',
             pointerEvents: 'none'
           }}>
-            <span style={{ fontSize: '0.75rem', color: 'rgba(111,101,89,0.3)', fontFamily: "'Inter', sans-serif" }}>
-              Hier unterschreiben ✍️
+            <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontFamily: 'inherit' }}>
+              Hier unterschreiben
             </span>
           </div>
         )}
@@ -118,9 +118,9 @@ const SignaturePad = forwardRef(({ label }, ref) => {
           setIsEmpty(true)
         }}
         style={{
-          marginTop: '6px', fontSize: '0.65rem', color: '#B79B6C',
+          marginTop: '6px', fontSize: '11px', color: 'var(--c)',
           background: 'none', border: 'none', cursor: 'pointer',
-          fontFamily: "'Inter', sans-serif", padding: 0
+          fontFamily: 'inherit', padding: 0
         }}>
         Zurücksetzen
       </button>
