@@ -318,31 +318,16 @@ footer{background:#030810;border-top:1px solid var(--bd);padding:40px 48px}
             <div class="bk-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10.5" x2="8" y2="10.5"/><line x1="12" y1="10.5" x2="12" y2="10.5"/><line x1="16" y1="10.5" x2="16" y2="10.5"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="8" y1="17.5" x2="8" y2="17.5"/><line x1="12" y1="17.5" x2="12" y2="17.5"/><line x1="16" y1="14" x2="16" y2="17.5"/></svg></div>
             <div>
               <div class="bk-title">Ihr Richtwert</div>
-              <div class="bk-head-sub">Bereich und Leistung wählen</div>
+              <div class="bk-head-sub">Leistung und Größe wählen</div>
             </div>
           </div>
           <div class="bk-pill">Angebot in 30 Min</div>
         </div>
         <div class="bk-body">
 
-          <!-- Bereich -->
-          <div>
-            <div class="bk-label">① Bereich</div>
-            <div class="bk-services" id="bk-bereich">
-              <div class="bk-svc sel" data-bereich="Privat">
-                <div class="bk-svc-name">Privat</div>
-                <div class="bk-svc-hint">Wohnung, Haus, Umzug</div>
-              </div>
-              <div class="bk-svc" data-bereich="Gewerbe">
-                <div class="bk-svc-name">Gewerbe</div>
-                <div class="bk-svc-hint">Büro, Praxis, Kanzlei</div>
-              </div>
-            </div>
-          </div>
-
           <!-- Leistung -->
           <div>
-            <div class="bk-label">② Leistung</div>
+            <div class="bk-label">① Leistung</div>
             <div class="bk-rooms" id="bk-leistung">
               <div class="bk-room sel" data-leistung="Auszugsreinigung">Auszugsreinigung</div>
               <div class="bk-room" data-leistung="Grundreinigung">Grundreinigung</div>
@@ -351,11 +336,17 @@ footer{background:#030810;border-top:1px solid var(--bd);padding:40px 48px}
             </div>
           </div>
 
+          <!-- Größe -->
+          <div>
+            <div class="bk-label" id="bk-size-label">② Zimmerzahl</div>
+            <div class="bk-rooms" id="bk-size"></div>
+          </div>
+
           <!-- Richtwert -->
           <div class="bk-price-box">
             <div class="bk-price-lbl">Richtwert</div>
-            <div class="bk-price-val" id="bk-price-val">180 bis 500 EUR</div>
-            <div id="bk-price-note" style="font-size:11px;color:var(--mt);margin-top:4px">Festpreis nach kurzer Anfrage, brutto</div>
+            <div class="bk-price-val" id="bk-price-val">ab 179 EUR</div>
+            <div id="bk-price-note" style="font-size:11px;color:var(--mt);margin-top:4px">Startpreis brutto, Endpreis je nach Zustand</div>
             <div class="bk-breakdown" id="bk-incl"></div>
           </div>
 
@@ -597,7 +588,6 @@ footer{background:#030810;border-top:1px solid var(--bd);padding:40px 48px}
     <div class="footer-col">
       <h4>Ratgeber</h4>
       <a href="https://nautilus-facility.de/reinigung-kosten-berlin/">Reinigungskosten Berlin</a>
-      <a href="https://nautilus-facility.de/treppenhausreinigung-kosten-berlin/">Treppenhausreinigung Kosten</a>
       <a href="https://nautilus-facility.de/checkliste-wohnungsuebergabe-berlin/">Checkliste Wohnungsübergabe</a>
     </div>
     <div class="footer-col">
@@ -717,8 +707,9 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
   });
 })();
 (function(){
-  const bereichWrap=document.getElementById('bk-bereich');
   const leistWrap=document.getElementById('bk-leistung');
+  const sizeWrap=document.getElementById('bk-size');
+  const sizeLabel=document.getElementById('bk-size-label');
   const waBtn=document.getElementById('bk-wa-btn');
   const priceVal=document.getElementById('bk-price-val');
   const priceNote=document.getElementById('bk-price-note');
@@ -726,55 +717,45 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
   const calcBtn=document.getElementById('bk-calc-btn');
   const calcLabel=document.getElementById('bk-calc-label');
   const calcSub=document.getElementById('bk-calc-sub');
-  if(!bereichWrap||!leistWrap)return;
+  if(!leistWrap||!sizeWrap)return;
   const B='https://nautilus-facility.de/';
-  const LEIST={
-    Privat:['Auszugsreinigung','Grundreinigung','Unterhaltsreinigung','Fensterreinigung'],
-    Gewerbe:['Büroreinigung','Praxisreinigung','Kanzleireinigung','Treppenhausreinigung']
+  const CFG={
+    Auszugsreinigung:{url:B+'reinigung-nach-auszug-berlin/',min:179,label:'② Zimmerzahl',sub:'Zimmerzahl wählen',note:'Startpreis brutto, Endpreis je nach Zustand und Extras',sizes:[['1 Zi.',130],['2 Zi.',190],['3 Zi.',260],['4 Zi.',340],['5+ Zi.',420]],incl:['Küche, Bad, Böden und Oberflächen','Übergabeprotokoll immer inklusive']},
+    Grundreinigung:{url:B+'grundreinigung-berlin/',min:179,label:'② Zimmerzahl',sub:'Zimmerzahl wählen',note:'Startpreis brutto, Endpreis je nach Zustand',sizes:[['1 Zi.',150],['2 Zi.',220],['3 Zi.',300],['4 Zi.',390],['5+ Zi.',480]],incl:['Kalk, Fett und Fugen intensiv','Küche und Bad tiefengereinigt']},
+    Unterhaltsreinigung:{url:B+'unterhaltsreinigung-berlin/',min:0,label:'② Wohnfläche',sub:'Fläche wählen',note:'je Reinigung brutto, monatlich kündbar',sizes:[['bis 50 m²',65],['50 bis 80 m²',85],['80 bis 110 m²',110],['110 bis 150 m²',140],['über 150 m²',175]],incl:['Feste Kraft, fester Termin','Wöchentlich, 14-tägig oder monatlich']},
+    Fensterreinigung:{url:B+'fensterreinigung-berlin/',min:179,label:'② Anzahl Fenster',sub:'Anzahl Fenster wählen',note:'Startpreis brutto, innen und außen',sizes:[['1 bis 5',75],['6 bis 10',115],['11 bis 15',155],['16 bis 20',215],['über 20',270]],incl:['Innen und außen streifenfrei','Rahmen und Falze auf Wunsch']}
   };
-  const MAP={
-    Auszugsreinigung:{url:B+'reinigung-nach-auszug-berlin/',price:'180 bis 500 EUR',note:'Festpreis nach kurzer Anfrage, brutto',incl:['Küche, Bad, Böden und Oberflächen','Übergabeprotokoll immer inklusive'],cta:'Genauen Richtpreis berechnen',sub:'Größe wählen, Sofort-Richtpreis'},
-    Grundreinigung:{url:B+'grundreinigung-berlin/',price:'180 bis 550 EUR',note:'Festpreis nach kurzer Anfrage, brutto',incl:['Kalk, Fett und Fugen intensiv','Küche und Bad tiefengereinigt'],cta:'Genauen Richtpreis berechnen',sub:'Größe wählen, Sofort-Richtpreis'},
-    Unterhaltsreinigung:{url:B+'unterhaltsreinigung-berlin/',price:'70 bis 250 EUR',note:'je Reinigung, monatlich kündbar',incl:['Feste Kraft, fester Termin','Wöchentlich, 14-tägig oder monatlich'],cta:'Genauen Richtpreis berechnen',sub:'Größe und Intervall wählen'},
-    Fensterreinigung:{url:B+'fensterreinigung-berlin/',price:'180 bis 400 EUR',note:'Festpreis nach kurzer Anfrage, brutto',incl:['Innen und außen streifenfrei','Rahmen und Falze auf Wunsch'],cta:'Genauen Richtpreis berechnen',sub:'Anzahl Fenster wählen'},
-    Büroreinigung:{url:B+'bueroreinigung-berlin/',price:'Individuell',note:'meist als Monatspauschale',incl:['Im laufenden Betrieb, diskret','Fester Turnus nach Ihren Zeiten'],cta:'Mehr zur Büroreinigung',sub:'Leistung und Ablauf ansehen'},
-    Praxisreinigung:{url:B+'praxisreinigung-berlin/',price:'Individuell',note:'meist als Monatspauschale',incl:['Hygienegerecht gereinigt','Nach Ihren Praxiszeiten'],cta:'Mehr zur Praxisreinigung',sub:'Leistung und Ablauf ansehen'},
-    Kanzleireinigung:{url:B+'kanzleireinigung-berlin/',price:'Individuell',note:'meist als Monatspauschale',incl:['Vertraulich, mit Aktenschutz','Fester Turnus, feste Teams'],cta:'Mehr zur Kanzleireinigung',sub:'Leistung und Ablauf ansehen'},
-    Treppenhausreinigung:{url:B+'hausverwaltungen-berlin/',price:'Individuell',note:'meist als Monatspauschale',incl:['Treppenhäuser und Allgemeinflächen','Fester Rhythmus für Verwalter'],cta:'Mehr zur Hausverwaltung',sub:'Leistung und Ablauf ansehen'}
-  };
-  let bereich='Privat',leistung='Auszugsreinigung';
-  function renderLeistung(){
-    leistWrap.innerHTML='';
-    LEIST[bereich].forEach((name,i)=>{
+  let leistung='Auszugsreinigung',sizeIdx=0;
+  function renderSize(){
+    const c=CFG[leistung];sizeLabel.textContent=c.label;sizeWrap.innerHTML='';
+    c.sizes.forEach((s,i)=>{
       const el=document.createElement('div');
       el.className='bk-room'+(i===0?' sel':'');
-      el.dataset.leistung=name;el.textContent=name;
+      el.textContent=s[0];
       el.addEventListener('click',()=>{
-        leistWrap.querySelectorAll('.bk-room').forEach(r=>r.classList.remove('sel'));
-        el.classList.add('sel');leistung=name;update();
+        sizeWrap.querySelectorAll('.bk-room').forEach(r=>r.classList.remove('sel'));
+        el.classList.add('sel');sizeIdx=i;update();
       });
-      leistWrap.appendChild(el);
+      sizeWrap.appendChild(el);
     });
-    leistung=LEIST[bereich][0];
+    sizeIdx=0;
   }
   function update(){
-    const m=MAP[leistung];
-    priceVal.textContent=m.price;
-    priceNote.textContent=m.note;
-    inclWrap.innerHTML=m.incl.map(x=>'<div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span><span>'+x+'</span></div>').join('');
-    calcBtn.href=m.url;
-    calcLabel.textContent=m.cta;
-    calcSub.textContent=m.sub;
-    const txt='Hallo Nautilus, ich interessiere mich für '+leistung+' ('+bereich+') in Tiergarten. Bitte senden Sie mir ein Angebot.';
+    const c=CFG[leistung];const base=c.sizes[sizeIdx][1];const price=Math.max(base,c.min);
+    priceVal.textContent='ab '+price+' EUR';
+    priceNote.textContent=c.note;
+    inclWrap.innerHTML=c.incl.map(x=>'<div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span><span>'+x+'</span></div>').join('');
+    calcBtn.href=c.url;calcLabel.textContent='Genauen Richtpreis berechnen';calcSub.textContent=c.sub;
+    const txt='Hallo Nautilus, ich interessiere mich für '+leistung+' in Tiergarten. Bitte senden Sie mir ein Angebot.';
     waBtn.href='https://wa.me/4917622844636?text='+encodeURIComponent(txt);
   }
-  bereichWrap.querySelectorAll('.bk-svc').forEach(el=>{
+  leistWrap.querySelectorAll('.bk-room').forEach(el=>{
     el.addEventListener('click',()=>{
-      bereichWrap.querySelectorAll('.bk-svc').forEach(s=>s.classList.remove('sel'));
-      el.classList.add('sel');bereich=el.dataset.bereich;renderLeistung();update();
+      leistWrap.querySelectorAll('.bk-room').forEach(r=>r.classList.remove('sel'));
+      el.classList.add('sel');leistung=el.dataset.leistung;renderSize();update();
     });
   });
-  renderLeistung();
+  renderSize();
   update();
 })();
 </script>
