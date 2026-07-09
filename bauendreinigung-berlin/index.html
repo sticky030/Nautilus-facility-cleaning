@@ -380,13 +380,13 @@ footer{background:#030810;border-top:1px solid var(--bd);padding:40px 48px}
           <!-- Größe -->
           <div>
             <div class="bk-label">① Objektgröße (m²)</div>
-            <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:8px 12px;">
-              <button type="button" id="bk-m2-minus" aria-label="weniger" style="width:34px;height:34px;border-radius:8px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:20px;font-weight:700;cursor:pointer;line-height:1;">-</button>
-              <input type="number" id="bk-m2-input" value="100" min="20" max="10000" step="10" inputmode="numeric" style="flex:1;min-width:0;background:transparent;border:none;color:#fff;font-size:22px;font-weight:800;text-align:center;outline:none;">
-              <span style="color:var(--mt);font-size:14px;font-weight:700;">m²</span>
-              <button type="button" id="bk-m2-plus" aria-label="mehr" style="width:34px;height:34px;border-radius:8px;border:none;background:rgba(255,255,255,.1);color:#fff;font-size:20px;font-weight:700;cursor:pointer;line-height:1;">+</button>
+            <div class="bk-rooms" id="bk-rooms">
+              <div class="bk-room" data-m2="50">bis 50 m²</div>
+              <div class="bk-room sel" data-m2="100">50-100 m²</div>
+              <div class="bk-room" data-m2="200">100-200 m²</div>
+              <div class="bk-room" data-m2="400">200-400 m²</div>
+              <div class="bk-room" data-m2="500">über 400 m²</div>
             </div>
-            <div style="margin-top:6px;font-size:10px;color:var(--mt)">Gesamte Wohn- oder Nutzfläche in Quadratmetern</div>
           </div>
 
           <!-- Leistungsart -->
@@ -918,31 +918,14 @@ function updateWA() {
 })();
 
 (function(){
-  var input = document.getElementById('bk-m2-input');
-  function readM2(){
-    var v = parseInt(input.value, 10);
-    if(isNaN(v) || v < 1) v = 1;
-    if(v > 10000) v = 10000;
-    state.m2 = v;
-    updateBreakdown(); updateWA();
-  }
-  input.addEventListener('input', readM2);
-  input.addEventListener('change', function(){
-    var v = parseInt(input.value, 10);
-    if(isNaN(v) || v < 20){ v = 20; input.value = 20; }
-    if(v > 10000){ v = 10000; input.value = 10000; }
-    state.m2 = v;
-    updateBreakdown(); updateWA();
-  });
-  document.getElementById('bk-m2-minus').addEventListener('click', function(){
-    var v = (parseInt(input.value, 10) || 20) - 10;
-    if(v < 20) v = 20;
-    input.value = v; state.m2 = v; updateBreakdown(); updateWA();
-  });
-  document.getElementById('bk-m2-plus').addEventListener('click', function(){
-    var v = (parseInt(input.value, 10) || 20) + 10;
-    if(v > 10000) v = 10000;
-    input.value = v; state.m2 = v; updateBreakdown(); updateWA();
+  var pills = document.querySelectorAll('#bk-rooms .bk-room');
+  pills.forEach(function(p){
+    p.addEventListener('click', function(){
+      pills.forEach(function(x){ x.classList.remove('sel'); });
+      this.classList.add('sel');
+      state.m2 = parseInt(this.dataset.m2, 10);
+      updateBreakdown(); updateWA();
+    });
   });
 })();
 
