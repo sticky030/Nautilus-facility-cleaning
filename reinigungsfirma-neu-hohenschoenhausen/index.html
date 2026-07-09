@@ -51,46 +51,62 @@ nav.stuck{background:rgba(4,12,24,.97);border-bottom-color:var(--bd)}
 .hero-sub{font-size:16px;color:var(--tx);line-height:1.75;margin-bottom:36px;max-width:460px}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
 .hero-right{position:relative}
-.dash-glow{position:absolute;width:440px;height:440px;background:radial-gradient(circle,rgba(6,182,212,.22),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);z-index:0;pointer-events:none}
-.booking-card{position:relative;z-index:1;background:linear-gradient(180deg,var(--ink2),var(--ink));border-radius:18px;border:1px solid var(--bd);box-shadow:var(--sh);overflow:hidden}
-.bk-header{background:linear-gradient(135deg,rgba(6,182,212,.16),rgba(8,145,178,.06));border-bottom:1px solid var(--bd);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-.bk-head-l{display:flex;align-items:center;gap:13px}
-.bk-icon{width:38px;height:38px;border-radius:11px;background:linear-gradient(145deg,#22d3ee,#0891b2);display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 6px 15px rgba(6,182,212,.26)}
-.bk-icon svg{color:#04121f}
-.bk-title{font-size:17px;font-weight:800;color:var(--white);letter-spacing:-.3px;line-height:1.15}
-.bk-head-sub{font-size:12px;color:var(--tx);margin-top:3px}
-.bk-pill{flex-shrink:0;font-size:11px;font-weight:700;color:var(--green);background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.28);border-radius:100px;padding:7px 13px;white-space:nowrap}
-.bk-body{padding:22px 24px;display:flex;flex-direction:column;gap:20px}
-.bk-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:var(--mt);margin-bottom:11px}
-.bk-services{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.bk-svc{border-radius:12px;padding:15px 16px;cursor:pointer;border:1px solid var(--bd);transition:all .2s;background:var(--ink3);user-select:none}
-.bk-svc:hover{border-color:rgba(6,182,212,.4)}
-.bk-svc.sel{border-color:var(--c);background:var(--cs);box-shadow:inset 0 0 0 1px var(--c)}
-.bk-svc-name{font-size:14px;font-weight:700;color:var(--white)}
+.dash-glow{position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(6,182,212,.22),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);z-index:0;pointer-events:none}
+.booking-card{background:var(--ink2);border-radius:var(--r);border:1px solid var(--bd);box-shadow:var(--sh);overflow:hidden}
+.bk-header{background:linear-gradient(135deg,rgba(6,182,212,.15),rgba(8,145,178,.08));border-bottom:1px solid var(--bd);padding:16px 20px;display:flex;align-items:center;justify-content:space-between}
+.bk-title{font-size:13px;font-weight:800;color:var(--white);display:flex;align-items:center;gap:8px}
+.bk-sub{font-size:11px;color:var(--tx)}
+.bk-body{padding:16px 20px;display:flex;flex-direction:column;gap:13px}
+.bk-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--mt);margin-bottom:6px}
+.bk-services{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.bk-svc{border-radius:9px;padding:10px 12px;cursor:pointer;border:1px solid var(--bd);transition:all .2s;background:var(--ink3);user-select:none}
+.bk-svc.sel{border-color:var(--c);background:var(--cs)}
+.bk-svc-name{font-size:11px;font-weight:700;color:var(--white)}
 .bk-svc.sel .bk-svc-name{color:var(--c)}
-.bk-svc-hint{font-size:11px;color:var(--mt);margin-top:3px}
-.bk-rooms{display:flex;flex-direction:column;gap:7px}
-.bk-room{padding:11px 14px;border-radius:10px;border:1px solid var(--bd);font-size:13.5px;font-weight:600;color:var(--tx);cursor:pointer;background:var(--ink3);transition:all .2s;user-select:none;display:flex;align-items:center;gap:9px}
-.bk-room::before{content:'';width:14px;height:14px;border-radius:50%;border:1.5px solid var(--bd);flex-shrink:0;transition:all .2s}
-.bk-room:hover{border-color:rgba(6,182,212,.4)}
+.bk-svc-hint{font-size:9px;color:var(--mt);margin-top:2px}
+.bk-rooms{display:flex;gap:5px;flex-wrap:wrap}
+.bk-room{padding:6px 12px;border-radius:100px;border:1px solid var(--bd);font-size:11px;font-weight:600;color:var(--tx);cursor:pointer;background:var(--ink3);transition:all .2s;user-select:none}
 .bk-room.sel{border-color:var(--c);color:var(--c);background:var(--cs)}
-.bk-room.sel::before{border-color:var(--c);background:radial-gradient(circle,var(--c) 42%,transparent 46%)}
-.bk-price-box{background:var(--ink3);border:1px solid rgba(6,182,212,.2);border-radius:13px;padding:18px 20px}
-.bk-price-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
-.bk-price-lbl{font-size:11px;color:var(--mt);margin-bottom:5px}
-.bk-price-val{font-size:20px;font-weight:800;color:var(--white);letter-spacing:-.4px;line-height:1.2}
-.bk-price-unit{font-size:12px;font-weight:600;color:var(--green);margin-top:3px}
-.bk-breakdown{margin-top:14px;padding-top:14px;border-top:1px solid var(--bd);font-size:12px;color:var(--mt);display:flex;flex-direction:column;gap:8px}
-.bk-breakdown-line{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.bk-breakdown-line span:last-child{color:var(--green);font-weight:700}
-.bk-breakdown-line.total{color:var(--tx);font-weight:700;margin-top:6px;padding-top:12px;border-top:1px solid var(--bd)}
-.bk-btn{background:#25d366;color:#fff;border:none;border-radius:12px;padding:15px 18px;font-size:15px;font-weight:800;cursor:pointer;width:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:9px;row-gap:2px;transition:all .2s;text-decoration:none;margin-top:2px}
+.bk-extras{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+.bk-extra{display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:7px;border:1px solid var(--bd);cursor:pointer;background:var(--ink3);transition:all .2s;user-select:none}
+.bk-extra.sel{border-color:rgba(6,182,212,.4);background:var(--cs)}
+.bk-extra-check{width:13px;height:13px;border-radius:3px;border:1.5px solid var(--mt);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:8px}
+.bk-extra.sel .bk-extra-check{background:var(--c);border-color:var(--c);color:#000;font-weight:900}
+.bk-extra-name{font-size:10px;font-weight:600;color:var(--white)}
+.bk-extra.sel .bk-extra-name{color:var(--c)}
+.bk-extra-price{font-size:9px;color:var(--mt)}
+.bk-fenster{display:flex;flex-direction:column;gap:5px}
+.bk-fenster-opt{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:7px;border:1px solid var(--bd);cursor:pointer;background:var(--ink3);transition:all .2s;user-select:none}
+.bk-fenster-opt.sel{border-color:var(--c);background:var(--cs)}
+.bk-fenster-radio{width:13px;height:13px;border-radius:50%;border:2px solid var(--mt);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;position:relative}
+.bk-fenster-opt.sel .bk-fenster-radio{border-color:var(--c)}
+.bk-fenster-radio::after{content:'';width:5px;height:5px;border-radius:50%;background:var(--c);opacity:0;transition:opacity .15s;position:absolute}
+.bk-fenster-opt.sel .bk-fenster-radio::after{opacity:1}
+.bk-fenster-label{flex:1;font-size:10px;font-weight:600;color:var(--white)}
+.bk-fenster-opt.sel .bk-fenster-label{color:var(--c)}
+.bk-fenster-price{font-size:10px;font-weight:700;color:var(--tx);flex-shrink:0}
+.bk-fenster-opt.sel .bk-fenster-price{color:var(--c)}
+.bk-price-box{background:var(--ink3);border:1px solid rgba(6,182,212,.2);border-radius:10px;padding:12px 15px}
+.bk-price-row{display:flex;align-items:flex-end;justify-content:space-between}
+.bk-price-lbl{font-size:9px;color:var(--mt);margin-bottom:2px}
+.bk-price-val{font-size:26px;font-weight:900;color:var(--white);letter-spacing:-1px;line-height:1}
+.bk-price-unit{font-size:9px;color:var(--mt);margin-top:3px}
+.bk-breakdown{margin-top:7px;padding-top:7px;border-top:1px solid var(--bd);font-size:9px;color:var(--mt);display:flex;flex-direction:column;gap:2px}
+.bk-breakdown-line{display:flex;justify-content:space-between}
+.bk-breakdown-line.total{color:var(--tx);font-weight:700;margin-top:3px;padding-top:3px;border-top:1px solid var(--bd)}
+.bk-kaution{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--green);font-weight:600}
+.bk-btn{background:#25d366;color:#fff;border:none;border-radius:9px;padding:12px 16px;font-size:13px;font-weight:800;cursor:pointer;width:100%;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:7px;row-gap:1px;transition:all .2s;text-decoration:none}
 .bk-btn:hover{background:#22c55e;transform:translateY(-1px);box-shadow:0 8px 24px rgba(37,211,102,.3)}
 .bk-btn svg{flex-shrink:0}
 .bk-btn-main{line-height:1.1}
-.bk-btn-sub{flex-basis:100%;text-align:center;font-size:10.5px;font-weight:500;opacity:.85}
-.bk-btn.bk-btn-alt{background:transparent;color:var(--white);border:1px solid rgba(6,182,212,.4);margin-top:10px}
-.bk-btn.bk-btn-alt:hover{background:rgba(6,182,212,.1);border-color:var(--c);box-shadow:0 8px 24px rgba(6,182,212,.3);transform:translateY(-1px)}
+.bk-btn-sub{flex-basis:100%;text-align:center;font-size:9px;font-weight:500;opacity:.85}
+.bk-label{font-size:11px}
+.bk-svc-hint{font-size:10px}
+.bk-extra-price{font-size:10px}
+.bk-price-lbl{font-size:10px}
+.bk-price-unit{font-size:10px}
+.bk-btn-sub{font-size:10px}
+.bk-breakdown{font-size:10px}
 .section-tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--c);margin-bottom:12px}
 .seo-section{padding:80px 48px;text-align:center}
 .seo-section h2{font-size:clamp(28px,3.5vw,42px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin-bottom:14px}
@@ -312,59 +328,7 @@ footer{background:#030810;border-top:1px solid var(--bd);padding:40px 48px}
     </div>
     <div class="hero-right reveal">
       <div class="dash-glow"></div>
-      <div class="booking-card">
-        <div class="bk-header">
-          <div class="bk-head-l">
-            <div class="bk-icon"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10.5" x2="8" y2="10.5"/><line x1="12" y1="10.5" x2="12" y2="10.5"/><line x1="16" y1="10.5" x2="16" y2="10.5"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="8" y1="17.5" x2="8" y2="17.5"/><line x1="12" y1="17.5" x2="12" y2="17.5"/><line x1="16" y1="14" x2="16" y2="17.5"/></svg></div>
-            <div>
-              <div class="bk-title">Ihr Richtwert</div>
-              <div class="bk-head-sub">Leistung und Größe wählen</div>
-            </div>
-          </div>
-          <div class="bk-pill">Angebot in 30 Min</div>
-        </div>
-        <div class="bk-body">
-
-          <!-- Leistung -->
-          <div>
-            <div class="bk-label">① Leistung</div>
-            <div class="bk-rooms" id="bk-leistung">
-              <div class="bk-room sel" data-leistung="Auszugsreinigung">Auszugsreinigung</div>
-              <div class="bk-room" data-leistung="Grundreinigung">Grundreinigung</div>
-              <div class="bk-room" data-leistung="Unterhaltsreinigung">Unterhaltsreinigung</div>
-              <div class="bk-room" data-leistung="Fensterreinigung">Fensterreinigung</div>
-            </div>
-          </div>
-
-          <!-- Größe -->
-          <div>
-            <div class="bk-label" id="bk-size-label">② Zimmerzahl</div>
-            <div class="bk-rooms" id="bk-size"></div>
-          </div>
-
-          <!-- Richtwert -->
-          <div class="bk-price-box">
-            <div class="bk-price-lbl">Richtwert</div>
-            <div class="bk-price-val" id="bk-price-val">ab 179 EUR</div>
-            <div id="bk-price-note" style="font-size:11px;color:var(--mt);margin-top:4px">Startpreis brutto, Endpreis je nach Zustand</div>
-            <div class="bk-breakdown" id="bk-incl"></div>
-          </div>
-
-          <!-- WA Button -->
-          <a class="bk-btn" id="bk-wa-btn" href="#" target="_blank" rel="noopener">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            <span class="bk-btn-main">Per WhatsApp anfragen</span>
-            <span class="bk-btn-sub">Antwort in unter 30 Minuten</span>
-          </a>
-
-          <a class="bk-btn bk-btn-alt" id="bk-calc-btn" href="#">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/></svg>
-            <span class="bk-btn-main" id="bk-calc-label">Genauen Richtpreis berechnen</span>
-            <span class="bk-btn-sub" id="bk-calc-sub">Größe wählen, Sofort-Richtpreis</span>
-          </a>
-
-        </div>
-      </div>
+      <div class="booking-card"><div class="bk-header"><div><div class="bk-title">🧮 Richtwert-Rechner</div></div><div style="font-size:10px;color:var(--green);font-weight:700;">✓ Unverbindlich</div></div><div class="bk-body"><div><div class="bk-label">Leistung</div><div class="bk-services" id="bk-leistung"><div class="bk-svc sel" data-leistung="Auszugsreinigung"><div class="bk-svc-name">Auszugsreinigung</div><div class="bk-svc-hint">nach dem Umzug</div></div><div class="bk-svc" data-leistung="Grundreinigung"><div class="bk-svc-name">Grundreinigung</div><div class="bk-svc-hint">intensiv, tief</div></div><div class="bk-svc" data-leistung="Unterhaltsreinigung"><div class="bk-svc-name">Unterhaltsreinigung</div><div class="bk-svc-hint">regelmäßig</div></div><div class="bk-svc" data-leistung="Fensterreinigung"><div class="bk-svc-name">Fensterreinigung</div><div class="bk-svc-hint">innen und außen</div></div></div></div><div><div class="bk-label" id="bk-size-label">Zimmerzahl</div><div class="bk-rooms" id="bk-size"></div></div><div class="bk-price-box"><div class="bk-price-row"><div><div class="bk-price-lbl">Ihr Richtwert</div><div class="bk-price-val" id="bk-price-val">155,00</div><div class="bk-price-unit">EUR inkl. MwSt.</div></div></div><div class="bk-breakdown" id="bk-incl"></div></div><a class="bk-btn" id="bk-wa-btn" href="#" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg><span class="bk-btn-main">Per WhatsApp anfragen</span><span class="bk-btn-sub">Antwort in unter 30 Minuten</span></a><a class="bk-btn bk-btn-alt" id="bk-calc-btn" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/></svg><span class="bk-btn-main" id="bk-calc-label">Genauen Richtpreis berechnen</span><span class="bk-btn-sub" id="bk-calc-sub">Größe wählen, Sofort-Richtpreis</span></a></div></div>
     </div>
   </div>
 </section>
@@ -712,7 +676,6 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
   const sizeLabel=document.getElementById('bk-size-label');
   const waBtn=document.getElementById('bk-wa-btn');
   const priceVal=document.getElementById('bk-price-val');
-  const priceNote=document.getElementById('bk-price-note');
   const inclWrap=document.getElementById('bk-incl');
   const calcBtn=document.getElementById('bk-calc-btn');
   const calcLabel=document.getElementById('bk-calc-label');
@@ -720,10 +683,10 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
   if(!leistWrap||!sizeWrap)return;
   const B='https://nautilus-facility.de/';
   const CFG={
-    Auszugsreinigung:{url:B+'reinigung-nach-auszug-berlin/',min:179,label:'② Zimmerzahl',sub:'Zimmerzahl wählen',note:'Startpreis brutto, Endpreis je nach Zustand und Extras',sizes:[['1 Zi.',130],['2 Zi.',190],['3 Zi.',260],['4 Zi.',340],['5+ Zi.',420]],incl:['Küche, Bad, Böden und Oberflächen','Übergabeprotokoll immer inklusive']},
-    Grundreinigung:{url:B+'grundreinigung-berlin/',min:179,label:'② Zimmerzahl',sub:'Zimmerzahl wählen',note:'Startpreis brutto, Endpreis je nach Zustand',sizes:[['1 Zi.',150],['2 Zi.',220],['3 Zi.',300],['4 Zi.',390],['5+ Zi.',480]],incl:['Kalk, Fett und Fugen intensiv','Küche und Bad tiefengereinigt']},
-    Unterhaltsreinigung:{url:B+'unterhaltsreinigung-berlin/',min:0,label:'② Wohnfläche',sub:'Fläche wählen',note:'je Reinigung brutto, monatlich kündbar',sizes:[['bis 50 m²',65],['50 bis 80 m²',85],['80 bis 110 m²',110],['110 bis 150 m²',140],['über 150 m²',175]],incl:['Feste Kraft, fester Termin','Wöchentlich, 14-tägig oder monatlich']},
-    Fensterreinigung:{url:B+'fensterreinigung-berlin/',min:179,label:'② Anzahl Fenster',sub:'Anzahl Fenster wählen',note:'Startpreis brutto, innen und außen',sizes:[['1 bis 5',75],['6 bis 10',115],['11 bis 15',155],['16 bis 20',215],['über 20',270]],incl:['Innen und außen streifenfrei','Rahmen und Falze auf Wunsch']}
+    Auszugsreinigung:{url:B+'reinigung-nach-auszug-berlin/',min:179,label:'Zimmerzahl',sub:'Zimmerzahl wählen',note:'Richtpreis brutto, Endpreis je nach Zustand und Extras',sizes:[['1 Zi.',130],['2 Zi.',190],['3 Zi.',260],['4 Zi.',340],['5+ Zi.',420]],incl:['Küche, Bad, Böden und Oberflächen','Übergabeprotokoll immer inklusive']},
+    Grundreinigung:{url:B+'grundreinigung-berlin/',min:179,label:'Zimmerzahl',sub:'Zimmerzahl wählen',note:'Richtpreis brutto, Endpreis je nach Zustand',sizes:[['1 Zi.',150],['2 Zi.',220],['3 Zi.',300],['4 Zi.',390],['5+ Zi.',480]],incl:['Kalk, Fett und Fugen intensiv','Küche und Bad tiefengereinigt']},
+    Unterhaltsreinigung:{url:B+'unterhaltsreinigung-berlin/',min:0,label:'Wohnfläche',sub:'Fläche wählen',note:'je Reinigung brutto, monatlich kündbar',sizes:[['bis 50 m²',65],['50 bis 80 m²',85],['80 bis 110 m²',110],['110 bis 150 m²',140],['über 150 m²',175]],incl:['Feste Kraft, fester Termin','Wöchentlich, 14-tägig oder monatlich']},
+    Fensterreinigung:{url:B+'fensterreinigung-berlin/',min:179,label:'Anzahl Fenster',sub:'Anzahl Fenster wählen',note:'Richtpreis brutto, innen und außen',sizes:[['1 bis 5',75],['6 bis 10',115],['11 bis 15',155],['16 bis 20',215],['über 20',270]],incl:['Innen und außen streifenfrei','Rahmen und Falze auf Wunsch']}
   };
   let leistung='Auszugsreinigung',sizeIdx=0;
   function renderSize(){
@@ -741,17 +704,16 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
     sizeIdx=0;
   }
   function update(){
-    const c=CFG[leistung];const base=c.sizes[sizeIdx][1];const price=Math.max(base,c.min);
-    priceVal.textContent='ab '+price+' EUR';
-    priceNote.textContent=c.note;
-    inclWrap.innerHTML=c.incl.map(x=>'<div style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--green);font-weight:700;flex-shrink:0">✓</span><span>'+x+'</span></div>').join('');
+    const c=CFG[leistung];const base=c.sizes[sizeIdx][1];const price=Math.round(base*1.19);
+    priceVal.textContent=price.toFixed(2).replace('.',',');
+    inclWrap.innerHTML=c.incl.map(x=>'<div class="bk-breakdown-line"><span style="color:var(--green)">✓ '+x+'</span></div>').join('')+'<div class="bk-breakdown-line total"><span>'+c.note+'</span></div>';
     calcBtn.href=c.url;calcLabel.textContent='Genauen Richtpreis berechnen';calcSub.textContent=c.sub;
     const txt='Hallo Nautilus, ich interessiere mich für '+leistung+' in Neu-Hohenschönhausen. Bitte senden Sie mir ein Angebot.';
     waBtn.href='https://wa.me/4917622844636?text='+encodeURIComponent(txt);
   }
-  leistWrap.querySelectorAll('.bk-room').forEach(el=>{
+  leistWrap.querySelectorAll('.bk-svc').forEach(el=>{
     el.addEventListener('click',()=>{
-      leistWrap.querySelectorAll('.bk-room').forEach(r=>r.classList.remove('sel'));
+      leistWrap.querySelectorAll('.bk-svc').forEach(r=>r.classList.remove('sel'));
       el.classList.add('sel');leistung=el.dataset.leistung;renderSize();update();
     });
   });
