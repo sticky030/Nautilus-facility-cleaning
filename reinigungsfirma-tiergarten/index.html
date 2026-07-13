@@ -700,10 +700,10 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
   if(!leistWrap||!sizeWrap)return;
   const B='https://nautilus-facility.de/';
   const CFG={
-    Auszugsreinigung:{url:B+'reinigung-nach-auszug-berlin/',min:179,label:'Zimmerzahl',sub:'Zimmerzahl wählen',note:'Richtpreis brutto, Endpreis je nach Zustand und Extras',sizes:[['1 Zi.',130],['2 Zi.',190],['3 Zi.',260],['4 Zi.',340],['5+ Zi.',420]],incl:['Küche, Bad, Böden und Oberflächen','Übergabeprotokoll immer inklusive']},
-    Grundreinigung:{url:B+'grundreinigung-berlin/',min:179,label:'Zimmerzahl',sub:'Zimmerzahl wählen',note:'Richtpreis brutto, Endpreis je nach Zustand',sizes:[['1 Zi.',150],['2 Zi.',220],['3 Zi.',300],['4 Zi.',390],['5+ Zi.',480]],incl:['Kalk, Fett und Fugen intensiv','Küche und Bad tiefengereinigt']},
-    Unterhaltsreinigung:{url:B+'unterhaltsreinigung-berlin/',min:0,label:'Wohnfläche',sub:'Fläche wählen',note:'je Reinigung brutto, monatlich kündbar',sizes:[['bis 50 m²',65],['50 bis 80 m²',85],['80 bis 110 m²',110],['110 bis 150 m²',140],['über 150 m²',175]],incl:['Feste Kraft, fester Termin','Wöchentlich, 14-tägig oder monatlich']},
-    Fensterreinigung:{url:B+'fensterreinigung-berlin/',min:179,label:'Anzahl Fenster',sub:'Anzahl Fenster wählen',note:'Richtpreis brutto, innen und außen',sizes:[['1 bis 5',75],['6 bis 10',115],['11 bis 15',155],['16 bis 20',215],['über 20',270]],incl:['Innen und außen streifenfrei','Rahmen und Falze auf Wunsch']}
+    Auszugsreinigung:{url:B+'reinigung-nach-auszug-berlin/',min:179,label:'Zimmerzahl',sub:'Mit Extras und Optionen',note:'Richtpreis brutto, Endpreis je nach Zustand und Extras',sizes:[['1 Zi.',130],['2 Zi.',190],['3 Zi.',260],['4 Zi.',340],['5+ Zi.',420]],incl:['Küche, Bad, Böden und Oberflächen','Übergabeprotokoll immer inklusive']},
+    Grundreinigung:{url:B+'grundreinigung-berlin/',min:179,label:'Zimmerzahl',sub:'Mit Extras und Optionen',note:'Richtpreis brutto, Endpreis je nach Zustand',sizes:[['1 Zi.',150],['2 Zi.',220],['3 Zi.',300],['4 Zi.',390],['5+ Zi.',480]],incl:['Kalk, Fett und Fugen intensiv','Küche und Bad tiefengereinigt']},
+    Unterhaltsreinigung:{url:B+'unterhaltsreinigung-berlin/',min:0,label:'Wohnfläche',sub:'Mit Extras und Optionen',note:'je Reinigung brutto, monatlich kündbar',sizes:[['bis 50 m²',65],['50 bis 80 m²',85],['80 bis 110 m²',110],['110 bis 150 m²',140],['über 150 m²',175]],incl:['Feste Kraft, fester Termin','Wöchentlich, 14-tägig oder monatlich']},
+    Fensterreinigung:{url:B+'fensterreinigung-berlin/',min:179,label:'Anzahl Fenster',sub:'Mit Extras und Optionen',note:'Richtpreis brutto, innen und außen',sizes:[['1 bis 5',75],['6 bis 10',115],['11 bis 15',155],['16 bis 20',215],['über 20',270]],incl:['Innen und außen streifenfrei','Rahmen und Falze auf Wunsch']}
   };
   let leistung='Auszugsreinigung',sizeIdx=0;
   function renderSize(){
