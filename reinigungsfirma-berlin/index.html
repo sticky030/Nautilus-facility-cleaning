@@ -373,7 +373,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="bk-price-row">
               <div>
                 <div class="bk-price-lbl">Ihr Richtpreis</div>
-                <div class="bk-price-val" id="mc-price">179,00</div>
+                <div class="bk-price-val" id="mc-price">155,00</div>
                 <div class="bk-price-unit" id="mc-unit">EUR inkl. MwSt.</div>
               </div>
               <div style="text-align:right" id="mc-badges"></div>
@@ -782,7 +782,7 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
     if(c.fenster)n+=FEN[st.fen][1];
     return n;
   }
-  function brutto(){var c=cfg(),b=netto()*1.19;return Math.round(c.min>0?Math.max(b,c.min):b);}
+  function brutto(){return Math.round(netto()*1.19);}
   function pick(wrap,sel){wrap.querySelectorAll('.sel').forEach(function(x){x.classList.remove('sel');});sel.classList.add('sel');}
   function renderL(){
     lWrap.innerHTML='';
@@ -840,11 +840,7 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
     lines+='<div class="bk-breakdown-line"><span>Basis ('+c.sizes[st.size][0]+' × '+c.arten[st.art][0]+')</span><span>'+fmt(c.sizes[st.size][1]*c.arten[st.art][1])+' EUR</span></div>';
     st.extras.forEach(function(i){lines+='<div class="bk-breakdown-line"><span>'+c.extras[i][0]+'</span><span>+'+fmt(c.extras[i][1])+' EUR</span></div>';});
     if(c.fenster&&FEN[st.fen][1]>0)lines+='<div class="bk-breakdown-line"><span>Fenster '+FEN[st.fen][0]+'</span><span>+'+fmt(FEN[st.fen][1])+' EUR</span></div>';
-    var zw=netto()*1.19;
-    if(c.min>0&&zw<c.min){
-      lines+='<div class="bk-breakdown-line"><span>Zwischensumme inkl. MwSt.</span><span>'+fmt(zw)+' EUR</span></div>';
-      lines+='<div class="bk-breakdown-line"><span>Mindestauftragswert</span><span>'+fmt(c.min)+' EUR</span></div>';
-    }
+    lines+='<div class="bk-breakdown-line"><span>MwSt. 19 %</span><span>+'+fmt(brutto()-netto())+' EUR</span></div>';
     lines+='<div class="bk-breakdown-line total"><span>'+(c.perClean?'Je Reinigung inkl. MwSt.':'Gesamt inkl. MwSt.')+'</span><span>'+fmt(brutto())+' EUR</span></div>';
     bd.innerHTML=lines;
     document.getElementById('mc-price').textContent=fmt(brutto());
