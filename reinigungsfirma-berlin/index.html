@@ -343,7 +343,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="hero-right reveal">
       <div class="dash-glow"></div>
-      <div class="booking-card"><div class="bk-header"><div><div class="bk-title">🧮 Richtwert-Rechner</div></div><div style="font-size:10px;color:var(--green);font-weight:700;">✓ Unverbindlich</div></div><div class="bk-body"><div><div class="bk-label">Leistung</div><div class="bk-services" id="bk-leistung"><div class="bk-svc sel" data-leistung="Auszugsreinigung"><div class="bk-svc-name">Auszugsreinigung</div><div class="bk-svc-hint">nach dem Umzug</div></div><div class="bk-svc" data-leistung="Grundreinigung"><div class="bk-svc-name">Grundreinigung</div><div class="bk-svc-hint">intensiv, tief</div></div><div class="bk-svc" data-leistung="Unterhaltsreinigung"><div class="bk-svc-name">Unterhaltsreinigung</div><div class="bk-svc-hint">regelmäßig</div></div><div class="bk-svc" data-leistung="Fensterreinigung"><div class="bk-svc-name">Fensterreinigung</div><div class="bk-svc-hint">innen und außen</div></div></div></div><div><div class="bk-label" id="bk-size-label">Zimmerzahl</div><div class="bk-rooms" id="bk-size"></div></div><div class="bk-price-box"><div class="bk-price-row"><div><div class="bk-price-lbl">Ihr Richtwert</div><div class="bk-price-val" id="bk-price-val">179,00</div><div class="bk-price-unit">EUR inkl. MwSt.</div></div></div><div class="bk-breakdown" id="bk-incl"></div></div><a class="bk-btn" id="bk-wa-btn" href="#" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg><span class="bk-btn-main">Per WhatsApp anfragen</span><span class="bk-btn-sub">Antwort in unter 30 Minuten</span></a><a class="bk-btn bk-btn-alt" id="bk-calc-btn" href="#"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/></svg><span class="bk-btn-main" id="bk-calc-label">Genauen Richtpreis berechnen</span><span class="bk-btn-sub" id="bk-calc-sub">Größe wählen, Sofort-Richtpreis</span></a></div></div>
+      <div class="booking-card" id="rechner" style="scroll-margin-top:90px">
+        <div class="bk-header">
+          <div><div class="bk-title">🧮 Preisrechner</div><div class="bk-sub">Alle Privatleistungen in einem Rechner</div></div>
+          <div style="font-size:10px;color:var(--green);font-weight:700;">✓ Unverbindlich</div>
+        </div>
+        <div class="bk-body">
+          <div>
+            <div class="bk-label">① Leistung wählen</div>
+            <div class="bk-services" id="mc-leistung"></div>
+          </div>
+          <div>
+            <div class="bk-label" id="mc-size-label">② Wohnungsgröße</div>
+            <div class="bk-rooms" id="mc-size"></div>
+          </div>
+          <div>
+            <div class="bk-label" id="mc-art-label">③ Leistungsart</div>
+            <div class="bk-services" id="mc-art"></div>
+          </div>
+          <div>
+            <div class="bk-label">④ Extras (optional)</div>
+            <div class="bk-extras" id="mc-extras"></div>
+          </div>
+          <div id="mc-fen-wrap">
+            <div class="bk-label">⑤ Fensterreinigung dazubuchen</div>
+            <div class="bk-fenster" id="mc-fen"></div>
+          </div>
+          <div class="bk-price-box">
+            <div class="bk-price-row">
+              <div>
+                <div class="bk-price-lbl">Ihr Richtpreis</div>
+                <div class="bk-price-val" id="mc-price">179,00</div>
+                <div class="bk-price-unit" id="mc-unit">EUR inkl. MwSt.</div>
+              </div>
+              <div style="text-align:right" id="mc-badges"></div>
+            </div>
+            <div class="bk-breakdown" id="mc-break"></div>
+            <div style="margin-top:8px;font-size:9px;color:var(--mt);line-height:1.4">Unverbindliche Sofort-Schätzung. Ihren verbindlichen Festpreis erhalten Sie nach kurzer Anfrage.</div>
+          </div>
+          <a class="bk-btn" id="mc-wa" href="#" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+            <span class="bk-btn-main">Angebot per WhatsApp senden</span>
+            <span class="bk-btn-sub">Antwort in unter 30 Minuten</span>
+          </a>
+          <a class="bk-btn bk-btn-alt" id="mc-email" href="#anfrage">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span class="bk-btn-main">Per E-Mail anfragen</span>
+            <span class="bk-btn-sub">Richtpreis wird ins Formular übernommen</span>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -688,54 +737,138 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
   });
 })();
 (function(){
-  const leistWrap=document.getElementById('bk-leistung');
-  const sizeWrap=document.getElementById('bk-size');
-  const sizeLabel=document.getElementById('bk-size-label');
-  const waBtn=document.getElementById('bk-wa-btn');
-  const priceVal=document.getElementById('bk-price-val');
-  const inclWrap=document.getElementById('bk-incl');
-  const calcBtn=document.getElementById('bk-calc-btn');
-  const calcLabel=document.getElementById('bk-calc-label');
-  const calcSub=document.getElementById('bk-calc-sub');
-  if(!leistWrap||!sizeWrap)return;
-  const B='https://nautilus-facility.de/';
-  const CFG={
-    Auszugsreinigung:{url:B+'reinigung-nach-auszug-berlin/',min:179,label:'Zimmerzahl',sub:'Mit Extras und Optionen',note:'Richtpreis brutto, Endpreis je nach Zustand und Extras',sizes:[['1 Zi.',130],['2 Zi.',190],['3 Zi.',260],['4 Zi.',340],['5+ Zi.',420]],incl:['Küche, Bad, Böden und Oberflächen','Übergabeprotokoll immer inklusive']},
-    Grundreinigung:{url:B+'grundreinigung-berlin/',min:179,label:'Zimmerzahl',sub:'Mit Extras und Optionen',note:'Richtpreis brutto, Endpreis je nach Zustand',sizes:[['1 Zi.',150],['2 Zi.',220],['3 Zi.',300],['4 Zi.',390],['5+ Zi.',480]],incl:['Kalk, Fett und Fugen intensiv','Küche und Bad tiefengereinigt']},
-    Unterhaltsreinigung:{url:B+'unterhaltsreinigung-berlin/',min:0,label:'Wohnfläche',sub:'Mit Extras und Optionen',note:'je Reinigung brutto, monatlich kündbar',sizes:[['bis 50 m²',65],['50 bis 80 m²',85],['80 bis 110 m²',110],['110 bis 150 m²',140],['über 150 m²',175]],incl:['Feste Kraft, fester Termin','Wöchentlich, 14-tägig oder monatlich']},
-    Fensterreinigung:{url:B+'fensterreinigung-berlin/',min:179,label:'Anzahl Fenster',sub:'Mit Extras und Optionen',note:'Richtpreis brutto, innen und außen',sizes:[['1 bis 5',75],['6 bis 10',115],['11 bis 15',155],['16 bis 20',215],['über 20',270]],incl:['Innen und außen streifenfrei','Rahmen und Falze auf Wunsch']}
+  var CFG={
+    'Auszugsreinigung':{hint:'nach dem Umzug',sizeLabel:'② Wohnungsgröße',artLabel:'③ Leistungsart',min:179,unit:'EUR inkl. MwSt.',perClean:false,
+      badges:['✓ Übergabeprotokoll','✓ Nachbesserung inklusive'],
+      sizes:[['1 Zi.',130],['2 Zi.',190],['3 Zi.',260],['4 Zi.',340],['5+ Zi.',420]],
+      arten:[['Besenrein',1.0,'Standard-Auszug, Grundanforderung'],['Übergabefertig',1.4,'Intensiv inkl. Fugen und Heizkörper']],
+      extras:[['Backofen und Kühlschrank (innen)',40],['Einbauküche (Schränke innen)',80],['Kellerabteil/Dachboden besenrein',30],['Balkon/Terrasse reinigen',20]],
+      fenster:true},
+    'Grundreinigung':{hint:'intensiv, tief',sizeLabel:'② Wohnungsgröße',artLabel:'③ Leistungsart',min:179,unit:'EUR inkl. MwSt.',perClean:false,
+      badges:['✓ Kalk, Fett und Fugen','✓ Küche und Bad intensiv'],
+      sizes:[['1 Zi.',150],['2 Zi.',220],['3 Zi.',300],['4 Zi.',390],['5+ Zi.',480]],
+      arten:[['Standard',1.0,'Gründliche Grundreinigung'],['Intensiv',1.4,'Bei starker Verschmutzung']],
+      extras:[['Backofen und Kühlschrank (innen)',40],['Einbauküche (Schränke innen)',80],['Kellerabteil/Dachboden besenrein',30],['Balkon/Terrasse reinigen',20]],
+      fenster:true},
+    'Sonderreinigung':{hint:'Nikotin, Kleber, extrem',sizeLabel:'② Wohnungsgröße',artLabel:'③ Leistungsart',min:179,unit:'EUR inkl. MwSt.',perClean:false,
+      badges:['✓ Für harte Fälle','✓ Festpreis nach Anfrage'],
+      sizes:[['1 Zi.',190],['2 Zi.',280],['3 Zi.',370],['4 Zi.',460],['5+ Zi.',560]],
+      arten:[['Intensivreinigung',1.0,'Starke Verschmutzung'],['Extremreinigung',1.5,'Sehr starke Verschmutzung']],
+      extras:[['Küche intensiv entfetten',60],['Nikotin-/Vergilbungsentfernung',90],['Kleber- und Renovierungsrückstände großflächig',50],['Kalk- und Urinstein Sanitär intensiv',40]],
+      fenster:true},
+    'Unterhaltsreinigung':{hint:'regelmäßig',sizeLabel:'② Wohnfläche',artLabel:'③ Turnus',min:0,unit:'EUR je Reinigung inkl. MwSt.',perClean:true,
+      badges:['✓ Feste Kraft, fester Termin','✓ Monatlich kündbar'],
+      sizes:[['bis 50 m²',65],['50 bis 80 m²',85],['80 bis 110 m²',110],['110 bis 150 m²',140],['über 150 m²',175]],
+      arten:[['wöchentlich',0.85,'Bester Preis je Reinigung'],['14-tägig',1.0,'Der beliebte Standard'],['monatlich',1.2,'Für kleine Haushalte']],
+      extras:[['Fenster innen und Rahmen',15],['Küche intensiv (Backofen, Kühlschrank)',20],['Balkon / Terrasse',15],['Wäsche und Bügelservice',20]],
+      fenster:false},
+    'Fensterreinigung':{hint:'innen und außen',sizeLabel:'② Anzahl Fenster',artLabel:'③ Fenstertyp',min:179,unit:'EUR inkl. MwSt.',perClean:false,
+      badges:['✓ Streifenfrei innen und außen','✓ Ohne Sondertechnik'],
+      sizes:[['1 bis 5',75],['6 bis 10',115],['11 bis 15',155],['16 bis 20',215],['über 20',270]],
+      arten:[['Standard',1.0,'Normale Fenster und Türen'],['Aufwändig',1.4,'Sprossen, Kastenfenster']],
+      extras:[['Rahmen und Falze intensiv',30],['Rollläden und Jalousien',40],['Wintergarten / Glasdach / Loggia',70],['Bau- und Farbreste am Glas ablösen',40]],
+      fenster:false}
   };
-  let leistung='Auszugsreinigung',sizeIdx=0;
-  function renderSize(){
-    const c=CFG[leistung];sizeLabel.textContent=c.label;sizeWrap.innerHTML='';
-    c.sizes.forEach((s,i)=>{
-      const el=document.createElement('div');
-      el.className='bk-room'+(i===0?' sel':'');
-      el.textContent=s[0];
-      el.addEventListener('click',()=>{
-        sizeWrap.querySelectorAll('.bk-room').forEach(r=>r.classList.remove('sel'));
-        el.classList.add('sel');sizeIdx=i;update();
-      });
-      sizeWrap.appendChild(el);
+  var FEN=[['Ohne Fensterreinigung',0,''],['Paket S',35,'ca. 5 bis 8 Fenster'],['Paket M',65,'ca. 9 bis 14 Fenster'],['Paket L',95,'15+ Fenster']];
+  var lWrap=document.getElementById('mc-leistung'),sWrap=document.getElementById('mc-size'),aWrap=document.getElementById('mc-art'),
+      eWrap=document.getElementById('mc-extras'),fWrap=document.getElementById('mc-fen'),fenWrap=document.getElementById('mc-fen-wrap');
+  if(!lWrap||!sWrap)return;
+  var st={l:'Auszugsreinigung',size:0,art:0,extras:[],fen:0};
+  function fmt(n){return n.toFixed(2).replace('.',',');}
+  function cfg(){return CFG[st.l];}
+  function netto(){
+    var c=cfg(),n=c.sizes[st.size][1]*c.arten[st.art][1];
+    st.extras.forEach(function(i){n+=c.extras[i][1];});
+    if(c.fenster)n+=FEN[st.fen][1];
+    return n;
+  }
+  function brutto(){var c=cfg(),b=netto()*1.19;return Math.round(c.min>0?Math.max(b,c.min):b);}
+  function pick(wrap,sel){wrap.querySelectorAll('.sel').forEach(function(x){x.classList.remove('sel');});sel.classList.add('sel');}
+  function renderL(){
+    lWrap.innerHTML='';
+    Object.keys(CFG).forEach(function(k){
+      var el=document.createElement('div');el.className='bk-svc'+(k===st.l?' sel':'');
+      el.innerHTML='<div class="bk-svc-name">'+k+'</div><div class="bk-svc-hint">'+CFG[k].hint+'</div>';
+      el.addEventListener('click',function(){st.l=k;st.size=0;st.art=0;st.extras=[];st.fen=0;pick(lWrap,el);renderAll();});
+      lWrap.appendChild(el);
     });
-    sizeIdx=0;
+  }
+  function renderS(){
+    var c=cfg();document.getElementById('mc-size-label').textContent=c.sizeLabel;sWrap.innerHTML='';
+    c.sizes.forEach(function(s,i){
+      var el=document.createElement('div');el.className='bk-room'+(i===st.size?' sel':'');el.textContent=s[0];
+      el.addEventListener('click',function(){st.size=i;pick(sWrap,el);update();});
+      sWrap.appendChild(el);
+    });
+  }
+  function renderA(){
+    var c=cfg();document.getElementById('mc-art-label').textContent=c.artLabel;aWrap.innerHTML='';
+    c.arten.forEach(function(a,i){
+      var el=document.createElement('div');el.className='bk-svc'+(i===st.art?' sel':'');
+      el.innerHTML='<div class="bk-svc-name">'+a[0]+'</div><div class="bk-svc-hint">'+a[2]+'</div>';
+      el.addEventListener('click',function(){st.art=i;pick(aWrap,el);update();});
+      aWrap.appendChild(el);
+    });
+  }
+  function renderE(){
+    var c=cfg();eWrap.innerHTML='';
+    c.extras.forEach(function(x,i){
+      var el=document.createElement('div');el.className='bk-extra'+(st.extras.indexOf(i)>=0?' sel':'');
+      el.innerHTML='<div class="bk-extra-check"></div><div class="bk-extra-txt"><div class="bk-extra-name">'+x[0]+'</div><div class="bk-extra-price">+'+x[1]+' EUR</div></div>';
+      el.addEventListener('click',function(){
+        var p=st.extras.indexOf(i);
+        if(p>=0){st.extras.splice(p,1);el.classList.remove('sel');}else{st.extras.push(i);el.classList.add('sel');}
+        update();
+      });
+      eWrap.appendChild(el);
+    });
+  }
+  function renderF(){
+    var c=cfg();
+    fenWrap.style.display=c.fenster?'':'none';
+    fWrap.innerHTML='';
+    if(!c.fenster)return;
+    FEN.forEach(function(f,i){
+      var el=document.createElement('div');el.className='bk-fenster-opt'+(i===st.fen?' sel':'');
+      el.innerHTML='<div class="bk-fenster-radio"></div><div style="flex:1"><div class="bk-fenster-label">'+f[0]+'</div>'+(f[2]?'<div style="font-size:10px;color:var(--mt);margin-top:1px">'+f[2]+'</div>':'')+'</div><div class="bk-fenster-price">'+(f[1]>0?'+'+f[1]+' EUR':'0 EUR')+'</div>';
+      el.addEventListener('click',function(){st.fen=i;pick(fWrap,el);update();});
+      fWrap.appendChild(el);
+    });
   }
   function update(){
-    const c=CFG[leistung];const base=c.sizes[sizeIdx][1];const price=Math.max(179, Math.round(base*1.19));
-    priceVal.textContent=price.toFixed(2).replace('.',',');
-    inclWrap.innerHTML=c.incl.map(x=>'<div class="bk-breakdown-line"><span style="color:var(--green)">✓ '+x+'</span></div>').join('')+'<div class="bk-breakdown-line total"><span>'+c.note+'</span></div>';
-    calcBtn.href=c.url;calcLabel.textContent='Genauen Richtpreis berechnen';calcSub.textContent=c.sub;
-    const txt='Hallo Nautilus, ich interessiere mich für '+leistung+' in Berlin. Bitte senden Sie mir ein Angebot.';
-    waBtn.href='https://wa.me/4917622844636?text='+encodeURIComponent(txt);
+    var c=cfg(),bd=document.getElementById('mc-break'),lines='';
+    lines+='<div class="bk-breakdown-line"><span>Basis ('+c.sizes[st.size][0]+' × '+c.arten[st.art][0]+')</span><span>'+fmt(c.sizes[st.size][1]*c.arten[st.art][1])+' EUR</span></div>';
+    st.extras.forEach(function(i){lines+='<div class="bk-breakdown-line"><span>'+c.extras[i][0]+'</span><span>+'+fmt(c.extras[i][1])+' EUR</span></div>';});
+    if(c.fenster&&FEN[st.fen][1]>0)lines+='<div class="bk-breakdown-line"><span>Fenster '+FEN[st.fen][0]+'</span><span>+'+fmt(FEN[st.fen][1])+' EUR</span></div>';
+    var zw=netto()*1.19;
+    if(c.min>0&&zw<c.min){
+      lines+='<div class="bk-breakdown-line"><span>Zwischensumme inkl. MwSt.</span><span>'+fmt(zw)+' EUR</span></div>';
+      lines+='<div class="bk-breakdown-line"><span>Mindestauftragswert</span><span>'+fmt(c.min)+' EUR</span></div>';
+    }
+    lines+='<div class="bk-breakdown-line total"><span>'+(c.perClean?'Je Reinigung inkl. MwSt.':'Gesamt inkl. MwSt.')+'</span><span>'+fmt(brutto())+' EUR</span></div>';
+    bd.innerHTML=lines;
+    document.getElementById('mc-price').textContent=fmt(brutto());
+    document.getElementById('mc-unit').textContent=c.unit;
+    document.getElementById('mc-badges').innerHTML=c.badges.map(function(b){return '<div style="font-size:10px;color:var(--green);font-weight:600;margin-top:2px">'+b+'</div>';}).join('');
+    document.getElementById('mc-wa').href='https://wa.me/4917622844636?text='+encodeURIComponent(waMsg());
   }
-  leistWrap.querySelectorAll('.bk-svc').forEach(el=>{
-    el.addEventListener('click',()=>{
-      leistWrap.querySelectorAll('.bk-svc').forEach(r=>r.classList.remove('sel'));
-      el.classList.add('sel');leistung=el.dataset.leistung;renderSize();update();
-    });
+  function confTxt(){
+    var c=cfg();
+    var ex=st.extras.length?st.extras.map(function(i){return c.extras[i][0];}).join(', '):'Keine';
+    var t='Leistung: '+st.l+'\nGröße: '+c.sizes[st.size][0]+'\n'+c.artLabel.replace(/^③ /,'')+': '+c.arten[st.art][0]+'\nExtras: '+ex;
+    if(c.fenster)t+='\nFensterreinigung: '+FEN[st.fen][0];
+    t+='\nRichtpreis: '+fmt(brutto())+' '+c.unit;
+    return t;
+  }
+  function waMsg(){return 'Hallo, ich möchte ein Angebot anfragen.\n'+confTxt()+'\nBitte bestätigen Sie mir den Termin.';}
+  document.getElementById('mc-email').addEventListener('click',function(){
+    var msg=document.getElementById('cf-msg');
+    if(msg)msg.value='Angebot aus dem Preisrechner:\n'+confTxt();
+    var art=document.getElementById('cf-art');
+    if(art){for(var i=0;i<art.options.length;i++){if(art.options[i].text.toLowerCase().indexOf(st.l.substring(0,7).toLowerCase())>=0){art.selectedIndex=i;break;}}}
   });
-  renderSize();
-  update();
+  function renderAll(){renderS();renderA();renderE();renderF();update();}
+  renderL();renderAll();
 })();
 </script>
 </body>
