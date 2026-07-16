@@ -532,7 +532,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="bk-price-row">
               <div>
                 <div class="bk-price-lbl">Ihr Richtpreis</div>
-                <div class="bk-price-val" id="bk-price">179,00</div>
+                <div class="bk-price-val" id="bk-price">89,00</div>
                 <div class="bk-price-unit">EUR inkl. MwSt.</div>
               </div>
               <div style="text-align:right">
@@ -968,8 +968,7 @@ function calcNetto() {
   const extra = state.extras.reduce((s,e) => s + e.price, 0);
   return base + extra;
 }
-var MINDEST = 179; // Mindestauftragswert brutto
-function calcBrutto() { return Math.round(Math.max(calcNetto() * 1.19, MINDEST)); }
+function calcBrutto() { return Math.round(calcNetto() * 1.19); }
 
 function updateBreakdown() {
   const el = document.getElementById('bk-breakdown');
@@ -978,10 +977,6 @@ function updateBreakdown() {
   state.extras.forEach(e => {
     lines += `<div class="bk-breakdown-line"><span>${e.name}</span><span>+${fmt(e.price)} EUR</span></div>`;
   });
-  if(calcNetto() * 1.19 < MINDEST) {
-    lines += `<div class="bk-breakdown-line"><span>Zwischensumme inkl. MwSt.</span><span>${fmt(calcNetto() * 1.19)} EUR</span></div>`;
-    lines += `<div class="bk-breakdown-line"><span>Mindestauftragswert</span><span>${fmt(MINDEST)} EUR</span></div>`;
-  }
   lines += `<div class="bk-breakdown-line total"><span>Gesamt inkl. MwSt.</span><span>${fmt(calcBrutto())} EUR</span></div>`;
   el.innerHTML = lines;
   document.getElementById('bk-price').textContent = fmt(calcBrutto());

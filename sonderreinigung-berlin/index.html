@@ -996,8 +996,7 @@ function calcNetto() {
   const extra = state.extras.reduce((s,e) => s + e.price, 0);
   return base + extra + state.fenster.price;
 }
-var MINDEST = 179; // Mindestauftragswert brutto
-function calcBrutto() { return Math.round(Math.max(calcNetto() * 1.19, MINDEST)); }
+function calcBrutto() { return Math.round(calcNetto() * 1.19); }
 
 function updateBreakdown() {
   const el = document.getElementById('bk-breakdown');
@@ -1008,10 +1007,6 @@ function updateBreakdown() {
   });
   if(state.fenster.price > 0) {
     lines += `<div class="bk-breakdown-line"><span>${state.fenster.name}</span><span>+${fmt(state.fenster.price)} EUR</span></div>`;
-  }
-  if(calcNetto() * 1.19 < MINDEST) {
-    lines += `<div class="bk-breakdown-line"><span>Zwischensumme inkl. MwSt.</span><span>${fmt(calcNetto() * 1.19)} EUR</span></div>`;
-    lines += `<div class="bk-breakdown-line"><span>Mindestauftragswert</span><span>${fmt(MINDEST)} EUR</span></div>`;
   }
   lines += `<div class="bk-breakdown-line total"><span>Gesamt inkl. MwSt.</span><span>${fmt(calcBrutto())} EUR</span></div>`;
   el.innerHTML = lines;
