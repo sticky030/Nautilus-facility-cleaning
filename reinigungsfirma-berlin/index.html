@@ -766,8 +766,8 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
     'Fensterreinigung':{hint:'innen und außen',sizeLabel:'② Anzahl Fenster',artLabel:'③ Fenstertyp',min:0,unit:'EUR inkl. MwSt.',perClean:false,
       badges:['✓ Streifenfrei innen und außen','✓ Ohne Sondertechnik'],
       sizes:[['1 bis 5',75],['6 bis 10',115],['11 bis 15',155],['16 bis 20',215],['über 20',270]],
-      arten:[['Standard',1.0,'Normale Fenster und Türen'],['Aufwändig',1.4,'Sprossen, Kastenfenster']],
-      extras:[['Rahmen und Falze intensiv',30],['Rollläden und Jalousien',40],['Wintergarten / Glasdach / Loggia',70],['Bau- und Farbreste am Glas ablösen',40]],
+      arten:[['Standard',1.0,'Normale Fenster und Türen'],['Aufwändig',1.5,'Sprossen, Kastenfenster']],
+      extras:[['Rollläden und Jalousien',40],['Wintergarten / Glasdach / Loggia',70],['Bau- und Farbreste am Glas ablösen',40]],
       fenster:false}
   };
   var FEN=[['Ohne Fensterreinigung',0,''],['Paket S',35,'ca. 5 bis 8 Fenster'],['Paket M',65,'ca. 9 bis 14 Fenster'],['Paket L',95,'15+ Fenster']];
@@ -777,13 +777,9 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
   var st={l:'Auszugsreinigung',size:0,art:0,extras:[],fen:0};
   function fmt(n){return n.toFixed(2).replace('.',',');}
   function cfg(){return CFG[st.l];}
-  function netto(){
-    var c=cfg(),n=c.sizes[st.size][1]*c.arten[st.art][1];
-    st.extras.forEach(function(i){n+=c.extras[i][1];});
-    if(c.fenster)n+=FEN[st.fen][1];
-    return n;
-  }
-  function brutto(){return Math.round(netto()*1.19);}
+  function baseBrutto(){var c=cfg();return Math.round(c.sizes[st.size][1]*c.arten[st.art][1]*1.19);}
+  function extrasSum(){var c=cfg(),s=0;st.extras.forEach(function(i){s+=c.extras[i][1];});if(c.fenster)s+=FEN[st.fen][1];return s;}
+  function brutto(){return baseBrutto()+extrasSum();}
   function pick(wrap,sel){wrap.querySelectorAll('.sel').forEach(function(x){x.classList.remove('sel');});sel.classList.add('sel');}
   function renderL(){
     lWrap.innerHTML='';
@@ -838,10 +834,9 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
   }
   function update(){
     var c=cfg(),bd=document.getElementById('mc-break'),lines='';
-    lines+='<div class="bk-breakdown-line"><span>Basis ('+c.sizes[st.size][0]+' × '+c.arten[st.art][0]+')</span><span>'+fmt(c.sizes[st.size][1]*c.arten[st.art][1])+' EUR</span></div>';
+    lines+='<div class="bk-breakdown-line"><span>Basis ('+c.sizes[st.size][0]+' × '+c.arten[st.art][0]+')</span><span>'+fmt(baseBrutto())+' EUR</span></div>';
     st.extras.forEach(function(i){lines+='<div class="bk-breakdown-line"><span>'+c.extras[i][0]+'</span><span>+'+fmt(c.extras[i][1])+' EUR</span></div>';});
     if(c.fenster&&FEN[st.fen][1]>0)lines+='<div class="bk-breakdown-line"><span>Fenster '+FEN[st.fen][0]+'</span><span>+'+fmt(FEN[st.fen][1])+' EUR</span></div>';
-    lines+='<div class="bk-breakdown-line"><span>MwSt. 19 %</span><span>+'+fmt(brutto()-netto())+' EUR</span></div>';
     lines+='<div class="bk-breakdown-line total"><span>'+(c.perClean?'Je Reinigung inkl. MwSt.':'Gesamt inkl. MwSt.')+'</span><span>'+fmt(brutto())+' EUR</span></div>';
     bd.innerHTML=lines;
     document.getElementById('mc-price').textContent=fmt(brutto());
