@@ -548,7 +548,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="bk-svc-hint">ein Termin, ein Festpreis</div>
               </div>
               <div class="bk-svc" data-abo="1">
-                <div class="bk-svc-name">Alle 8 Wochen</div>
+                <div class="bk-svc-name">Alle 3 Monate</div>
                 <div class="bk-svc-hint">minus 15 %, jederzeit kündbar</div>
               </div>
             </div>
@@ -563,13 +563,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="bk-extra-txt">
                   <div class="bk-extra-name">Rollläden &amp; Jalousien</div>
                   <div class="bk-extra-price">+40 EUR</div>
-                </div>
-              </div>
-              <div class="bk-extra" data-extra-id="wintergarten" data-extra-price="70">
-                <div class="bk-extra-check"></div>
-                <div class="bk-extra-txt">
-                  <div class="bk-extra-name">Wintergarten / Glasdach / Loggia</div>
-                  <div class="bk-extra-price">ab 70 EUR</div>
                 </div>
               </div>
               <div class="bk-extra" data-extra-id="baureste" data-extra-price="40">
@@ -634,7 +627,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="seo-section reveal">
   <div class="section-tag">Fensterreinigung Berlin</div>
   <h2>Klarer Blick,<br>ohne Schlieren.</h2>
-  <p>Nautilus Facility Cleaning reinigt Ihre Fenster in Berlin innen und außen, streifenfrei und gründlich. Für Wohnungen, Häuser und einzelne Räume. Rahmen, Falze und Fensterbänke sind immer inklusive, auf Wunsch Rollläden oder Wintergarten. Wir reinigen alle sicher vom Boden oder aus der Wohnung erreichbaren Fenster, mit eigenem Material und verbindlichem Festpreis.</p>
+  <p>Nautilus Facility Cleaning reinigt Ihre Fenster in Berlin innen und außen, streifenfrei und gründlich. Für Wohnungen, Häuser und einzelne Räume. Rahmen, Falze und Fensterbänke sind immer inklusive, auf Wunsch Rollläden oder Wintergarten. Wir reinigen alle sicher vom Boden oder aus der Wohnung erreichbaren Fenster, mit eigenem Material und verbindlichem Festpreis. Hohe Fenster bis ca. 10 m erreichen wir ohne Gerüst und ohne Leiter an der Fassade: mit unserem Reinwasser-Teleskopsystem, streifenfrei bis in den zweiten und dritten Stock. Mit demselben System reinigen wir auch Photovoltaikanlagen: <a href="https://nautilus-facility.de/solarreinigung-berlin/">Solarreinigung Berlin zum Festpreis ab 149 €</a>.</p>
   <p style="margin-top:16px">Viele Kunden buchen die Fensterreinigung zusammen mit einer <a href="https://nautilus-facility.de/grundreinigung-berlin/">Grundreinigung</a> oder als Teil der regelmäßigen <a href="https://nautilus-facility.de/unterhaltsreinigung-berlin/">Unterhaltsreinigung</a>.</p>
 </section>
 <!-- STATS -->
@@ -750,9 +743,9 @@ klar.</h2>
   <div class="abo-wrap">
     <div class="section-tag">Regelmäßig sparen</div>
     <h2>Einmal glänzen oder dauerhaft klare Sicht?</h2>
-    <p class="abo-sub">Im 8-Wochen-Rhythmus sparen Sie 15 % bei jedem Termin. Kein Vertrag, jederzeit kündbar, wir melden uns rechtzeitig vor jedem Termin.</p>
+    <p class="abo-sub">Im 3-Monats-Rhythmus sparen Sie 15 % bei jedem Termin. Kein Vertrag, jederzeit kündbar, wir melden uns rechtzeitig vor jedem Termin.</p>
     <div class="abo-table">
-      <div class="abo-row abo-head"><span>Fensterzahl</span><span>Einmalig</span><span>Im 8-Wochen-Abo</span></div>
+      <div class="abo-row abo-head"><span>Fensterzahl</span><span>Einmalig</span><span>Im 3-Monats-Abo</span></div>
       <div class="abo-row"><span>bis 5</span><span>89 €</span><span>75 € je Termin</span></div>
       <div class="abo-row"><span>bis 10</span><span>137 €</span><span>115 € je Termin</span></div>
       <div class="abo-row"><span>bis 15</span><span>184 €</span><span>155 € je Termin</span></div>
@@ -892,6 +885,7 @@ klar.</h2>
       <a href="https://nautilus-facility.de/unterhaltsreinigung-berlin/">Unterhaltsreinigung Berlin</a>
       <a href="https://nautilus-facility.de/sonderreinigung-berlin/">Sonderreinigung Berlin</a>
       <a href="https://nautilus-facility.de/fensterreinigung-berlin/">Fensterreinigung Berlin</a>
+      <a href="https://nautilus-facility.de/solarreinigung-berlin/">Solarreinigung Berlin</a>
       <a href="https://nautilus-facility.de/reinigung-nach-renovierung-berlin/">Reinigung nach Renovierung</a>
     </div>
     <div class="footer-col">
@@ -1092,7 +1086,7 @@ function updateBreakdown() {
     lines += `<div class="bk-breakdown-line"><span>${e.name}</span><span>+${fmt(e.price)} EUR</span></div>`;
   });
   if (state.abo) {
-    lines += `<div class="bk-breakdown-line"><span>8-Wochen-Rhythmus (minus 15 %)</span><span>inklusive</span></div>`;
+    lines += `<div class="bk-breakdown-line"><span>3-Monats-Rhythmus (minus 15 %)</span><span>inklusive</span></div>`;
   }
   lines += `<div class="bk-breakdown-line total"><span>Gesamt inkl. MwSt.${state.abo ? ' je Termin' : ''}</span><span>${fmt(calcBrutto())} EUR</span></div>`;
   el.innerHTML = lines;
@@ -1110,7 +1104,7 @@ function buildWAMsg() {
   return encodeURIComponent(
     `Hallo, ich möchte ein Angebot für eine Fensterreinigung in Berlin anfragen.\n` +
     `Anzahl Fenster: ${state.rooms}\n` +
-    `Rhythmus: ${state.abo ? 'alle 8 Wochen' : 'einmalig'}\n` +
+    `Rhythmus: ${state.abo ? 'alle 3 Monate' : 'einmalig'}\n` +
     `Extras: ${extras}\n` +
     `Richtpreis: ${fmt(calcBrutto())} EUR inkl. MwSt.\n` +
     `Bitte bestätigen Sie den Termin.`
