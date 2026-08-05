@@ -380,7 +380,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div style="text-align:right" id="mc-badges"></div>
             </div>
             <div class="bk-breakdown" id="mc-break"></div>
-            <div style="margin-top:8px;font-size:9px;color:var(--mt);line-height:1.4">Unverbindliche Sofort-Schätzung. Ihren verbindlichen Festpreis erhalten Sie nach kurzer Anfrage.</div>
+            <div style="margin-top:8px;font-size:9px;color:var(--mt);line-height:1.4">Unverbindliche Sofort-Schätzung. Ihren verbindlichen Festpreis erhalten Sie nach kurzer Anfrage.</div><div id="mc-note" style="margin-top:4px;font-size:9px;color:var(--mt);line-height:1.4"></div>
           </div>
           <a class="bk-btn" id="mc-wa" href="#" target="_blank" rel="noopener">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
@@ -766,7 +766,7 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
     'Fensterreinigung':{hint:'innen und außen',sizeLabel:'② Anzahl Fenster',artLabel:'③ Fenstertyp',min:0,unit:'EUR inkl. MwSt.',perClean:false,
       badges:['✓ Streifenfrei innen und außen','✓ Ohne Sondertechnik'],
       sizes:[['1 bis 5',75],['6 bis 10',115],['11 bis 15',155],['16 bis 20',215],['über 20',270]],
-      arten:[['Standard',1.0,'Normale Fenster und Türen'],['Aufwändig',1.5,'Sprossen, Kastenfenster']],
+      arten:[['Standard',1.0,'']],
       extras:[['Rollläden und Jalousien',40],['Wintergarten / Glasdach / Loggia',70],['Bau- und Farbreste am Glas ablösen',40]],
       fenster:false}
   };
@@ -799,7 +799,9 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
     });
   }
   function renderA(){
-    var c=cfg();document.getElementById('mc-art-label').textContent=c.artLabel;aWrap.innerHTML='';
+    var c=cfg();var albl=document.getElementById('mc-art-label');
+    if(c.arten.length<2){st.art=0;albl.style.display='none';aWrap.style.display='none';aWrap.innerHTML='';return;}
+    albl.style.display='';aWrap.style.display='';albl.textContent=c.artLabel;aWrap.innerHTML='';
     c.arten.forEach(function(a,i){
       var el=document.createElement('div');el.className='bk-svc'+(i===st.art?' sel':'');
       el.innerHTML='<div class="bk-svc-name">'+a[0]+'</div><div class="bk-svc-hint">'+a[2]+'</div>';
@@ -834,20 +836,21 @@ setTimeout(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classLi
   }
   function update(){
     var c=cfg(),bd=document.getElementById('mc-break'),lines='';
-    lines+='<div class="bk-breakdown-line"><span>Basis ('+c.sizes[st.size][0]+' × '+c.arten[st.art][0]+')</span><span>'+fmt(baseBrutto())+' EUR</span></div>';
+    lines+='<div class="bk-breakdown-line"><span>Basis ('+c.sizes[st.size][0]+(c.arten.length>1?' × '+c.arten[st.art][0]:'')+')</span><span>'+fmt(baseBrutto())+' EUR</span></div>';
     st.extras.forEach(function(i){lines+='<div class="bk-breakdown-line"><span>'+c.extras[i][0]+'</span><span>+'+fmt(c.extras[i][1])+' EUR</span></div>';});
     if(c.fenster&&FEN[st.fen][1]>0)lines+='<div class="bk-breakdown-line"><span>Fenster '+FEN[st.fen][0]+'</span><span>+'+fmt(FEN[st.fen][1])+' EUR</span></div>';
     lines+='<div class="bk-breakdown-line total"><span>'+(c.perClean?'Je Reinigung inkl. MwSt.':'Gesamt inkl. MwSt.')+'</span><span>'+fmt(brutto())+' EUR</span></div>';
     bd.innerHTML=lines;
     document.getElementById('mc-price').textContent=fmt(brutto());
     document.getElementById('mc-unit').textContent=c.unit;
+    var nt=document.getElementById('mc-note');if(nt)nt.textContent=(st.l==='Fensterreinigung')?'Sprossen- und Kastenfenster zählen wegen des Mehraufwands als anderthalb Fenster.':'';
     document.getElementById('mc-badges').innerHTML=c.badges.map(function(b){return '<div style="font-size:10px;color:var(--green);font-weight:600;margin-top:2px">'+b+'</div>';}).join('');
     document.getElementById('mc-wa').href='https://wa.me/4917622844636?text='+encodeURIComponent(waMsg());
   }
   function confTxt(){
     var c=cfg();
     var ex=st.extras.length?st.extras.map(function(i){return c.extras[i][0];}).join(', '):'Keine';
-    var t='Leistung: '+st.l+'\nGröße: '+c.sizes[st.size][0]+'\n'+c.artLabel.replace(/^③ /,'')+': '+c.arten[st.art][0]+'\nExtras: '+ex;
+    var t='Leistung: '+st.l+'\nGröße: '+c.sizes[st.size][0]+(c.arten.length>1?'\n'+c.artLabel.replace(/^③ /,'')+': '+c.arten[st.art][0]:'')+'\nExtras: '+ex;
     if(c.fenster)t+='\nFensterreinigung: '+FEN[st.fen][0];
     t+='\nRichtpreis: '+fmt(brutto())+' '+c.unit;
     return t;

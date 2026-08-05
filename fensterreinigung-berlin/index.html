@@ -539,24 +539,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="bk-counthelp">Nicht sicher? Ein Einfamilienhaus hat im Schnitt 13 bis 16 Fenster. <a href="#" id="bk-help-efh">Übernehmen</a></div>
           </div>
 
-          <!-- Fensterart -->
-          <div>
-            <div class="bk-label">② Fensterart</div>
-            <div class="bk-services" id="bk-services">
-              <div class="bk-svc sel" data-svc="Standard" data-mult="1.0">
-                <div class="bk-svc-name">Standard</div>
-                <div class="bk-svc-hint">normale Fenster, gut erreichbar</div>
-              </div>
-              <div class="bk-svc" data-svc="Aufwändig" data-mult="1.5">
-                <div class="bk-svc-name">Aufwändig</div>
-                <div class="bk-svc-hint">Sprossen- und Kastenfenster</div>
-              </div>
-            </div>
-          </div>
-
           <!-- Rhythmus -->
           <div>
-            <div class="bk-label">③ Rhythmus</div>
+            <div class="bk-label">② Rhythmus</div>
             <div class="bk-services" id="bk-abo">
               <div class="bk-svc sel" data-abo="0">
                 <div class="bk-svc-name">Einmalig</div>
@@ -571,7 +556,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
           <!-- Extras -->
           <div>
-            <div class="bk-label">④ Extras (optional)</div>
+            <div class="bk-label">③ Extras (optional)</div>
             <div class="bk-extras" id="bk-extras">
               <div class="bk-extra" data-extra-id="rolllaeden" data-extra-price="40">
                 <div class="bk-extra-check"></div>
@@ -614,7 +599,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <div class="bk-breakdown" id="bk-breakdown"></div>
             <div class="bk-effektiv" id="bk-effektiv"></div>
-            <div style="margin-top:8px;font-size:9px;color:var(--mt);line-height:1.4">Unverbindliche Sofort-Schätzung. Den verbindlichen Festpreis nennen wir nach kurzer Rücksprache zur Fensterzahl.</div>
+            <div style="margin-top:8px;font-size:9px;color:var(--mt);line-height:1.4">Unverbindliche Sofort-Schätzung. Den verbindlichen Festpreis nennen wir nach kurzer Rücksprache zur Fensterzahl. Sprossen- und Kastenfenster zählen wegen des Mehraufwands als anderthalb Fenster.</div>
           </div>
 
           <!-- WA Button -->
@@ -798,7 +783,7 @@ klar.</h2>
   <div class="steps-inner">
     <div class="steps-title">Von der Anfrage zum klaren Fenster</div>
     <div class="steps-grid">
-      <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Preis berechnen</div><div class="step-desc">Anzahl Fenster, Fensterart und Extras wählen. Ihren Richtpreis sehen Sie sofort.</div></div></div>
+      <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Preis berechnen</div><div class="step-desc">Anzahl Fenster und Extras wählen. Ihren Richtpreis sehen Sie sofort.</div></div></div>
       <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Termin bestätigen</div><div class="step-desc">Anfrage per WhatsApp oder Formular. Antwort in unter 30 Minuten, verbindlicher Festpreis.</div></div></div>
       <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Wir reinigen</div><div class="step-desc">Ein festes Team reinigt Glas, Rahmen und Extras streifenfrei mit professioneller Technik.</div></div></div>
       <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Ergebnis abnehmen</div><div class="step-desc">Sie prüfen das Ergebnis. Bei begründeter Beanstandung bessern wir kostenfrei nach.</div></div></div>
@@ -878,12 +863,6 @@ klar.</h2>
                 <option>1 bis 5</option><option>6 bis 10</option><option>11 bis 15</option><option>16 bis 20</option><option>mehr als 20</option>
               </select>
             </div>
-          </div>
-          <div class="form-group"><label for="cf-art"><span class="form-label-row">Fensterart *</span></label>
-            <select id="cf-art" name="Fensterart" required>
-              <option value="" disabled selected>Bitte wählen</option>
-              <option>Standard</option><option>Aufwändig</option><option>Noch nicht sicher</option>
-            </select>
           </div>
           <div class="form-group"><label for="cf-msg"><span class="form-label-row">Weitere Hinweise</span></label><textarea id="cf-msg" name="message" placeholder="Rahmen, Rollläden, Wintergarten, Etage, Wunschtermin …"></textarea></div>
           <label class="form-gdpr"><input type="checkbox" name="gdpr" id="cf-gdpr" required><span>Ich stimme der Verarbeitung meiner Daten gemäß der <a href="https://nautilus-facility.de/datenschutz/" target="_blank">Datenschutzerklärung</a> zu. *</span></label>
@@ -1108,7 +1087,7 @@ function calcBrutto() {
 
 function updateBreakdown() {
   const el = document.getElementById('bk-breakdown');
-  let lines = `<div class="bk-breakdown-line"><span>Basis (${state.rooms} Fenster${state.mult>1?', aufwändig':''})</span><span>${fmt(baseBrutto())} EUR</span></div>`;
+  let lines = `<div class="bk-breakdown-line"><span>Basis (${state.rooms} Fenster)</span><span>${fmt(baseBrutto())} EUR</span></div>`;
   state.extras.forEach(e => {
     lines += `<div class="bk-breakdown-line"><span>${e.name}</span><span>+${fmt(e.price)} EUR</span></div>`;
   });
@@ -1131,7 +1110,6 @@ function buildWAMsg() {
   return encodeURIComponent(
     `Hallo, ich möchte ein Angebot für eine Fensterreinigung in Berlin anfragen.\n` +
     `Anzahl Fenster: ${state.rooms}\n` +
-    `Fensterart: ${state.service}\n` +
     `Rhythmus: ${state.abo ? 'alle 8 Wochen' : 'einmalig'}\n` +
     `Extras: ${extras}\n` +
     `Richtpreis: ${fmt(calcBrutto())} EUR inkl. MwSt.\n` +
@@ -1155,12 +1133,9 @@ function updateWA() {
       msg.value =
         'Angebot aus dem Preisrechner:\n' +
         'Anzahl Fenster: ' + state.rooms + '\n' +
-        'Fensterart: ' + state.service + '\n' +
         'Extras: ' + extras + '\n' +
         'Richtpreis: ' + fmt(calcBrutto()) + ' EUR inkl. MwSt.';
     }
-    var art = document.getElementById('cf-art');
-    if(art){ for(var i=0;i<art.options.length;i++){ if(art.options[i].text===state.service){ art.selectedIndex=i; break; } } }
   });
 })();
 
@@ -1170,15 +1145,6 @@ document.querySelectorAll('#bk-rooms .bk-room').forEach(el => {
     el.classList.add('sel');
     state.rooms = el.dataset.rooms;
     state.base = parseInt(el.dataset.base);
-    updateBreakdown(); updateWA();
-  });
-});
-document.querySelectorAll('#bk-services .bk-svc').forEach(el => {
-  el.addEventListener('click', () => {
-    document.querySelectorAll('#bk-services .bk-svc').forEach(x => x.classList.remove('sel'));
-    el.classList.add('sel');
-    state.service = el.dataset.svc;
-    state.mult = parseFloat(el.dataset.mult);
     updateBreakdown(); updateWA();
   });
 });
