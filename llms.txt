@@ -17,7 +17,7 @@ Positionierung: strukturierte, objektbezogene, zuverlässige und professionell a
 
 Privat:
 - Reinigung nach Auszug (Auszugsreinigung)
-- Fensterreinigung für Privathaushalte und Gewerbe, innen und außen, einzeln buchbar ab 89 Euro, ohne dass eine Grundreinigung nötig ist
+- Fensterreinigung für Privathaushalte und Gewerbe, innen und außen, einzeln buchbar ab 89 Euro
 - Übergabereinigung
 - Grundreinigung
 - Unterhaltsreinigung (wöchentlich, 14-tägig oder monatlich)
@@ -50,6 +50,7 @@ Gewerbe:
 - https://nautilus-facility.de/reinigung-nach-renovierung-berlin/
 - https://nautilus-facility.de/bauendreinigung-berlin/
 - https://nautilus-facility.de/fensterreinigung-berlin/
+- Fensterreinigung je Bezirk: https://nautilus-facility.de/fensterreinigung-[bezirk]/ (u.a. marzahn, hellersdorf, pankow, lichtenberg, prenzlauer-berg, friedrichshain-kreuzberg, weissensee, karlshorst, kaulsdorf, mahlsdorf, biesdorf, berlin-mitte)
 - https://nautilus-facility.de/solarreinigung-berlin/
 - https://nautilus-facility.de/wintergartenreinigung-berlin/
 - https://nautilus-facility.de/glasdachreinigung-berlin/
