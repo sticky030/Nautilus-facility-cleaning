@@ -309,6 +309,46 @@ footer{background:#030810;border-top:1px solid var(--bd);padding:40px 48px}
 .bk-btn-sub{font-size:10px}
 .bk-breakdown{font-size:10px}
 }
+/* == Wintergarten-Sektionen v4 19.08.2026 == */
+.wg-packs{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;text-align:left}
+@media(max-width:760px){.wg-packs{grid-template-columns:1fr}}
+.wg-pack{position:relative;background:var(--ink2);border:1px solid var(--bd);border-radius:16px;padding:20px}
+.wg-pack-hot{border-color:rgba(6,182,212,.45);background:linear-gradient(180deg,rgba(6,182,212,.07),var(--ink2) 55%)}
+.wg-pack-badge{display:inline-block;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#000;background:var(--c);border-radius:99px;padding:4px 10px;margin-bottom:10px}
+.wg-pack-name{font-size:15px;font-weight:800;margin-bottom:2px}
+.wg-pack-lead{font-size:13px;color:var(--mt);margin-bottom:14px}
+.wg-pack-lead b{font-size:24px;color:var(--white);font-weight:900;letter-spacing:-.5px}
+.wg-pack-rows{display:flex;flex-direction:column}
+.wg-pack-rows>div{display:flex;justify-content:space-between;font-size:13px;color:var(--tx);padding:7px 0;border-top:1px solid var(--bd)}
+.wg-pack-rows>div>span:last-child{font-weight:800;color:var(--white)}
+/* Inklusiv-Chips statt Checklisten-Box */
+.wg-inkl{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
+.wg-chip{font-size:12.5px;color:var(--tx);border:1px solid var(--bd);background:var(--ink2);border-radius:99px;padding:7px 14px;white-space:nowrap}
+.wg-extras{font-size:12.5px;color:var(--mt);margin-top:14px;text-align:center}
+/* Duo-Karten */
+.wg-duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px;text-align:left}
+@media(max-width:680px){.wg-duo{grid-template-columns:1fr}}
+.wg-duo-card{display:block;background:var(--ink2);border:1px solid rgba(6,182,212,.25);border-radius:14px;padding:18px 20px;color:inherit;transition:border-color .2s,transform .2s}
+a.wg-duo-card:hover{border-color:rgba(6,182,212,.6);transform:translateY(-2px)}
+.wg-duo-green{border-color:rgba(16,185,129,.3)}
+.wg-duo-tag{display:inline-block;font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--c);margin-bottom:8px}
+.wg-tag-green{color:var(--green)}
+.wg-duo-card p{font-size:13px;color:var(--tx);line-height:1.65;margin:0}
+.wg-duo-link{display:inline-block;font-size:12.5px;font-weight:700;color:var(--c);margin-top:10px}
+/* Sicherheits-Items statt Karten-Friedhof */
+.g-item{display:flex;gap:14px;text-align:left;align-items:flex-start}
+.g-item .g-ico{margin-bottom:0;flex-shrink:0}
+.g-item h3{font-size:15px;font-weight:800;margin:0 0 4px}
+.g-item p{font-size:12.5px;color:var(--mt);line-height:1.55;margin:0}
+.garantie-grid{gap:26px 22px}
+@media(max-width:900px){.garantie-grid{grid-template-columns:1fr 1fr;gap:20px 18px}}
+@media(max-width:600px){.garantie-grid{grid-template-columns:1fr}}
+@media(min-width:560px){.abo-wrap ul{display:grid!important;grid-template-columns:1fr 1fr;gap:7px 18px!important}}
+/* == Wintergarten-Typo 19.08.2026 (linksbuendige Lesespalte) == */
+.seo-section{text-align:left}
+.seo-section>.section-tag,.seo-section>h2,.seo-section>p{max-width:760px;margin-left:auto;margin-right:auto;display:block}
+.seo-section h2{margin-bottom:18px}
+.seo-section p{max-width:680px;margin-top:0;margin-bottom:18px;text-align:left}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Was kostet eine Wintergartenreinigung in Ahrensfelde?", "acceptedAnswer": {"@type": "Answer", "text": "Die Reinigung der Seitenverglasung innen und außen beginnt bei 299 EUR, komplett mit Dach außen bei 399 EUR. Große Anlagen mit Dach beidseitig liegen je nach Größe zwischen 700 und 1.100 EUR. Alle Preise sind Bruttopreise inklusive Material. Für Ahrensfelde kommt eine Anfahrtpauschale von 40 EUR dazu, sie ist im Angebot immer offen ausgewiesen. Ihren verbindlichen Festpreis erhalten Sie nach einem Foto in 30 Minuten."}}, {"@type": "Question", "name": "Reinigen Sie auch das Glasdach?", "acceptedAnswer": {"@type": "Answer", "text": "Ja, außen und auf Wunsch auch innen. Gearbeitet wird vom Boden per Teleskopsystem bis ca. 15 m Arbeitshöhe. Ihr Glasdach wird dabei niemals betreten oder belastet."}}, {"@type": "Question", "name": "Werden Rahmen und Falze mitgereinigt?", "acceptedAnswer": {"@type": "Answer", "text": "Ja, immer. Rahmen, Falze und Fensterbänke sind bei uns Teil des Festpreises. Profile und Ränder arbeiten wir in Handarbeit nach, genau dort entstehen sonst Schlieren."}}, {"@type": "Question", "name": "Bekommen Sie jeden Belag vom Glas?", "acceptedAnswer": {"@type": "Answer", "text": "Wetterschleier und Grünbelag bekommen wir ab, bei hartnäckigen Fällen mit einer Intensivbehandlung, deren Festpreis wir vorab nach Foto nennen. Ehrlich ist aber auch: Trübungen und eingebrannte Beläge im Glas selbst lassen sich durch keine Reinigung entfernen. Sehen wir so etwas auf Ihrem Foto, sagen wir es Ihnen vorab."}}, {"@type": "Question", "name": "Was passiert bei schlechtem Wetter?", "acceptedAnswer": {"@type": "Answer", "text": "Gereinigt wird nur bei geeigneter Witterung. Passt das Wetter nicht, verschieben wir den Termin kostenlos, Ihr Preis bleibt unverändert."}}, {"@type": "Question", "name": "Reinigen Sie auch in Blumberg, Eiche, Mehrow und Marzahn?", "acceptedAnswer": {"@type": "Answer", "text": "Ja. Von Ahrensfelde aus bedienen wir auch Blumberg, Eiche, Mehrow und Marzahn. Es gilt die Anfahrtpauschale von 40 EUR, am Festpreis selbst ändert sich nichts. Senden Sie einfach ein Foto per WhatsApp, Sie erhalten Ihren verbindlichen Festpreis in 30 Minuten."}}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://nautilus-facility.de/"},{"@type":"ListItem","position":2,"name":"Leistungen","item":"https://nautilus-facility.de/#leistungen"},{"@type":"ListItem","position":3,"name":"Wintergartenreinigung Ahrensfelde","item":"https://nautilus-facility.de/wintergartenreinigung-ahrensfelde/"}]}</script>
@@ -393,7 +433,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section>
   <div class="hero">
     <div class="reveal">
-      <div class="hero-badge"><div class="badge-dot"></div>Wintergartenreinigung Berlin · Reinwasser &amp; Festpreis</div>
+      <div class="hero-badge"><div class="badge-dot"></div>Wintergartenreinigung Ahrensfelde · Reinwasser &amp; Festpreis</div>
       <h1>Wintergartenreinigung in&nbsp;Ahrensfelde.<br>Glasklar,<br><span class="accent">zum Festpreis.</span></h1>
       <p class="hero-sub">Seitenverglasung, Rahmen, Falze und Glasdach: Wir reinigen Ihren Wintergarten in Ahrensfelde mit entmineralisiertem Reinwasser streifenfrei, in der Regel komplett vom Boden aus, ohne Gerüst, per Teleskopsystem bis ca. 15 m. Ihr Glasdach wird dabei niemals betreten oder belastet. Festpreis vorab, Zahlung erst nach gemeinsamer Abnahme.</p>
       <div class="hero-btns">
@@ -403,7 +443,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="hero-right reveal">
       <div class="dash-glow"></div>
-      <div style="position:relative;z-index:1;margin-bottom:14px;padding:12px 16px;background:rgba(37,211,102,.08);border:1px solid rgba(37,211,102,.3);border-radius:12px;font-size:12.5px;color:var(--tx);line-height:1.6"><strong style="color:#25d366">Am schnellsten:</strong> Foto vom Wintergarten per WhatsApp senden. Sie bekommen Ihren verbindlichen Festpreis in 30 Minuten.</div>
       <div class="booking-card" id="rechner" style="scroll-margin-top:90px">
         <div class="bk-header">
           <div>
@@ -569,31 +608,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="section-tag">Festpreise</div>
     <h2>Wintergartenreinigung Kosten: ein Festpreis, alles drin</h2>
     <p class="abo-sub">Festpreis nach Größe und Umfang, brutto inkl. MwSt., Material inklusive, für Ahrensfelde plus 40 EUR Anfahrtpauschale. Ihren verbindlichen Festpreis erhalten Sie nach einem Foto in 30 Minuten.</p>
-    <div class="abo-table">
-      <div class="wg-row wg-head"><span>Grundfläche</span><span>Seiten innen &amp; außen</span><span>plus Dach außen</span><span>komplett inkl. Dach innen</span></div>
-      <div class="wg-row"><span>bis 12 m²</span><span class="wg-price">299 €</span><span class="wg-price">399 €</span><span class="wg-price">479 €</span></div>
-      <div class="wg-row" style="background:rgba(6,182,212,.06)"><span>12 bis 20 m²</span><span class="wg-price">399 €</span><span class="wg-price">549 €</span><span class="wg-price">649 €</span></div>
-      <div class="wg-row"><span>über 20 m²</span><span class="wg-price">549 €</span><span class="wg-price">749 €</span><span class="wg-price">869 €</span></div>
-    </div>
-    <div style="margin-top:18px;text-align:left;background:var(--ink2);border:1px solid var(--bd);border-radius:14px;padding:20px 24px">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--c);margin-bottom:10px">Im Festpreis enthalten</div>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:7px;margin:0;padding:0">
-        <li style="font-size:13px;color:var(--tx)"><span style="color:var(--green);font-weight:700">✓</span> Reinigung mit entmineralisiertem Reinwasser, streifenfrei</li>
-        <li style="font-size:13px;color:var(--tx)"><span style="color:var(--green);font-weight:700">✓</span> Rahmen, Falze und Fensterbänke, in Handarbeit nachgearbeitet</li>
-        <li style="font-size:13px;color:var(--tx)"><span style="color:var(--green);font-weight:700">✓</span> Vom Boden per Teleskopsystem, Ihr Glasdach wird nie betreten</li>
-        <li style="font-size:13px;color:var(--tx)"><span style="color:var(--green);font-weight:700">✓</span> Anfahrt in Berlin und Material</li>
-        <li style="font-size:13px;color:var(--tx)"><span style="color:var(--green);font-weight:700">✓</span> Zahlung erst nach gemeinsamer Abnahme</li>
-      </ul>
-      <p style="font-size:13px;color:var(--tx);margin-top:14px;padding-top:12px;border-top:1px solid var(--bd)">Der Preis in dieser Tabelle ist derselbe, den Sie am Telefon und auf der Rechnung sehen.</p>
-    </div>
-    <p style="font-size:13px;color:var(--mt);margin-top:16px;line-height:1.7">Extras auf Wunsch: Beschattung (Raffstores, Jalousien) 25 EUR je Element beidseitig, Rinnenreinigung ab 49 EUR, Intensivbehandlung bei Wetterschleier zum Festpreis nach Foto. Sie kennen die Größe nicht genau? Ein Foto genügt, wir rechnen den Rest.</p>
-    <div style="margin-top:18px;text-align:left;background:var(--ink2);border:1px solid rgba(6,182,212,.25);border-radius:14px;padding:20px 24px">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--c);margin-bottom:10px">Auch nur ein Glasdach über der Terrasse?</div>
-      <p style="font-size:13.5px;color:var(--tx);line-height:1.75;margin:0">Ein freistehendes Terrassendach oder eine Glasüberdachung reinigen wir mit demselben Reinwasser-System vom Boden, streifenfrei. Außen ab 149 €, beidseitig ab 199 €. Alle Details und Preise finden Sie auf unserer Seite zur <a href="https://nautilus-facility.de/glasdachreinigung-berlin/" style="color:var(--c);font-weight:600">Glasdachreinigung</a>.</p>
-    </div>
-    <div style="margin-top:14px;text-align:left;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.22);border-radius:14px;padding:18px 22px">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:8px">Kombivorteil</div>
-      <p style="font-size:13.5px;color:var(--tx);line-height:1.75;margin:0">Lassen Sie in Ahrensfelde Fenster und Wintergarten oder Terrassendach im selben Termin reinigen, entfällt die zweite Anfahrt und das Glasdach kommt zum Vorzugspreis mit. Sagen Sie es einfach bei Ihrer Anfrage dazu.</p>
+    <div class="wg-packs">
+  <div class="wg-pack"><div class="wg-pack-name">Seiten innen &amp; außen</div><div class="wg-pack-lead">bis 12 m² Grundfläche: <b>299&nbsp;€</b></div><div class="wg-pack-rows"><div><span>12 bis 20 m²</span><span>399 €</span></div><div><span>über 20 m²</span><span>549 €</span></div></div></div>
+  <div class="wg-pack wg-pack-hot"><div class="wg-pack-badge">Am häufigsten gebucht</div><div class="wg-pack-name">Plus Dach außen</div><div class="wg-pack-lead">bis 12 m² Grundfläche: <b>399&nbsp;€</b></div><div class="wg-pack-rows"><div><span>12 bis 20 m²</span><span>549 €</span></div><div><span>über 20 m²</span><span>749 €</span></div></div></div>
+  <div class="wg-pack"><div class="wg-pack-name">Komplett inkl. Dach innen</div><div class="wg-pack-lead">bis 12 m² Grundfläche: <b>479&nbsp;€</b></div><div class="wg-pack-rows"><div><span>12 bis 20 m²</span><span>649 €</span></div><div><span>über 20 m²</span><span>869 €</span></div></div></div>
+</div>
+    <div class="wg-duo">
+      <a class="wg-duo-card" href="https://nautilus-facility.de/glasdachreinigung-berlin/"><span class="wg-duo-tag">Nur ein Terrassendach?</span><p>Freistehende Glas- und Terrassendächer reinigen wir außen ab 149 €, beidseitig ab 199 €.</p><span class="wg-duo-link">Zur Glasdachreinigung →</span></a>
+      <div class="wg-duo-card wg-duo-green"><span class="wg-duo-tag wg-tag-green">Kombivorteil</span><p>Fenster und Wintergarten im selben Termin: eine Anfahrt, Vorzugspreis fürs Glasdach. Einfach bei der Anfrage dazusagen.</p></div>
     </div>
   </div>
 </section>
@@ -611,12 +633,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="section-tag">Ihre Sicherheit</div>
     <h2>Schonend, versichert, ehrlich</h2>
     <div class="garantie-grid">
-      <div class="garantie-card"><div class="g-ico">✓</div><h3>Garantiekonforme Methode</h3><p>Kein Hochdruck, keine aggressive Chemie. Wir reinigen mit entmineralisiertem Reinwasser, schonend für Glas, Dichtungen und Rahmen. Zum Einsatz kommt das Gardiner-SLX-Teleskopsystem mit Aquintos-Reinwasseraufbereitung, das Wasser wird vor Ort entmineralisiert und trocknet rückstandsfrei ab.</p></div>
-      <div class="garantie-card"><div class="g-ico">⌂</div><h3>Glasdach wird nie belastet</h3><p>Ihr Glasdach wird niemals betreten oder belastet. Gearbeitet wird vom Boden per Teleskopsystem bis ca. 15 m Arbeitshöhe, ohne Gewicht auf Glas, Sprossen und Profilen. Kein Gerüst und keine Leiter auf dem Glasdach, das spart Ihnen die teure und riskante Alternative.</p></div>
-      <div class="garantie-card"><div class="g-ico">✦</div><h3>Handarbeit an den Profilen</h3><p>Ränder und Profilkanten werden von Hand nachgearbeitet, genau dort entstehen sonst Schlieren. Rahmen, Falze und Fensterbänke sind bei uns immer Teil des Festpreises.</p></div>
-      <div class="garantie-card"><div class="g-ico">§</div><h3>Versichert &amp; Nacharbeit inklusive</h3><p>Sollte trotz aller Sorgfalt etwas passieren, deckt unsere Betriebshaftpflicht Schäden an Glas, Rahmen und Fassade. Sind Sie bei der Abnahme nicht zufrieden, arbeiten wir kostenlos nach, bezahlt wird erst danach.</p></div>
-      <div class="garantie-card"><div class="g-ico">★</div><h3>5,0 Sterne bei Google</h3><p>Unsere Kunden bewerten uns bei Google mit 5,0 Sternen. Persönlicher Ansprechpartner statt anonymer Großbetrieb.</p></div>
-      <div class="garantie-card"><div class="g-ico">i</div><h3>Ehrlichkeit beim Glas</h3><p>Trübungen und eingebrannte Beläge im Glas lassen sich durch keine Reinigung entfernen. Sehen wir so etwas auf Ihrem Foto, sagen wir es Ihnen vorab, bevor Sie einen Termin buchen.</p></div>
+      <div class="g-item"><div class="g-ico">✓</div><div><h3>Reinwasser statt Chemie</h3><p>Kein Hochdruck, keine aggressive Chemie. Schonend für Glas, Dichtungen und Rahmen.</p></div></div>
+      <div class="g-item"><div class="g-ico">⌂</div><div><h3>Dach wird nie betreten</h3><p>Alles vom Boden per Teleskopsystem bis ca. 15 m, kein Gewicht auf dem Glas.</p></div></div>
+      <div class="g-item"><div class="g-ico">✦</div><div><h3>Handarbeit an den Profilen</h3><p>Rahmen, Falze und Fensterbänke sind immer Teil des Festpreises.</p></div></div>
+      <div class="g-item"><div class="g-ico">§</div><div><h3>Versichert, Nacharbeit inklusive</h3><p>Die Betriebshaftpflicht deckt Schäden, nachgebessert wird kostenlos, bezahlt erst nach Abnahme.</p></div></div>
+      <div class="g-item"><div class="g-ico">★</div><div><h3>5,0 Sterne bei Google</h3><p>Persönlicher Ansprechpartner statt anonymer Großbetrieb.</p></div></div>
+      <div class="g-item"><div class="g-ico">i</div><div><h3>Ehrlich beim Glas</h3><p>Eingebranntes sehen wir am Foto und sagen es vorab, nicht erst bei der Abnahme.</p></div></div>
     </div>
   </div>
 </section>
