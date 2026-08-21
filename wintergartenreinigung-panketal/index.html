@@ -20,7 +20,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nautilus-facility.de/wintergartenreinigung-panketal/">
 <meta property="og:site_name" content="Nautilus Facility Cleaning">
-<meta property="og:image" content="https://nautilus-facility.de/nautilus-logo.png">
+<meta property="og:image" content="https://nautilus-facility.de/images/wintergarten-nachher.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <style>
 
@@ -409,6 +409,20 @@ a.wg-duo-card:hover{border-color:rgba(6,182,212,.6);transform:translateY(-2px)}
 /* == Textlinks sichtbar 19.08.2026 == */
 .seo-section p a{color:var(--c);font-weight:600;text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;transition:opacity .2s}
 .seo-section p a:hover{opacity:.75}
+/* == Vorher-Nachher-Slider 21.08.2026 == */
+.ba-section{padding:24px 24px 60px}
+.ba-wrap{max-width:760px;margin:0 auto;text-align:center}
+.ba-wrap h2{font-size:clamp(24px,3vw,34px);font-weight:800;letter-spacing:-1px}
+.ba-sub{font-size:13.5px;color:var(--mt);margin:6px 0 18px}
+.ba-slider{position:relative;width:100%;max-width:430px;margin:18px auto 0;aspect-ratio:4/5;border-radius:18px;overflow:hidden;border:1px solid var(--bd)}
+.ba-img{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.ba-after{background:#eaf3fb url("/images/wintergarten-nachher.jpg") center/cover no-repeat}
+.ba-before{background:#cfc9ba url("/images/wintergarten-vorher.jpg") center/cover no-repeat;clip-path:inset(0 23% 0 0)}
+.ba-tag{position:absolute;top:14px;left:14px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;padding:4px 10px;border-radius:99px}
+.ba-tag-r{left:auto;right:14px}
+.ba-slider input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:3;margin:0}
+.ba-handle{position:absolute;top:0;bottom:0;left:77%;width:3px;background:#fff;box-shadow:0 0 8px rgba(0,0,0,.35);z-index:2;pointer-events:none}
+.ba-handle::after{content:"\25C2 \25B8";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:99px;padding:6px 9px;font-size:11px;color:#333;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -630,6 +644,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <a href="https://wa.me/4917622844636?text=Hallo%2C%20ich%20sende%20Ihnen%20gleich%20ein%20Foto%20meines%20Wintergartens%20f%C3%BCr%20einen%20Festpreis%20zur%20Reinigung." class="btn-primary" target="_blank" rel="noopener">Foto senden, Festpreis in 30 Min →</a>
   </div>
 </section>
+<!-- VORHER-NACHHER -->
+<section class="ba-section reveal">
+  <div class="ba-wrap">
+    <div class="section-tag">Ergebnis</div>
+    <h2>Der Unterschied ist sichtbar</h2>
+    <p class="ba-sub">Glasdach eines Wintergartens in Berlin, vor und nach unserer Reinigung. Ziehen Sie den Regler und vergleichen Sie selbst.</p>
+    <div class="ba-slider" id="ba-slider">
+      <div class="ba-img ba-after"><span class="ba-tag ba-tag-r">NACHHER</span></div>
+      <div class="ba-img ba-before" id="ba-before"><span class="ba-tag">VORHER</span></div>
+      <input type="range" min="0" max="100" value="77" id="ba-range" aria-label="Vorher-Nachher-Vergleich">
+      <div class="ba-handle" id="ba-handle"></div>
+    </div>
+  </div>
+</section>
+
 <!-- SICHERHEIT -->
 <section class="garantie-section reveal">
   <div class="garantie-wrap">
@@ -1053,5 +1082,13 @@ updateBreakdown(); updateWA();
 </div>
 <!-- Sticky-Init -->
 <script>try{if(typeof updateBreakdown==="function")updateBreakdown();if(typeof updateWA==="function")updateWA();if(typeof update==="function")update();if(typeof renderAll==="function")renderAll();}catch(e){}</script>
+<script>(function(){
+  var range=document.getElementById('ba-range'),before=document.getElementById('ba-before'),handle=document.getElementById('ba-handle');
+  if(!range||!before||!handle)return;
+  range.addEventListener('input',function(){
+    before.style.clipPath='inset(0 '+(100-this.value)+'% 0 0)';
+    handle.style.left=this.value+'%';
+  });
+})();</script>
 </body>
 </html>
