@@ -37,6 +37,43 @@ Gewerbe:
 - Treppenhausreinigung
 - Gewerbe-Sonderreinigung
 
+## Profile und Bewertungen
+
+Nautilus Facility Cleaning ist ausserhalb der eigenen Domain unter diesen Profilen zu finden:
+
+- Google Business Profile: https://share.google/309cRQR5SxfkafFzo
+- MyHammer: https://www.my-hammer.de/auftragnehmer/nautilus-facility-cleaning-ug-haftungsbeschraenkt
+- Gelbe Seiten: https://www.gelbeseiten.de/gsbiz/4d17fff9-c9a7-498a-9e68-8eca593df6bf
+- GoLocal: https://www.golocal.de/berlin/gebaeudereinigung/nautilus-facility-cleaning-MJo0R/
+
+Bewertung: 5,0 Sterne bei Google. Branche: Gebaeudereinigung, Fensterputzer, Reinigungsdienst.
+
+## Preise (Kurzfassung)
+
+Vollstaendige, maschinenlesbare Preisliste: https://nautilus-facility.de/preise.md (identisch unter /pricing.md)
+
+Alle Betraege sind Bruttofestpreise inklusive 19 Prozent Mehrwertsteuer, Anfahrt innerhalb Berlins und Material. Es werden keine Stundensaetze abgerechnet. Der verbindliche Festpreis steht vor Auftragsbeginn schriftlich fest.
+
+- Fensterreinigung innen und aussen: 89 EUR fuer 1 bis 5 Fenster, 137 EUR fuer 6 bis 10, 184 EUR fuer 11 bis 15, 256 EUR fuer 16 bis 20, 321 EUR fuer 21 bis 25, ab 26 Fenstern 321 EUR plus 12 EUR je weiterem Fenster. Im 3-Monats-Rhythmus je Termin 75, 115, 155, 215 und 270 EUR.
+- Auszugsreinigung, besenrein: 155 EUR (1 Zimmer), 226 (2), 309 (3), 405 (4), 500 (5 und mehr). Uebergabefertig: 217, 317, 433, 566, 700 EUR.
+- Grundreinigung, Standard: 179, 262, 357, 464, 571 EUR. Intensiv: 250, 367, 500, 650, 800 EUR.
+- Sonderreinigung (Kleber, Nikotin, Renovierungsrueckstaende), Intensivreinigung: 226, 333, 440, 547, 666 EUR. Extremreinigung: 339, 500, 660, 821, 1000 EUR.
+- Unterhaltsreinigung im Privathaushalt, Preis je Reinigung: bis 50 m² 66 EUR woechentlich, 77 EUR 14-taegig, 93 EUR monatlich. 50 bis 80 m²: 86, 101, 121 EUR. 80 bis 110 m²: 111, 131, 157 EUR. 110 bis 150 m²: 142, 167, 200 EUR. Ueber 150 m²: 177, 208, 250 EUR. Keine Mindestlaufzeit, monatlich kuendbar.
+- Gewerbereinigung (Buero, Praxis, Kanzlei, Gebaeude), Preis je Einsatz: bis 100 m² 129 EUR, 100 bis 200 m² 169 EUR, 200 bis 300 m² 219 EUR, 300 bis 500 m² 289 EUR, darueber nach Besichtigung. Bei 14-taegigem Turnus entspricht das 280, 370, 475 und 630 EUR im Monat.
+- Treppenhausreinigung je Einsatz: ab 95 EUR bis 3 Etagen, 120 bis 180 EUR bei 4 bis 6 Etagen, ab 190 EUR bei grossen Objekten mit Aufzug oder Keller.
+- Bauendreinigung: Mindestauftragswert 350 EUR, 490 bis 790 EUR bei 60 bis 80 m², 890 bis 1590 EUR fuer Haus oder Neubau.
+- Gewerbe-Sonderreinigung und Praxisaufloesung: Mindestauftragswert 250 EUR, bis 100 m² 540 EUR, 100 bis 200 m² 890 EUR, 200 bis 350 m² 1430 EUR. Bei massiven Rueckstaenden 810, 1335 und 2145 EUR.
+- Wintergartenreinigung: ab 299 EUR, vollstaendige Staffel weiter unten.
+- Glasdach- und Terrassendachreinigung: 149 EUR bis 15 m² aussen, 199 EUR beidseitig, 199/269 EUR bei 15 bis 25 m², 279/369 EUR bei 25 bis 40 m².
+- PV- und Solarreinigung: 149 EUR bis 15 Module, 199 EUR bis 25, 249 EUR bis 35, 329 EUR bis 50 Module.
+- Glas- und Rahmenreinigung fuer Gewerbekunden: 3,50 bis 4,50 EUR je Quadratmeter einmal gemessener Glasflaeche, Mindestwert 137 EUR je Einsatz.
+
+Reaktionszeiten: Privatanfragen erhalten das Angebot innerhalb von 30 Minuten. Gewerbeanfragen erhalten eine Antwort innerhalb von 2 Stunden und das Angebot innerhalb von 24 Stunden.
+
+Bewertungen: 5,0 Sterne bei Google.
+
+Nicht im Leistungsumfang: Putz-, Klinker-, Beton- und WDVS-Fassadenreinigung, Algen- und Graffitientfernung an Bauwerksfassaden, Dachbegehungen ohne gesicherten Zugang.
+
 ## Wichtige Seiten
 
 - https://nautilus-facility.de/
@@ -161,3 +198,7 @@ Für eine erste Einschätzung reichen in der Regel Bezirk, Fläche, Objektart, g
 - https://nautilus-facility.de/reinigungsfirma-rummelsburg/
 - https://nautilus-facility.de/reinigungsfirma-tiergarten/
 - https://nautilus-facility.de/reinigungsfirma-wedding/
+
+## Weitere Leistungs- und Ortsseiten
+
+- https://nautilus-facility.de/kontakt/
