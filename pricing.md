@@ -170,6 +170,8 @@ Mindestauftragswert 250 €.
 | 350 bis 500 m² | 2.080 € | 3.120 € |
 | über 500 m² | 2.980 € | 4.470 € |
 
+Zusatzpositionen: Bau- und Feinstaubreinigung 120 €, Gastro- und Küchenfett intensiv 90 €, Kleber- und Renovierungsrückstände 80 €, Kalk und Urinstein im Sanitärbereich 50 €.
+
 ## Praxisauflösung
 
 Eigene Preisstruktur, nicht identisch mit der Gewerbe-Sonderreinigung. Mindestauftragswert 250 €.
@@ -183,8 +185,6 @@ Eigene Preisstruktur, nicht identisch mit der Gewerbe-Sonderreinigung. Mindestau
 | über 500 m² | 2.400 € | 3.120 € |
 
 Zusatzpositionen: Entsorgung von Restmüll und Kleinteilen 70 €, Kleber- und Renovierungsrückstände 80 €, Express- oder Wochenendtermin 150 €.
-
-Zusatzpositionen: Bau- und Feinstaubreinigung 120 €, Gastro- und Küchenfett intensiv 90 €, Kleber- und Renovierungsrückstände 80 €, Kalk und Urinstein im Sanitärbereich 50 €.
 
 ## Glas- und Rahmenreinigung für Gewerbekunden
 
