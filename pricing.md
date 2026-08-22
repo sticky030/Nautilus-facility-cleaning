@@ -119,15 +119,19 @@ Faustregel zur Umrechnung: Kilowatt-Peak mal 2,5 ergibt die Modulzahl. Anlagen, 
 
 ## Bauendreinigung und Baufeinreinigung
 
-Mindestauftragswert 350 €.
+Mindestauftragswert 350 €. Der Preis richtet sich nach Fläche und Reinigungsgrad.
 
-| Objektgröße | Festpreis |
-|---|---|
-| bis 40 m² | 350 bis 490 € |
-| 40 bis 60 m² | 390 bis 650 € |
-| 60 bis 80 m² | 490 bis 790 € |
-| 80 bis 110 m² | 650 bis 990 € |
-| Haus oder Neubau | 890 bis 1.590 € |
+| Fläche | Baufeinreinigung, bezugsfertig | Baugrob und Baufein | Intensivreinigung |
+|---|---|---|---|
+| bis 50 m² | 360 € | 540 € | 710 € |
+| bis 80 m² | 570 € | 860 € | 1.140 € |
+| bis 100 m² | 710 € | 1.070 € | 1.430 € |
+| bis 150 m² | 1.070 € | 1.610 € | 2.140 € |
+| bis 200 m² | 1.430 € | 2.140 € | 2.860 € |
+| bis 400 m² | 2.860 € | 4.280 € | 5.710 € |
+| ab 500 m² | nach Aufmaß | nach Aufmaß | nach Aufmaß |
+
+Zusatzpositionen: Fensterreinigung inklusive Schutzfolien, Aufklebern und Farbresten 1,50 € je m² Grundfläche, Sanitäranlagen intensiv 2,00 € je m², Bauschutt- und Folienentsorgung pauschal 150 €.
 
 ## Treppenhausreinigung und Objektbetreuung für Hausverwaltungen
 
@@ -152,27 +156,43 @@ Preis je Einsatz, unabhängig vom gewählten Turnus. Reinigung außerhalb der Be
 | 300 bis 500 m² | 289 € | 630 € |
 | ab 500 m² | nach Besichtigung | nach Besichtigung |
 
-Bei wöchentlichem Turnus sind rund 4,33 Einsätze je Monat anzusetzen. Behandlungsräume in Praxen mit erhöhtem Hygieneaufwand werden gesondert auf Grundlage des Hygieneplans kalkuliert. Für die Buchhaltung wird auf Wunsch netto zuzüglich 19 % Mehrwertsteuer ausgewiesen.
+Bei wöchentlichem Turnus sind rund 4,33 Einsätze je Monat anzusetzen. Behandlungsräume in Praxen mit erhöhtem Hygieneaufwand werden gesondert auf Grundlage des Hygieneplans kalkuliert. Die Rechnung weist die Mehrwertsteuer gesondert aus, sie ist für gewerbliche Auftraggeber in voller Höhe vorsteuerabzugsfähig. Netto entsprechen die Einsatzpreise 108, 142, 184 und 243 €.
 
-## Gewerbe-Sonderreinigung und Praxisauflösung
+## Gewerbe-Sonderreinigung
 
 Mindestauftragswert 250 €.
 
-| Fläche | Starke Verschmutzung | Massive Rückstände |
+| Fläche | Intensivreinigung | Extremreinigung |
 |---|---|---|
 | bis 100 m² | 540 € | 810 € |
 | 100 bis 200 m² | 890 € | 1.335 € |
 | 200 bis 350 m² | 1.430 € | 2.145 € |
+| 350 bis 500 m² | 2.080 € | 3.120 € |
+| über 500 m² | 2.980 € | 4.470 € |
+
+## Praxisauflösung
+
+Eigene Preisstruktur, nicht identisch mit der Gewerbe-Sonderreinigung. Mindestauftragswert 250 €.
+
+| Fläche | Normal | Stark verschmutzt |
+|---|---|---|
+| bis 100 m² | 480 € | 624 € |
+| 100 bis 200 m² | 780 € | 1.014 € |
+| 200 bis 350 m² | 1.200 € | 1.560 € |
+| 350 bis 500 m² | 1.700 € | 2.210 € |
+| über 500 m² | 2.400 € | 3.120 € |
+
+Zusatzpositionen: Entsorgung von Restmüll und Kleinteilen 70 €, Kleber- und Renovierungsrückstände 80 €, Express- oder Wochenendtermin 150 €.
 
 Zusatzpositionen: Bau- und Feinstaubreinigung 120 €, Gastro- und Küchenfett intensiv 90 €, Kleber- und Renovierungsrückstände 80 €, Kalk und Urinstein im Sanitärbereich 50 €.
 
 ## Glas- und Rahmenreinigung für Gewerbekunden
 
-Abgerechnet wird die einmal gemessene Glasfläche, also Breite mal Höhe je Element, nicht die Summe beider Seiten.
+Abgerechnet wird die einmal gemessene Glasfläche, also Breite mal Höhe je Element, nicht die Summe beider Seiten. Abweichend von allen anderen Leistungen wird der Quadratmeterpreis hier netto genannt, weil es sich um reines Geschäftskundengeschäft handelt. Der Mindestauftragswert ist ein Bruttobetrag.
 
 | Position | Preis |
 |---|---|
-| Außenseiten (Standard) | 3,50 bis 4,50 € je m² Glasfläche |
+| Außenseiten (Standard) | 3,50 bis 4,50 € je m² Glasfläche netto (4,17 bis 5,36 € brutto) |
 | Innenseiten ebenerdig, zubuchbar | plus 50 % auf den Außenpreis der betreffenden Flächen |
 | Innenseiten ab rund 3 m Höhe | nur nach Besichtigung |
 | Mindestwert je Einsatz | 137 € |

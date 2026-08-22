@@ -61,12 +61,13 @@ Alle Betraege sind Bruttofestpreise inklusive 19 Prozent Mehrwertsteuer, Anfahrt
 - Unterhaltsreinigung im Privathaushalt, Preis je Reinigung: bis 50 m² 66 EUR woechentlich, 77 EUR 14-taegig, 93 EUR monatlich. 50 bis 80 m²: 86, 101, 121 EUR. 80 bis 110 m²: 111, 131, 157 EUR. 110 bis 150 m²: 142, 167, 200 EUR. Ueber 150 m²: 177, 208, 250 EUR. Keine Mindestlaufzeit, monatlich kuendbar.
 - Gewerbereinigung (Buero, Praxis, Kanzlei, Gebaeude), Preis je Einsatz: bis 100 m² 129 EUR, 100 bis 200 m² 169 EUR, 200 bis 300 m² 219 EUR, 300 bis 500 m² 289 EUR, darueber nach Besichtigung. Bei 14-taegigem Turnus entspricht das 280, 370, 475 und 630 EUR im Monat.
 - Treppenhausreinigung je Einsatz: ab 95 EUR bis 3 Etagen, 120 bis 180 EUR bei 4 bis 6 Etagen, ab 190 EUR bei grossen Objekten mit Aufzug oder Keller.
-- Bauendreinigung: Mindestauftragswert 350 EUR, 490 bis 790 EUR bei 60 bis 80 m², 890 bis 1590 EUR fuer Haus oder Neubau.
-- Gewerbe-Sonderreinigung und Praxisaufloesung: Mindestauftragswert 250 EUR, bis 100 m² 540 EUR, 100 bis 200 m² 890 EUR, 200 bis 350 m² 1430 EUR. Bei massiven Rueckstaenden 810, 1335 und 2145 EUR.
+- Bauendreinigung: Mindestauftragswert 350 EUR. Baufeinreinigung bis 50 m² 360 EUR, bis 80 m² 570 EUR, bis 100 m² 710 EUR, bis 150 m² 1070 EUR, bis 200 m² 1430 EUR. Baugrob und Baufein zusammen 540, 860, 1070, 1610 und 2140 EUR. Intensivreinigung 710, 1140, 1430, 2140 und 2860 EUR.
+- Gewerbe-Sonderreinigung: Mindestauftragswert 250 EUR. Intensivreinigung bis 100 m² 540 EUR, 100 bis 200 m² 890 EUR, 200 bis 350 m² 1430 EUR, 350 bis 500 m² 2080 EUR, ueber 500 m² 2980 EUR. Extremreinigung 810, 1335, 2145, 3120 und 4470 EUR.
+- Praxisaufloesung (eigene Preisstruktur, nicht identisch mit der Gewerbe-Sonderreinigung): bis 100 m² 480 EUR, 100 bis 200 m² 780 EUR, 200 bis 350 m² 1200 EUR, 350 bis 500 m² 1700 EUR, ueber 500 m² 2400 EUR. Bei starker Verschmutzung Faktor 1,3, also 624, 1014, 1560, 2210 und 3120 EUR.
 - Wintergartenreinigung: ab 299 EUR, vollstaendige Staffel weiter unten.
 - Glasdach- und Terrassendachreinigung: 149 EUR bis 15 m² aussen, 199 EUR beidseitig, 199/269 EUR bei 15 bis 25 m², 279/369 EUR bei 25 bis 40 m².
 - PV- und Solarreinigung: 149 EUR bis 15 Module, 199 EUR bis 25, 249 EUR bis 35, 329 EUR bis 50 Module.
-- Glas- und Rahmenreinigung fuer Gewerbekunden: 3,50 bis 4,50 EUR je Quadratmeter einmal gemessener Glasflaeche, Mindestwert 137 EUR je Einsatz.
+- Glas- und Rahmenreinigung fuer Gewerbekunden: 3,50 bis 4,50 EUR netto je Quadratmeter einmal gemessener Glasflaeche, das sind 4,17 bis 5,36 EUR brutto. Mindestwert 137 EUR brutto je Einsatz. Dies ist die einzige Leistung, deren Flaechenpreis netto genannt wird, weil es reines Geschaeftskundengeschaeft ist.
 
 Reaktionszeiten: Privatanfragen erhalten das Angebot innerhalb von 30 Minuten. Gewerbeanfragen erhalten eine Antwort innerhalb von 2 Stunden und das Angebot innerhalb von 24 Stunden.
 
