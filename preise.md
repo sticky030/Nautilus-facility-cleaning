@@ -215,7 +215,7 @@ Turnusnachlass: alle 3 Monate minus 15 %, alle 6 Monate minus 10 %, einmal jähr
 
 ## Profile und Bewertungen
 
-- Google Business Profile: https://share.google/309cRQR5SxfkafFzo
+- Google Business Profile: https://maps.app.goo.gl/hzPKbnRmhnobuGEJ6
 - MyHammer: https://www.my-hammer.de/auftragnehmer/nautilus-facility-cleaning-ug-haftungsbeschraenkt
 - Gelbe Seiten: https://www.gelbeseiten.de/gsbiz/4d17fff9-c9a7-498a-9e68-8eca593df6bf
 - GoLocal: https://www.golocal.de/berlin/gebaeudereinigung/nautilus-facility-cleaning-MJo0R/
