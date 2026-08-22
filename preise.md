@@ -137,26 +137,26 @@ Zusatzpositionen: Fensterreinigung inklusive Schutzfolien, Aufklebern und Farbre
 
 Preis je Einsatz. Bei festem Turnus im Rahmenvertrag wird der einzelne Einsatz günstiger.
 
-| Objekt | Festpreis je Einsatz |
-|---|---|
-| Kleines Mehrfamilienhaus, bis 3 Etagen | ab 95 € |
-| Mittleres Objekt, 4 bis 6 Etagen | 120 bis 180 € |
-| Großes Objekt, mit Aufzug oder Keller | ab 190 € |
-| Mehrere Aufgänge oder Liegenschaften | nach Besichtigung |
+| Objekt | Je Einsatz netto | Je Einsatz brutto |
+|---|---|---|
+| Kleines Mehrfamilienhaus, bis 3 Etagen | ab 80 € | ab 95 € |
+| Mittleres Objekt, 4 bis 6 Etagen | 101 bis 151 € | 120 bis 180 € |
+| Großes Objekt, mit Aufzug oder Keller | ab 160 € | ab 190 € |
+| Mehrere Aufgänge oder Liegenschaften | nach Besichtigung | nach Besichtigung |
 
 ## Gewerbereinigung: Büro, Praxis, Kanzlei, Gebäude
 
 Preis je Einsatz, unabhängig vom gewählten Turnus. Reinigung außerhalb der Betriebszeiten, jeder Einsatz wird digital dokumentiert und ist für den Kunden im Dashboard einsehbar.
 
-| Fläche | Festpreis je Einsatz | Im Monat bei 14-tägigem Turnus |
-|---|---|---|
-| bis 100 m² | 129 € | 280 € |
-| 100 bis 200 m² | 169 € | 370 € |
-| 200 bis 300 m² | 219 € | 475 € |
-| 300 bis 500 m² | 289 € | 630 € |
-| ab 500 m² | nach Besichtigung | nach Besichtigung |
+| Fläche | Je Einsatz netto | Je Einsatz brutto | Monatlich brutto bei 14-täglicher Reinigung |
+|---|---|---|---|
+| bis 100 m² | 108 € | 129 € | 280 € |
+| 100 bis 200 m² | 142 € | 169 € | 370 € |
+| 200 bis 300 m² | 184 € | 219 € | 475 € |
+| 300 bis 500 m² | 243 € | 289 € | 630 € |
+| ab 500 m² | nach Besichtigung | nach Besichtigung | nach Besichtigung |
 
-Bei wöchentlichem Turnus sind rund 4,33 Einsätze je Monat anzusetzen. Behandlungsräume in Praxen mit erhöhtem Hygieneaufwand werden gesondert auf Grundlage des Hygieneplans kalkuliert. Die Rechnung weist die Mehrwertsteuer gesondert aus, sie ist für gewerbliche Auftraggeber in voller Höhe vorsteuerabzugsfähig. Netto entsprechen die Einsatzpreise 108, 142, 184 und 243 €.
+Bei wöchentlichem Turnus sind rund 4,33 Einsätze je Monat anzusetzen. Behandlungsräume in Praxen mit erhöhtem Hygieneaufwand werden gesondert auf Grundlage des Hygieneplans kalkuliert. Die Rechnung weist die Mehrwertsteuer gesondert aus, sie ist für gewerbliche Auftraggeber in voller Höhe vorsteuerabzugsfähig. 
 
 ## Gewerbe-Sonderreinigung
 
